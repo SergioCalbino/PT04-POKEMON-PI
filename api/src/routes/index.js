@@ -3,6 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios');
 
+
 const url = 'https://pokeapi.co/api/v2/pokemon';
 const urlId = `https://pokeapi.co/api/v2/pokemon/`;
 const urlName = `https://pokeapi.co/api/v2/pokemon/`;
@@ -42,9 +43,11 @@ router.get('/pokemons', async (req, res) => {
     }
     try {
         allpokemons = await axios.get(urlApi)
+       // let data = allpokemons.data
+       // let dataSort = compare(data)
         res.json(allpokemons.data)
     } catch (error) {
-        res.status(404).send(error)
+        res.status(404).send({error: "El nombre del pokemon ingresado no existe"})
     }
 })
 
@@ -60,6 +63,17 @@ router.get('/types', async (req, res) => {
     let urlApi = urlType;
     try {
         allpokemons = await axios.get(urlApi)
+        res.json(allpokemons.data)
+    } catch (error) {
+        
+    }
+})
+
+router.get('/pokemons', async (req, res) => {
+    let ord = url;
+    let allpokemons = {}
+    try {
+        allpokemons = await axios.get(ord)
         res.json(allpokemons.data)
     } catch (error) {
         
