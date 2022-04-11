@@ -2,6 +2,8 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios');
+//const Pokemon = require('../models/Pokemon');
+const {Pokemon, Type} = require('../db')
 
 
 const url = 'https://pokeapi.co/api/v2/pokemon';
@@ -19,7 +21,7 @@ router.get('/', (req, res) => {
     res.send('<h1>Bienvenidos</h1>')
 })
 
-//Traemos por params el pokemon
+//Traemos por params con ID el pokemon
 router.get('/pokemons/:id', async (req, res) => {
     let {id} = req.params;
     let urlApi = urlId+id;
@@ -51,10 +53,19 @@ router.get('/pokemons', async (req, res) => {
     }
 })
 
-
+// Vamos a crear el pokeon con los datos obligatorios
 router.post('/pokemons', async (req, res) => {
-    let {name, age} = req.body;
-    res.send(`Me llego ${name} y ${age}`)
+    let {name, life, strength, defense, speed, height, Weight} = req.body;
+    if(!name) return res.status(404).send("El nombre es requerido")
+
+       
+    try {
+        const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, Weight})
+        return res.status(201).json(newPokemon)
+        } catch (error) {
+            res.status(404).send(error)
+        
+    }
 
 })
 
@@ -69,16 +80,6 @@ router.get('/types', async (req, res) => {
     }
 })
 
-router.get('/pokemons', async (req, res) => {
-    let ord = url;
-    let allpokemons = {}
-    try {
-        allpokemons = await axios.get(ord)
-        res.json(allpokemons.data)
-    } catch (error) {
-        
-    }
-})
 
 
 

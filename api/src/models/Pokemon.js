@@ -17,32 +17,32 @@ module.exports = (sequelize) => {
       
     },
 
-    vida: {
+    life: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
 
-    Fuerza: {
+    strength: {
       type: DataTypes.FLOAT,
       allowNull: false
     },
 
-    defensa: {
+    defense: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
 
-    velocidad: {
+    speed: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
 
-    altura: {
+    height: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
 
-    Peso: { 
+    Weight: { 
     type: DataTypes.FLOAT,
     allowNull: false
     },
