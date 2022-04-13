@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
     ID: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primarykey: true,
+      primaryKey: true,
       allowNull: false,
       
     },
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
 
     Weight: { 
     type: DataTypes.FLOAT,
-    allowNull: false
+    allowNull: true
     },
 
   });
