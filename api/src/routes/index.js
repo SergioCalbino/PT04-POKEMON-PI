@@ -4,6 +4,7 @@ const { Router } = require('express');
 const axios = require('axios');
 //const Pokemon = require('../models/Pokemon');
 const {Pokemon, Type} = require('../db')
+const {reqApi} = require('../ReqApi/ReqApi')
 
 
 const url = 'https://pokeapi.co/api/v2/pokemon';
@@ -21,6 +22,47 @@ router.get('/', (req, res) => {
     res.send('<h1>Bienvenidos</h1>')
 })
 
+
+// Hacemos el request a types y luego lo mandamos a la
+router.get('/types', async (req, res) => {
+    try {
+        const allpokemons = await axios.get(urlType)
+        let typePoke = await allpokemons.data.results.map((ty) =>{
+            return {
+                name: ty.name,
+                url: ty.url
+            }
+        })
+        await Type.bulkCreate(typePoke)
+        res.json(typePoke)
+    } catch (error) {
+        
+    }
+})
+
+router.post('/pokemons', async (req, res) => {
+    let {name, life, strength, defense, speed, height, weight, types} = req.body;
+    if(!name) return res.status(404).send("El nombre es requerido")
+
+       
+    try {
+        const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
+        let findType = await Type.findAll({
+            where: {
+                id: types
+            }
+        })
+        await newPokemon.addTypes(findType);
+        return res.status(201).json(newPokemon)
+        } catch (error) {
+            console.log(error)
+            res.status(404).send(error)
+        
+    }
+
+})
+
+
 //Traemos por params con ID el pokemon
 router.get('/pokemons/:id', async (req, res) => {
     let {id} = req.params;
@@ -28,56 +70,58 @@ router.get('/pokemons/:id', async (req, res) => {
     let allpokemons = []
     ///^[0-9]+$/.test(id)
     
-    if(id.length === 36) {
-
-        // const user = await User.findOne({
-        //     attributes : ['id','name','email','contact'],
-        //     where: {email:req.body.email}
-        // }); 
-
+    if(/[a-zA-Z]/.test(id)) {
         try {
             const pokeId = await Pokemon.findOne({
-                attributes: ["name","id", "life", "strength", "defense","speed", "height", "weight"],
-                where: {
-                    id: id
-                },
+                where: {id: id},
+                include: {
+                    model: Type,
+                    attributes: ["name","url"],
+                    through: {attributes:[]}
+                }
             })
-            res.json(pokeId)
-            
+            if(pokeId !==null){ 
+           return  res.json(pokeId)
+            }
         } catch (error) {
-            next(error)
+            return res.status(404).send({error: "El id enviado no existe"})
             
         }
     }
+
+    
         
         try {
-            pokeApi = await axios.get(urlApi) //Me traigo todos los Pokemons de la Api por Id
-            let pokeAllApi = [];
-            console.log(pokeApi.data.forms[0].name)
-            // Pusheo toda la data a mi arreglo
-
-                pokeAllApi = pokeApi.data.forms.map((poke) => {
-                    let pokemon = {
-                        name: poke.name,
-                        // life: poke.data.stats[0].base_stat,
-                    // strength:  poke.data.stats[1].base_stat,
-                    // defense: poke.data.stats[2].base_stat,
-                    // speed: poke.data.stats[5].base_stat,
-                    // height: poke.data.height,
-                    // weight: poke.data.weight,
-                    }
-                    return pokemon
-
-                   
-
-            })
-            console.log(pokeAllApi)
-            res.json(pokeAllApi)
-        } catch (error) {
-            res.send(error)
-           
+           let pokeApi = await axios.get(urlApi) //Me traigo todos los Pokemons de la Api por Id
+           pokeApi = pokeApi.data
+            let onePoke = {
+                id: pokeApi.id,
+                image: pokeApi.sprites.other.dream_world.front_default,
+                name: pokeApi.name,
+                types: pokeApi.types.map(type => ({name: type.type.name, url: type.type.url})),
+                life: pokeApi.stats[0].base_stat,
+                strength: pokeApi.stats[1].base_stat,
+                defense: pokeApi.stats[2].base_stat,
+                speed: pokeApi.stats[3].base_stat,
+                height: pokeApi.height,
+                weigth: pokeApi.weight,
+                
             }
+            
+            res.json(onePoke);
+        
+        } catch (error) {
+            res.send({error: "El id enviado no existe"})
+        }
     })
+
+    // name: poke.data.name,
+    // life: poke.data.stats[0].base_stat,
+    // strength:  poke.data.stats[1].base_stat,
+    // defense: poke.data.stats[2].base_stat,
+    // speed: poke.data.stats[5].base_stat,
+    // height: poke.data.height,
+    // weight: poke.data.weight,
 
 //Hacemos el request de Name y todo los Pokemons
 router.get('/pokemons', async (req, res) => {
@@ -101,23 +145,9 @@ router.get('/pokemons', async (req, res) => {
     }
     
     try {
-        allpokemons = await axios(urlApi)
-        let pokeDev = allpokemons.data.results.map((poke) => {
-            return axios(poke.url)
-                .then((poke) => {
-                    return {
-                    name: poke.data.name,
-                    life: poke.data.stats[0].base_stat,
-                    strength:  poke.data.stats[1].base_stat,
-                    defense: poke.data.stats[2].base_stat,
-                    speed: poke.data.stats[5].base_stat,
-                    height: poke.data.height,
-                    weight: poke.data.weight,
-                   // img: poke.data.sprites
-                    
-                }})
-            });
-            res.json(await Promise.all(pokeDev))
+        // Aca hago el llamado a reqApi que tiene todos los pokemos. Ver carpeta ReqApi
+        const pokeDev = await reqApi()
+        res.json(await Promise.all(pokeDev))
        // let data = allpokemons.data
        // let dataSort = compare(data)
         
@@ -128,13 +158,13 @@ router.get('/pokemons', async (req, res) => {
 
 // Vamos a crear el pokeon con los datos obligatorios
 router.post('/pokemons', async (req, res) => {
-    let {name, life, strength, defense, speed, height, weight} = req.body;
+    let {name, life, strength, defense, speed, height, weight, types} = req.body;
     if(!name) return res.status(404).send("El nombre es requerido")
 
        
     try {
         const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-        
+        await newPokemon.addType(types);
         return res.status(201).json(newPokemon)
         } catch (error) {
             console.log(error)
@@ -144,35 +174,6 @@ router.post('/pokemons', async (req, res) => {
 
 })
 
-router.get('/types', async (req, res) => {
-   
-    
-    try {
-        const allpokemons = await axios.get(urlType)
-        let typePoke = await allpokemons.data.results.map((ty) =>{
-            return {
-                name: ty.name,
-                url: ty.url
-            }
-        })
-        await Type.bulkCreate(typePoke)
-        res.json(typePoke)
-    } catch (error) {
-        
-    }
-})
-
-
-// router.get('/types', async (req, res) => {
-
-//     try {
-//         const typesInDB = await Type.findAll()
-//         return res.json(typesInDB)
-//     } catch (error) {
-//         return res.status(404).send("No se pudo leer la DB")
-//     }
-   
-// })
 
 
 
