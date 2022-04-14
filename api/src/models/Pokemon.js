@@ -9,12 +9,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    ID: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false,
-      
     },
 
     life: {
@@ -42,7 +40,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
 
-    Weight: { 
+    weight: { 
     type: DataTypes.FLOAT,
     allowNull: true
     },
