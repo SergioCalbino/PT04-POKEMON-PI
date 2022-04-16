@@ -115,13 +115,6 @@ router.get('/pokemons/:id', async (req, res) => {
         }
     })
 
-    // name: poke.data.name,
-    // life: poke.data.stats[0].base_stat,
-    // strength:  poke.data.stats[1].base_stat,
-    // defense: poke.data.stats[2].base_stat,
-    // speed: poke.data.stats[5].base_stat,
-    // height: poke.data.height,
-    // weight: poke.data.weight,
 
 //Hacemos el request de Name y todo los Pokemons
 router.get('/pokemons', async (req, res) => {
