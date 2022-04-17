@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllPokemons} from '../redux/actions/actions'
+import {getAllPokemons} from '../../redux/actions/actions'
 
 
 
@@ -10,7 +10,7 @@ function Home() {
     
     useEffect(() => {
         dispatch(getAllPokemons())
-    })
+    },[dispatch])
   
     return (
     <div>

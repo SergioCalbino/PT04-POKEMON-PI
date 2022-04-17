@@ -1,8 +1,8 @@
-import { GET_ALL_POKEMONS, GET_ALL_POKEMONS_DB, GET_POKEMON_ID, GET_POKEMON_NAME, GET_TYPES, CREATE_POKEMON, ORDER_ASC } from "../actions/actions";
+import { GET_ALL_POKEMONS, GET_ALL_POKEMONS_DB, GET_POKEMON_ID, GET_POKEMON_NAME, GET_TYPES, CREATE_POKEMON, ORDER_ASC, ORDER_DESC, ORDER_STRENGTH_ASC,ORDER_STRENGTH_DESC } from "../actions/actions";
 
 const initialState = {
     allPokemons: [],
-    filterOrder: [],
+    filterOrder: {},
     pokemon: {},
     types: []
 }
@@ -44,7 +44,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_POKEMON_NAME: {
             return {
                 ...state,
-                pokemon: action.payload
+                allpokemons: [action.payload]
             }
         }
         case GET_TYPES: {
@@ -59,12 +59,35 @@ export default function rootReducer(state = initialState, action) {
                 allPokemons: state.allPokemons.concat(action.payload)
             }
         }
+        //Aca empiezo con los ordenamientos
         case ORDER_ASC: {
-            let ordername = compare(state.allPokemons, "name")
+            let orderNameAsc = compare(state.allPokemons, "name")
             return {
                 ...state,
-                filterOrder: ordername
+                filterOrder: orderNameAsc
             }
+        }
+        case ORDER_DESC: {
+            let ordeNameDesc = compare(state.allPokemons, "name").reverse()
+            return {
+                ...state,
+                filterOrder: ordeNameDesc
+            }
+        }
+        case ORDER_STRENGTH_ASC:{
+            let orderStrngthAsc = compare(state.allPokemons, "strength")
+            return {
+                ...state,
+                filterOrder: orderStrngthAsc
+            }
+        }
+        case  ORDER_STRENGTH_DESC: {
+            let orderStrngthDesc = compare(state.allPokemons, "strength").reverse()
+            return {
+                ...state,
+                filterOrder: orderStrngthDesc
+            }
+
         }
             
             
