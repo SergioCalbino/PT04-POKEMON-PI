@@ -7,10 +7,12 @@ export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const CREATE_POKEMON = 'CREATE_POKEMON'
-export const ORDER_ASC = 'ORDER_ASC'; // ordena por nombre de forma ascendente
-export const ORDER_DESC = 'ORDER_DESC'; //ordena por nombre de forma descendente
+// export const ORDER_ASC = 'ORDER_ASC'; // ordena por nombre de forma ascendente
+// export const ORDER_DESC = 'ORDER_DESC'; //ordena por nombre de forma descendente
 export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC'; //ordena por fuerza de forma ascendente
 export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH'; // ordena por fuerza de forma descendente
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE' // Ordena por tipo
+export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 
 //Action para traernos todos los pokemons
 export const getAllPokemons = () => async dispatch => {
@@ -106,18 +108,19 @@ export function postPokemon() {
 
 // Funciones de filtrado
 
-export function ordeByNameAsc() {
+export function ordeByName(payload) {
     return {
-        type: ORDER_ASC
+        type: ORDER_BY_NAME,
+        payload: payload
     }
 
 };
 
-export function ordeByNameDesc() {
-    return {
-        type: ORDER_DESC
-    }
-};
+// export function ordeByNameDesc() {
+//     return {
+//         type: ORDER_DESC
+//     }
+// };
 
 export function ordeByStrengthAsc() {
     return {
@@ -128,6 +131,13 @@ export function ordeByStrengthAsc() {
 export function ordeByStrengthDesc() {
     return {
         type: ORDER_STRENGTH_DESC
+    }
+}
+
+export function filterByType(payload) {
+    return {
+        type: FILTER_BY_TYPE,
+        payload
     }
 }
 

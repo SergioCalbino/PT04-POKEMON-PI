@@ -13,11 +13,14 @@ function DetailPokemon() {
 
     useEffect(() => dispatch(getPokemonsById(pokeId)),[])
 
+    let pokeFilt = detail.filter((poke) => poke.id === pokeId)
+
 
   return (
     <div>
-        <img src={detail.img} alt='#'/>
-        <p>Name: {detail.name}</p>
+        <img src={pokeFilt.img} alt='#'/>
+        <p>Name: {pokeFilt.name}</p>
+        <button onClick={() => dispatch(getPokemonsById(pokeFilt))}>Mostrar</button>
 
 
 
@@ -28,7 +31,3 @@ function DetailPokemon() {
 export default DetailPokemon
 
 
-
-// const house = useSelector(store => store.house)
-// const dispa = useDispatch()
-// const {houseId} = useParams()

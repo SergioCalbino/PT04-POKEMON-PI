@@ -10,7 +10,7 @@ function SearchBar() {
     const namePokemon = useSelector(state => state.allpokemon)
     const dispatch = useDispatch();
 
-    function handleChange(e) {
+    function handleInputChange(e) {
         setPoke(e.target.value)
 
 
@@ -22,13 +22,20 @@ function SearchBar() {
         setPoke('')
 
     }
+
+
     
     return (
     <div>
-        <form onSubmit={handleSubmit}>
-            <input type='text' value={poke} onChange={handleChange}/>
-            <button type='submit'>Busca tu Pokemon</button>
-        </form>
+       <div>
+            <input type="text"
+                   placeholder="Pokemon..."
+                   value={poke}
+                   onChange={(e)=>handleInputChange(e)}
+            />
+            
+            <button className="boton"  onClick={(e)=>handleSubmit(e)}>Buscar</button>
+        </div>
             
             
         

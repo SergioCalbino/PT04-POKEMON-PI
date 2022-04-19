@@ -5,10 +5,12 @@ import Home from './Components/Home/Home.jsx'
 import SearchBar from './Components/SearchBar/SearchBar';
 import CreatePokemon from './Components/CreatePokemon/CreatePokemon';
 import DetailPokemon from './Components/DetailPokemon/DetailPokemon'
+import Nav from './Components/Nav/Nav.jsx'
 
 function App() {
   return (
     <div className="App"> 
+    <Nav/>
     <SearchBar/>
     <Routes>
     <Route path ='/' element={<LandingPage/>}/>
