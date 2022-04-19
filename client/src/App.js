@@ -10,8 +10,9 @@ import Nav from './Components/Nav/Nav.jsx'
 function App() {
   return (
     <div className="App"> 
-    <Nav/>
+    
     <SearchBar/>
+   <Nav/>
     <Routes>
     <Route path ='/' element={<LandingPage/>}/>
     <Route path ='/home' element={<Home/>}/>

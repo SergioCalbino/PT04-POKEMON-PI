@@ -85,22 +85,25 @@ export default function rootReducer(state = initialState, action) {
             
 
 		if(action.payload === 'asc') {
-           let resultOrd = [...state.allPokemons]
-         resultOrd = compare(state.allPokemons, "name")
-            state = { ...state, filterOrder: resultOrd }
-            return state;
+           let orderAsc = state.allPokemons
+           orderAsc = compare(state.allPokemons, "name")
+           return { 
+               ...state, 
+               allPokemons: orderAsc
+            
         } 
+    }
 
         if(action.payload === 'desc') {
-            let ordeNameDesc = [...state.allPokemons]
-            ordeNameDesc = compare(state.allPokemons, "name").reverse()
+            let orderDesc = state.allPokemons
+            orderDesc = compare(state.allPokemons, "name").reverse()
             return {
                 ...state,
-                filterOrder: ordeNameDesc }
+                allPokemons: orderDesc }
         }
 
             
-        return state.allPokemons   
+        return state  
     }
 
         // case ORDER_ASC: {

@@ -7,12 +7,10 @@ export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const CREATE_POKEMON = 'CREATE_POKEMON'
-// export const ORDER_ASC = 'ORDER_ASC'; // ordena por nombre de forma ascendente
-// export const ORDER_DESC = 'ORDER_DESC'; //ordena por nombre de forma descendente
 export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC'; //ordena por fuerza de forma ascendente
 export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH'; // ordena por fuerza de forma descendente
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE' // Ordena por tipo
-export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'; // Ordena por Ascendiente y descendiente
 
 //Action para traernos todos los pokemons
 export const getAllPokemons = () => async dispatch => {
@@ -116,11 +114,6 @@ export function ordeByName(payload) {
 
 };
 
-// export function ordeByNameDesc() {
-//     return {
-//         type: ORDER_DESC
-//     }
-// };
 
 export function ordeByStrengthAsc() {
     return {

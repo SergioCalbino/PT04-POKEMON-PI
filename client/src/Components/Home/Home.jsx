@@ -14,7 +14,7 @@ function Home() {
     
     useEffect(() => {
         dispatch(getAllPokemons())
-    },[]);
+    },[dispatch]);
 
   
     return (
