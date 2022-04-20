@@ -6,9 +6,8 @@ export const GET_ALL_POKEMONS_DB = 'GET_ALL_POKEMONS_DB'
 export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_TYPES = 'GET_TYPES';
-export const CREATE_POKEMON = 'CREATE_POKEMON'
-export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC'; //ordena por fuerza de forma ascendente
-export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH'; // ordena por fuerza de forma descendente
+export const CREATE_POKEMON = 'CREATE_POKEMON';
+export const ORDER_STRENGTH = 'ORDER_STRENGTH'; //ordena por fuerza de forma ascendente
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE' // Ordena por tipo
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'; // Ordena por Ascendiente y descendiente
 
@@ -48,11 +47,14 @@ export  function getPokemonsByname (name) {
     console.log(name)
     return async function (dispatch) {
         try {
-            const resp = await axios(`http://localhost:3001/pokemons?name=${name}`)
+            const poke = await axios(`http://localhost:3001/pokemons/?name=${name}`)
+            console.log(poke)
+            if(poke){
             return dispatch({
                 type: GET_POKEMON_NAME,
-                payload: resp.data
+                payload: poke.data
             })
+        }
             
         } catch (error) {
             return dispatch({
@@ -115,22 +117,23 @@ export function ordeByName(payload) {
 };
 
 
-export function ordeByStrengthAsc() {
+export function ordeByStrength(payload) {
     return {
-        type: ORDER_STRENGTH_ASC
+        type: ORDER_STRENGTH,
+        payload: payload
     }
 };
 
-export function ordeByStrengthDesc() {
-    return {
-        type: ORDER_STRENGTH_DESC
-    }
-}
+// export function ordeByStrengthDesc() {
+//     return {
+//         type: ORDER_STRENGTH_DESC
+//     }
+// }
 
 export function filterByType(payload) {
     return {
         type: FILTER_BY_TYPE,
-        payload
+        payload: payload
     }
 }
 

@@ -3,11 +3,8 @@ import { GET_ALL_POKEMONS,
     GET_POKEMON_ID, 
     GET_POKEMON_NAME, 
     GET_TYPES, CREATE_POKEMON, 
-    // ORDER_ASC, 
-    // ORDER_DESC, 
     ORDER_BY_NAME,
-    ORDER_STRENGTH_ASC,
-    ORDER_STRENGTH_DESC,
+    ORDER_STRENGTH,
     FILTER_BY_TYPE } from "../actions/actions";
 
 const initialState = {
@@ -55,7 +52,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_POKEMON_NAME: {
             return {
                 ...state,
-                allpokemons: [action.payload]
+                pokemon: action.payload
             }
         }
         case GET_TYPES: {
@@ -72,8 +69,8 @@ export default function rootReducer(state = initialState, action) {
         }
         //Aca empiezo con los ordenamientos
         case FILTER_BY_TYPE: {
-            let allpoke = state.allPokemons
-            const filter = allpoke.filter(el => (el.types[1]) ? el.types[1].name  === action.payload : el.types[0].name === action.payload)
+            let allType = state.types
+            const filter = allType.filter(el => (el.types[1]) ? el.types[1].name  === action.payload : el.types[0].name === action.payload)
             return {
                 ...state,
                 filterOrder: filter
@@ -106,35 +103,28 @@ export default function rootReducer(state = initialState, action) {
         return state  
     }
 
-        // case ORDER_ASC: {
-        //     let orderNameAsc = compare(state.allPokemons, "name")
-        //     return {
-        //         ...state,
-        //         filterOrder: orderNameAsc
-        //     }
-        // }
-        // case ORDER_DESC: {
-        //     let ordeNameDesc = compare(state.allPokemons, "name").reverse()
-        //     return {
-        //         ...state,
-        //         filterOrder: ordeNameDesc
-        //     }
-        // }
-        // case ORDER_STRENGTH_ASC:{
-        //     let orderStrngthAsc = compare(state.allPokemons, "strength")
-        //     return {
-        //         ...state,
-        //         filterOrder: orderStrngthAsc
-        //     }
-        // }
-        // case  ORDER_STRENGTH_DESC: {
-        //     let orderStrngthDesc = compare(state.allPokemons, "strength").reverse()
-        //     return {
-        //         ...state,
-        //         filterOrder: orderStrngthDesc
-        //     }
+        
+        case ORDER_STRENGTH: {
+            if(action.payload === 'less') {
+            let orderStrngth = state.allPokemons
+            orderStrngth = compare(state.allPokemons, "strength")
+            return {
+                ...state,
+                allPokemons: orderStrngth
+            }
+        }
 
-        //}
+        if(action.payload === 'more') {
+            let orderStrngthDesc = state.allPokemons
+            orderStrngthDesc = compare(state.allPokemons, "strength").reverse()
+            return {
+                ...state,
+                allPokemons: orderStrngthDesc
+            }
+        }
+        return state
+        }
+       
             
             
     

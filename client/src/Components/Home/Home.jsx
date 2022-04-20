@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllPokemons, getTypes, filterByType} from '../../redux/actions/actions'
-import SearchBar from '../SearchBar/SearchBar';
+import {getAllPokemons, getTypes, filterByType, handlerStrength} from '../../redux/actions/actions'
+import Nav from '../Nav/Nav';
 
 
 
@@ -16,8 +16,11 @@ function Home() {
         dispatch(getAllPokemons())
     },[dispatch]);
 
-  
+    
     return (
+
+        <>
+        <Nav/>
         <div>
         {pokemon ? pokemon.allPokemons?.map(poke =>(
             <div key={poke.name}>
@@ -34,6 +37,10 @@ function Home() {
         ): <h1>Hola.. Cargando</h1>}
     
         </div>
+
+
+       
+      </>
       )
     
 }

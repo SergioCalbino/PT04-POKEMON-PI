@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 function SearchBar() {
 
     const [poke, setPoke] = useState('');
-    const namePokemon = useSelector(state => state.allpokemon)
+    //const namePokemon = useSelector(state => state.allpokemon)
     const dispatch = useDispatch();
 
     function handleInputChange(e) {
