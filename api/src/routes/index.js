@@ -120,22 +120,83 @@ router.get('/pokemons/:id', async (req, res) => {
 router.get('/pokemons', async (req, res) => {
     let {name} = req.query
     let urlApi = urlName
-    let allpokemons = {}
-    let onlyPoke = {};
+    let allpokemons = []
+    
     
     if(name) {
-        
+
+        try {
+           
+                allpokemons = await Pokemon.findOne({
+                    where: {name : name},
+                    include: {
+                        model: Type,
+                        attributes: ["name","id"],
+                        through: { attributes: [] },
+                    }
+                        
+                    }
+                )
+                
+              if(allpokemons.name) return res.json(allpokemons) 
+                
+           //let arrPoke = [allpokemons]
+            
+        } catch (error) {
+            console.log('error en DB')
+           //No utilizo un send.error porque corta el flujo de la aplicacion
+          
+        }
+    
+       
+       
+       
+       
+       
+       
+       
         urlApi = urlName+name.toLocaleLowerCase().trim();
 
         try {
-            const pok = await axios(urlApi)
-            console.log(pok.data)
-            onlyPoke = pok.data
+            const poke = await axios(urlApi)
+            
+            let onlyPoke = {
+                id: poke.data.id,
+                name: poke.data.name,
+                life: poke.data.stats[0].base_stat,
+                strength:  poke.data.stats[1].base_stat,
+                defense: poke.data.stats[2].base_stat,
+                speed: poke.data.stats[5].base_stat,
+                height: poke.data.height,
+                weight: poke.data.weight,
+                img: poke.data.sprites.other.dream_world.front_default,
+                types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
+            }
+        
+            // const filteredPokemon = onlyPoke.map((poke) => ({
+            //     id: poke.data,
+            //     name: poke.name,
+            //     life: poke.life,
+            //     strength:  poke.strength,
+            //     defense: poke.defense,
+            //     speed: poke.speed,
+            //     height: poke.height,
+            //     weight: poke.weight,
+            //     img: poke.img,
+            //     types: poke.types
+
+            // }))
             return res.json(onlyPoke);
+        
         } catch (error) {
+            res.status(404).send({error: "El nombre ingresado no existe"})
             
         };
     }
+
+    
+        
+
     
     try {
         // Aca hago el llamado a reqApi que tiene todos los pokemos. Ver carpeta ReqApi
@@ -143,6 +204,8 @@ router.get('/pokemons', async (req, res) => {
         res.json(await Promise.all(pokeDev))
        // let data = allpokemons.data
        // let dataSort = compare(data)
+
+       
         
     } catch (error) {
         res.status(404).send({error: "El nombre del pokemon ingresado no existe"})
