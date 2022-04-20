@@ -41,18 +41,18 @@ router.get('/types', async (req, res) => {
 })
 
 router.post('/pokemons', async (req, res) => {
-    let {name, life, strength, defense, speed, height, weight, types} = req.body;
+    let {name, life, strength, defense, speed, height, weight, type} = req.body;
     if(!name) return res.status(404).send("El nombre es requerido")
 
        
     try {
         const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-        let findType = await Type.findAll({
-            where: {
-                id: types
-            }
-        })
-        await newPokemon.addTypes(findType);
+        // let findType = await Type.findAll({
+        //     where: {
+        //         id: type
+        //     }
+        // })
+        await newPokemon.addTypes(type);
         return res.status(201).json(newPokemon)
         } catch (error) {
             console.log(error)
@@ -150,22 +150,22 @@ router.get('/pokemons', async (req, res) => {
 })
 
 // Vamos a crear el pokeon con los datos obligatorios
-router.post('/pokemons', async (req, res) => {
-    let {name, life, strength, defense, speed, height, weight, types} = req.body;
-    if(!name) return res.status(404).send("El nombre es requerido")
+// router.post('/pokemons', async (req, res) => {
+//     let {name, life, strength, defense, speed, height, weight, types} = req.body;
+//     if(!name) return res.status(404).send("El nombre es requerido")
 
        
-    try {
-        const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-        await newPokemon.addType(types);
-        return res.status(201).json(newPokemon)
-        } catch (error) {
-            console.log(error)
-            res.status(404).send(error)
+//     try {
+//         const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
+//         await newPokemon.addType(types);
+//         return res.status(201).json(newPokemon)
+//         } catch (error) {
+//             console.log(error)
+//             res.status(404).send(error)
         
-    }
+//     }
 
-})
+// })
 
 
 
