@@ -5,6 +5,7 @@ const axios = require('axios');
 //const Pokemon = require('../models/Pokemon');
 const {Pokemon, Type} = require('../db')
 const {reqApi} = require('../ReqApi/ReqApi')
+const {Op} = require('sequelize')
 
 
 const url = 'https://pokeapi.co/api/v2/pokemon';
@@ -127,51 +128,73 @@ router.get('/pokemons', async (req, res) => {
         try {
                 //Si existe name, primero verifico si existe en la base de datos
                 allpokemons = await Pokemon.findOne({
-                    where: {name : name},
+                    where: {name :{[Op.iLike]: name}},
                     include: {
                         model: Type,
                         attributes: ["name","id"],
                         through: { attributes: [] },
                     }
                         
-                    }
-                )
+                 }
+                 )
+                 if (allpokemons) { 
+                 return res.json(allpokemons);
                 
-              if(allpokemons.name) return res.json(allpokemons) 
+                } else { 
+               
+                urlApi = urlName+name.toLocaleLowerCase().trim();
+                const poke = await axios(urlApi)
+            
+                let onlyPoke = {
+                    id: poke.data.id,
+                    name: poke.data.name,
+                    life: poke.data.stats[0].base_stat,
+                    strength:  poke.data.stats[1].base_stat,
+                    defense: poke.data.stats[2].base_stat,
+                    speed: poke.data.stats[5].base_stat,
+                    height: poke.data.height,
+                    weight: poke.data.weight,
+                    img: poke.data.sprites.other.dream_world.front_default,
+                    types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
+                }
+            
+              
+               if(onlyPoke) return res.json(onlyPoke);
+            }
+            
+              
                 
         } catch (error) {
-            return res.send({error: "el nombre ingresado no existe"})
-           // console.log('error en DB')
+           return res.json('Nombre no encontrado')
            //No utilizo un send.error porque corta el flujo de la aplicaciónn
           
         }
         
         // Este es el supuesto del nombre, pero para el caso de la Api
-        urlApi = urlName+name.toLocaleLowerCase().trim();
 
-        try {
-            const poke = await axios(urlApi)
+        // try {
+        //     const poke = await axios(urlApi)
             
-            let onlyPoke = {
-                id: poke.data.id,
-                name: poke.data.name,
-                life: poke.data.stats[0].base_stat,
-                strength:  poke.data.stats[1].base_stat,
-                defense: poke.data.stats[2].base_stat,
-                speed: poke.data.stats[5].base_stat,
-                height: poke.data.height,
-                weight: poke.data.weight,
-                img: poke.data.sprites.other.dream_world.front_default,
-                types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
-            }
+        //     let onlyPoke = {
+        //         id: poke.data.id,
+        //         name: poke.data.name,
+        //         life: poke.data.stats[0].base_stat,
+        //         strength:  poke.data.stats[1].base_stat,
+        //         defense: poke.data.stats[2].base_stat,
+        //         speed: poke.data.stats[5].base_stat,
+        //         height: poke.data.height,
+        //         weight: poke.data.weight,
+        //         img: poke.data.sprites.other.dream_world.front_default,
+        //         types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
+        //     }
         
           
-            return res.json(onlyPoke);
+        //     return res.json(onlyPoke);
         
-        } catch (error) {
-            res.status(404).send({error: "El nombre ingresado no existe"})
+        // } catch (error) {
+        //     res.status(404).send({error: "El nombre ingresado no existe"})
             
-        };
+        // };
     }
 
     // Si no me pasan nombre, entonces traigo todos los pokemons de la DB y la Api
@@ -193,5 +216,6 @@ router.get('/pokemons', async (req, res) => {
         
     }
 })
+
 
 module.exports = router;
