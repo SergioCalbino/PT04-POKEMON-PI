@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 })
 
 
-// Hacemos el request a types y luego lo mandamos a la
+// Hacemos el request a types y luego lo utilizo para la creación del pokemon en el post
 router.get('/types', async (req, res) => {
 
     try {
@@ -50,11 +50,6 @@ router.post('/pokemons', async (req, res) => {
        
     try {
         const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-        // let findType = await Type.findAll({
-        //     where: {
-        //         id: type
-        //     }
-        // })
         await newPokemon.addTypes(type);
         return res.status(201).json(newPokemon)
         } catch (error) {
@@ -70,7 +65,7 @@ router.post('/pokemons', async (req, res) => {
 router.get('/pokemons/:id', async (req, res) => {
     let {id} = req.params;
     let urlApi = urlId+id;
-    let allpokemons = []
+
     ///^[0-9]+$/.test(id)
     
     if(/[a-zA-Z]/.test(id)) {
@@ -83,11 +78,11 @@ router.get('/pokemons/:id', async (req, res) => {
                     through: {attributes:[]}
                 }
             })
-            if(pokeId !==null){ 
+            if(pokeId !== null){ 
            return  res.json(pokeId)
             }
         } catch (error) {
-            return res.status(404).send({error: "El id enviado no existe"})
+            return res.status(404).send({error: "El id ingresado no existe"})
             
         }
     }
@@ -114,7 +109,7 @@ router.get('/pokemons/:id', async (req, res) => {
             res.json(onePoke);
         
         } catch (error) {
-            res.send({error: "El id enviado no existe"})
+            res.send({error: "El id ingresado no existe"})
         }
     })
 
@@ -124,13 +119,13 @@ router.get('/pokemons', async (req, res) => {
     let {name} = req.query
     let urlApi = urlName
     let allpokemons = []
-    let podbAndPokeApi = []
+   
     
     
     if(name) {
 
         try {
-           
+                //Si existe name, primero verifico si existe en la base de datos
                 allpokemons = await Pokemon.findOne({
                     where: {name : name},
                     include: {
@@ -144,21 +139,14 @@ router.get('/pokemons', async (req, res) => {
                 
               if(allpokemons.name) return res.json(allpokemons) 
                 
-           //let arrPoke = [allpokemons]
-            
         } catch (error) {
-            console.log('error en DB')
-           //No utilizo un send.error porque corta el flujo de la aplicacion
+            return res.send({error: "el nombre ingresado no existe"})
+           // console.log('error en DB')
+           //No utilizo un send.error porque corta el flujo de la aplicaciónn
           
         }
-    
-       
-       
-       
-       
-       
-       
-       
+        
+        // Este es el supuesto del nombre, pero para el caso de la Api
         urlApi = urlName+name.toLocaleLowerCase().trim();
 
         try {
@@ -186,7 +174,7 @@ router.get('/pokemons', async (req, res) => {
         };
     }
 
-    // Si no me pasan nombre
+    // Si no me pasan nombre, entonces traigo todos los pokemons de la DB y la Api
     try {
         let allPokeDb = await Pokemon.findAll({
             include: {
@@ -204,36 +192,6 @@ router.get('/pokemons', async (req, res) => {
         res.send(error)
         
     }
-
-    
-        
-  
-    
-    // try {
-    //     // Aca hago el llamado a reqApi que tiene todos los pokemos. Ver carpeta ReqApi
-    //     const pokeDev = await reqApi()
-    //    let pokeFinal= await Promise.all(pokeDev)
-      
-       
-
-    // //    podbAndPokeApi = pokeFinal.concat(allpokemons)
-    // //     res.json(podbAndPokeApi)
-    //     return res.json(pokeFinal)
-    // } catch (error) {
-    //     res.status(404).send({error: "El nombre del pokemon ingresado no existe"})
-    // }
-
-    
-
-
 })
-
-
-
-
-
-
-
-
 
 module.exports = router;
