@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAllPokemons, getTypes, filterByType, handlerStrength} from '../../redux/actions/actions'
 import Nav from '../Nav/Nav';
+import PokeCard from '../PokeCard/PokeCard'
 
 
 
@@ -9,7 +10,7 @@ import Nav from '../Nav/Nav';
 function Home() {
     
     const dispatch = useDispatch();
-    const pokemon = useSelector((initialState) => initialState);
+    const pokemonStore = useSelector((initialState) => initialState);
     
     
     useEffect(() => {
@@ -22,27 +23,23 @@ function Home() {
         <>
         <Nav/>
         <div>
-        {pokemon ? pokemon.allPokemons?.map(poke =>(
-            <div key={poke.name}>
-                <p>name: {poke.name}</p>
-                <p>weight: {poke.weight} lbs</p>
-                <p>{poke.types[0].name}</p>
-                <p>{poke.types[0].url}</p>
+        {
+            <div >
+              {pokemonStore ? pokemonStore.allPokemons.map((po) => (
+                <div >
+                  <PokeCard key={po.name} props={po} />
+                </div>
                 
-                <img src={poke.img} alt='#'/>
-    
-            </div>
-    
-        )
-        ): <h1>Hola.. Cargando</h1>}
-    
+              ))
+              : <h1>Cargando</h1>
+              }
         </div>
-
-
-       
-      </>
+        }
+        </div>
+        </>
       )
     
 }
 
 export default Home
+

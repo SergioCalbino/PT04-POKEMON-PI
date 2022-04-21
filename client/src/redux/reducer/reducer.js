@@ -3,14 +3,15 @@ import { GET_ALL_POKEMONS,
     GET_POKEMON_ID, 
     GET_POKEMON_NAME, 
     GET_TYPES, CREATE_POKEMON, 
-    ORDER_BY_NAME,
+    ORDER_NAME_ASC,
+    ORDER_NAME_DESC,
     ORDER_STRENGTH,
     FILTER_BY_TYPE } from "../actions/actions";
 
 const initialState = {
     allPokemons: [],
-    filterOrder: [],
-    pokemon: {},
+    pokeFilter: [],
+    pokemons: {},
     types: []
 }
  function compare( array, prop ) {
@@ -32,7 +33,8 @@ export default function rootReducer(state = initialState, action) {
         case GET_ALL_POKEMONS: {
             return {
                 ...state,
-                allPokemons: action.payload
+                allPokemons: action.payload,
+                
             }
 
         }
@@ -46,13 +48,13 @@ export default function rootReducer(state = initialState, action) {
         case GET_POKEMON_ID: {
             return {
                 ...state,
-                pokemon: action.payload
+                pokemons: action.payload
             }
         }
         case GET_POKEMON_NAME: {
             return {
                 ...state,
-                pokemon: action.payload
+                pokemons: action.payload
             }
         }
         case GET_TYPES: {
@@ -77,31 +79,68 @@ export default function rootReducer(state = initialState, action) {
         }
     }
 
-
-        case ORDER_BY_NAME: {
-            
-
-		if(action.payload === 'asc') {
-           let orderAsc = state.allPokemons
-           orderAsc = compare(state.allPokemons, "name")
-           return { 
-               ...state, 
-               allPokemons: orderAsc
-            
-        } 
-    }
-
-        if(action.payload === 'desc') {
-            let orderDesc = state.allPokemons
-            orderDesc = compare(state.allPokemons, "name").reverse()
-            return {
-                ...state,
-                allPokemons: orderDesc }
+    case  ORDER_NAME_ASC:{
+        let asc = compare(state.allPokemons, 'name')
+        return {
+            ...state,
+            allPokemons: asc
         }
+    }
+
+    case  ORDER_NAME_DESC:{
+        let des = compare(state.allPokemons, 'name').reverse();
+        return {
+            ...state,
+            allPokemons: des
+        }
+    }
+
+    //     case ORDER_NAME_ASC: {
+    //         if(action.payload === 'asc'){
+    //             let orderName = compare([...state.allPokemons], "name")
+    //             return {
+    //                 ...state,
+    //                 allPokemons: orderName
+    //             } 
+    //         // } else {
+    //         //     let orderName = compare([...state.pokemons], "name")
+    //         //     return {
+    //         //         ...state,
+    //         //         pokemons: orderName
+    //         //     }
+    //         }
+    //     }
+
+    //     case ORDER_NAME_DESC: {
+    //         if(action.payload === 'desc'){
+    //             let orderName = compare([...state.allPokemons], "name").reverse()
+    //             return {
+    //                 ...state,
+    //                 allPokemons: orderName
+    //             } 
+    //         // } else {
+    //         //     let orderName = compare([...state.pokemons], "name").reverse()
+    //         //     return {
+    //         //         ...state,
+    //         //         pokemons: orderName
+    //         //     }
+    //          }
+    //      }
+
+
+
+
+    // //     if(action.payload === 'desc') {
+           
+    // //         let orderDesc = compare([...state.allPokemons], "name").reverse()
+    // //         return {
+    // //             ...state,
+    // //             pokemons: orderDesc }
+    // //     }
 
             
-        return state  
-    }
+    // //     return state  
+    // // }
 
         
         case ORDER_STRENGTH: {
