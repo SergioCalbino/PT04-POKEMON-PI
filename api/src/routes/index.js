@@ -25,7 +25,10 @@ router.get('/', (req, res) => {
 
 // Hacemos el request a types y luego lo mandamos a la
 router.get('/types', async (req, res) => {
+
     try {
+        const allTypeDb = await Type.findAll()
+        if(allTypeDb.length > 1) res.json(allTypeDb) 
         const allpokemons = await axios.get(urlType)
         let typePoke = await allpokemons.data.results.map((ty) =>{
             return {
@@ -121,6 +124,7 @@ router.get('/pokemons', async (req, res) => {
     let {name} = req.query
     let urlApi = urlName
     let allpokemons = []
+    let podbAndPokeApi = []
     
     
     if(name) {
@@ -173,19 +177,7 @@ router.get('/pokemons', async (req, res) => {
                 types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
             }
         
-            // const filteredPokemon = onlyPoke.map((poke) => ({
-            //     id: poke.data,
-            //     name: poke.name,
-            //     life: poke.life,
-            //     strength:  poke.strength,
-            //     defense: poke.defense,
-            //     speed: poke.speed,
-            //     height: poke.height,
-            //     weight: poke.weight,
-            //     img: poke.img,
-            //     types: poke.types
-
-            // }))
+          
             return res.json(onlyPoke);
         
         } catch (error) {
@@ -194,41 +186,48 @@ router.get('/pokemons', async (req, res) => {
         };
     }
 
-    
-        
-
-    
+    // Si no me pasan nombre
     try {
-        // Aca hago el llamado a reqApi que tiene todos los pokemos. Ver carpeta ReqApi
+        let allPokeDb = await Pokemon.findAll({
+            include: {
+                model: Type,
+                attributes: ["name","id"],
+                through: { attributes: [] },
+            }
+            
+        })
         const pokeDev = await reqApi()
-        res.json(await Promise.all(pokeDev))
-       // let data = allpokemons.data
-       // let dataSort = compare(data)
+        let pokeFinal= await Promise.all(pokeDev)
 
-       
-        
+        return res.json(allPokeDb.concat(pokeFinal))
     } catch (error) {
-        res.status(404).send({error: "El nombre del pokemon ingresado no existe"})
+        res.send(error)
+        
     }
+
+    
+        
+  
+    
+    // try {
+    //     // Aca hago el llamado a reqApi que tiene todos los pokemos. Ver carpeta ReqApi
+    //     const pokeDev = await reqApi()
+    //    let pokeFinal= await Promise.all(pokeDev)
+      
+       
+
+    // //    podbAndPokeApi = pokeFinal.concat(allpokemons)
+    // //     res.json(podbAndPokeApi)
+    //     return res.json(pokeFinal)
+    // } catch (error) {
+    //     res.status(404).send({error: "El nombre del pokemon ingresado no existe"})
+    // }
+
+    
+
+
 })
 
-// Vamos a crear el pokeon con los datos obligatorios
-// router.post('/pokemons', async (req, res) => {
-//     let {name, life, strength, defense, speed, height, weight, types} = req.body;
-//     if(!name) return res.status(404).send("El nombre es requerido")
-
-       
-//     try {
-//         const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-//         await newPokemon.addType(types);
-//         return res.status(201).json(newPokemon)
-//         } catch (error) {
-//             console.log(error)
-//             res.status(404).send(error)
-        
-//     }
-
-// })
 
 
 
