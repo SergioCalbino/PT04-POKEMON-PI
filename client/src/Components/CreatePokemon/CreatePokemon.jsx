@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 //import { options } from '../../../../api/src/routes/index.js';
 import {postPokemon, getTypes} from '../../redux/actions/actions.js'
+import {Link} from 'react-router-dom'
 
 function CreatePokemon() {
     let newPokemon = {
@@ -14,7 +15,7 @@ function CreatePokemon() {
         height: "",
         weight: ""
     }
-    const types = useSelector(state => state.types)
+    const types = useSelector(state => state)
     const [input, setInput] = useState(newPokemon)
     const dispatch = useDispatch();
 
@@ -35,12 +36,13 @@ function CreatePokemon() {
     function handleType(e) {
         setInput({
             ...input,
-            types: [...input.types, e.target.value]
+            types: [...input.types.types, e.target.value]
         })
     }
 
   return (
     <div>
+        <h1>Create your Pokemon</h1>
         <form onSubmit={handleSubmit}>
             <label>Name</label>
             <input name ='name' type="text" onChange={handleInput}></input>
@@ -68,9 +70,14 @@ function CreatePokemon() {
                 <option>{ty}</option>)}
 
             </select> */}
-            <button type='submit'>Crear Pokemon</button>
+            <button type='submit'>Create Pokemon</button>
+
 
         </form>
+
+        <Link to={'/home'}>
+        <button>Back</button>
+        </Link>
     </div>
   )
 }

@@ -16,16 +16,18 @@ function PokeCard(props) {
     <div >
       
       <Link to={`/pokemon/${poke.id}`}>
-        <h1>{poke.name}</h1>
+        <h1>{poke.name} {poke.id}</h1>
       </Link>
      
      <img  src={poke.img} alt="" />
       <div>
-      {console.log(poke)}
-        <h2>Tipo de pokemon:</h2>
+      
+        <h2>Type pokemon:</h2>
            <div>
+           {/* {poke.types?.map(t => t.types)} */}
           {poke.types?.map((t) => {
-            return <p key={t.id}>{(t.name)}</p>;
+            return <p key={t.id}>
+            {(t.name)}</p>;
           })}
       </div>
       </div>

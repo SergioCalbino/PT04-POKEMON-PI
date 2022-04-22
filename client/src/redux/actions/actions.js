@@ -7,10 +7,15 @@ export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const CREATE_POKEMON = 'CREATE_POKEMON';
-export const ORDER_STRENGTH = 'ORDER_STRENGTH'; //ordena por fuerza de forma ascendente
-export const FILTER_BY_TYPE = 'FILTER_BY_TYPE' // Ordena por tipo
-export const ORDER_NAME_ASC = 'ORDER_NAME_ASC'; // Ordena por nombre de forma Ascendiente y descendiente
-export const ORDER_NAME_DESC = 'ORDER_NAME_DESC' // Ordena por nombre de forma Descendiente
+//export const ORDER_STRENGTH = 'ORDER_STRENGTH'; //ordena por fuerza de forma ascendente
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE'; // Ordena por tipo
+export const ORDER_NAME_ASC = 'ORDER_NAME_ASC'; // Ordena por nombre de forma Ascendente 
+export const ORDER_NAME_DESC = 'ORDER_NAME_DESC'; // Ordena por nombre de forma Descendente
+export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC';
+export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH_DESC';
+export const GET_ALL_POKEMONS_BY_DB = 'GET_ALL_POKEMONS_BY_DB';
+export const GET_ALL_POKEMONS_BY_API = 'GET_ALL_POKEMONS_BY_API'
+
 
 //Action para traernos todos los pokemons
 export const getAllPokemons = () => async (dispatch) => {
@@ -23,9 +28,10 @@ export const getAllPokemons = () => async (dispatch) => {
         {type: GET_ALL_POKEMONS, 
             payload: response.data
         }))
-    .catch(error=> dispatch (
-        console.log(error, "Ha ocurrido un error")))
-};
+        .catch(error=> dispatch (
+            console.log(error, "Ha ocurrido un error")))
+        };
+        
 
 //Action para traerme todos los pokemons de la DB
 export const allPokemonsByDb = () =>  dispatch => {
@@ -49,15 +55,15 @@ export const getPokemonsById = (id) => async dispatch => {
 //Actions para traer los pokemons por nombre
 
 export  function getPokemonsByname (name) {
-    console.log(name)
+    //console.log(name)
     return async function (dispatch) {
         try {
             const poke = await axios(`http://localhost:3001/pokemons/?name=${name}`)
-            console.log(poke)
+           // console.log(poke)
             if(poke){
             return dispatch({
                 type: GET_ALL_POKEMONS,
-                payload: [poke.data]
+                payload: [poke.data] // De esta forma hago un arreglo de toda la data
             })
         }
             
@@ -129,23 +135,37 @@ export function orderNameDesc() {
 };
 
 
-export function ordeByStrength(payload) {
+export function ordeByStrengthAsc() {
     return {
-        type: ORDER_STRENGTH,
-        payload: payload
+        type: ORDER_STRENGTH_ASC,
+    
     }
 };
 
-// export function ordeByStrengthDesc() {
-//     return {
-//         type: ORDER_STRENGTH_DESC
-//     }
-// }
+export function ordeByStrengthDesc() {
+    return {
+        type: ORDER_STRENGTH_DESC,
+    
+    }
+};
 
-export function filterByType(payload) {
+export function filterByType(type) {
+   // console.log(type)
     return {
         type: FILTER_BY_TYPE,
-        payload: payload
+        payload: type
+    }
+}
+
+export function getPokemonsByDb() {
+    return {
+        type: GET_ALL_POKEMONS_BY_DB
+    }
+}
+
+export function getPokemonsByApi() {
+    return {
+        type: GET_ALL_POKEMONS_BY_API
     }
 }
 

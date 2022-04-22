@@ -45,13 +45,19 @@ router.get('/types', async (req, res) => {
 })
 
 router.post('/pokemons', async (req, res) => {
-    let {name, life, strength, defense, speed, height, weight, type} = req.body;
+    let {name, life, strength, defense, speed, height, weight, type, img} = req.body;
     if(!name) return res.status(404).send("El nombre es requerido")
 
        
     try {
-        const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight})
-        await newPokemon.addTypes(type);
+        const newPokemon = await Pokemon.create({name, life, strength, defense, speed, height, weight, img})
+        const allTypeDb = await Type.findAll({
+            where: {
+                id: type
+            }
+        })
+        //En este caso el {where id} hace que se busque el type por id
+        await newPokemon.addTypes(allTypeDb);
         return res.status(201).json(newPokemon)
         } catch (error) {
             console.log(error)
@@ -95,15 +101,16 @@ router.get('/pokemons/:id', async (req, res) => {
            pokeApi = pokeApi.data
             let onePoke = {
                 id: pokeApi.id,
-                image: pokeApi.sprites.other.dream_world.front_default,
+                img: pokeApi.sprites.other.dream_world.front_default,
                 name: pokeApi.name,
+                //types: poke.data.types.map(type=> type.type.name),
                 types: pokeApi.types.map(type => ({name: type.type.name, url: type.type.url})),
                 life: pokeApi.stats[0].base_stat,
                 strength: pokeApi.stats[1].base_stat,
                 defense: pokeApi.stats[2].base_stat,
                 speed: pokeApi.stats[3].base_stat,
                 height: pokeApi.height,
-                weigth: pokeApi.weight,
+                weight: pokeApi.weight,
                 
             }
             
@@ -155,7 +162,9 @@ router.get('/pokemons', async (req, res) => {
                     height: poke.data.height,
                     weight: poke.data.weight,
                     img: poke.data.sprites.other.dream_world.front_default,
+                    //types: poke.data.types.map(type=> type.type.name)
                     types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
+                    
                 }
             
               
@@ -170,35 +179,12 @@ router.get('/pokemons', async (req, res) => {
           
         }
         
-        // Este es el supuesto del nombre, pero para el caso de la Api
-
-        // try {
-        //     const poke = await axios(urlApi)
-            
-        //     let onlyPoke = {
-        //         id: poke.data.id,
-        //         name: poke.data.name,
-        //         life: poke.data.stats[0].base_stat,
-        //         strength:  poke.data.stats[1].base_stat,
-        //         defense: poke.data.stats[2].base_stat,
-        //         speed: poke.data.stats[5].base_stat,
-        //         height: poke.data.height,
-        //         weight: poke.data.weight,
-        //         img: poke.data.sprites.other.dream_world.front_default,
-        //         types: poke.data.types.map(type => ({name: type.type.name, url: type.type.url}))
-        //     }
-        
-          
-        //     return res.json(onlyPoke);
-        
-        // } catch (error) {
-        //     res.status(404).send({error: "El nombre ingresado no existe"})
-            
-        // };
+       
     }
 
     // Si no me pasan nombre, entonces traigo todos los pokemons de la DB y la Api
     try {
+
         let allPokeDb = await Pokemon.findAll({
             include: {
                 model: Type,
@@ -209,7 +195,9 @@ router.get('/pokemons', async (req, res) => {
         })
         const pokeDev = await reqApi()
         let pokeFinal= await Promise.all(pokeDev)
-
+        // allPokeDb = allPokeDb.map(pokemon => ({
+        //     id:pokemon.id, name:pokemon.name, types: pokemon.types.map(type => type.name)}))
+        //     console.log(allPokeDb)
         return res.json(allPokeDb.concat(pokeFinal))
     } catch (error) {
         res.send(error)

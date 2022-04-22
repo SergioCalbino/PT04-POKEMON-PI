@@ -8,8 +8,7 @@ function LandingPage() {
     <h1>Gotta catch 'em all!</h1>
     <img src={image} alt=''/>
         <Link to='/home'>Home</Link>
-        <Link to='/create'>Create</Link>
-        <Link to='/detailpokemon'>Detalle</Link>
+        
     </div>
   )
 }

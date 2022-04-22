@@ -1,0 +1,31 @@
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 16px 32px;
+    box-shadow: 0px 4px 8px #ccc;
+    background: white;
+    color: darkblue;
+    margin-top: 16px;
+    z-index:10;
+  }
+
+  .pagination-button {
+    border: 1px solid white;
+    box-shadow: 0px 0px 3px #aaa;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: darkblue;
+    background: rgba(241, 241, 241, 0.856);
+    margin: 0px 4px; 
+    padding: 4px 16px;
+    width: auto;
+    cursor: pointer;
+    transition: 0.5s;
+
+  }

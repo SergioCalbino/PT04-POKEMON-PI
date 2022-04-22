@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
     type: DataTypes.FLOAT,
     allowNull: true
     },
+    
+    img: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    }
 
   });
 };
