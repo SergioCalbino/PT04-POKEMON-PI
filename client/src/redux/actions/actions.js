@@ -13,7 +13,11 @@ export const ORDER_NAME_ASC = 'ORDER_NAME_ASC'; // Ordena por nombre de forma As
 export const ORDER_NAME_DESC = 'ORDER_NAME_DESC' // Ordena por nombre de forma Descendiente
 
 //Action para traernos todos los pokemons
-export const getAllPokemons = () => async dispatch => {
+export const getAllPokemons = () => async (dispatch) => {
+    // let query = ''
+    // if(search){
+    //     query = '?name=' + search
+    // }
     return await axios('http://localhost:3001/pokemons')
     .then(response => dispatch(
         {type: GET_ALL_POKEMONS, 
@@ -52,14 +56,14 @@ export  function getPokemonsByname (name) {
             console.log(poke)
             if(poke){
             return dispatch({
-                type: GET_POKEMON_NAME,
-                payload: poke.data
+                type: GET_ALL_POKEMONS,
+                payload: [poke.data]
             })
         }
             
         } catch (error) {
             return dispatch({
-                type: GET_POKEMON_NAME,
+                type: GET_ALL_POKEMONS,
                 payload: error
             })
             

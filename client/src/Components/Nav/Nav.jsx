@@ -12,7 +12,8 @@ function Nav() {
 
     function searchPokemon(e) { // Para realizar la busqueda por nombre
         e.preventDefault()
-        dispatch(getPokemonsByname(search))
+       // dispatch(getPokemonsByname(search))
+       dispatch(getPokemonsByname(search))
         setSearch('')
 
     }

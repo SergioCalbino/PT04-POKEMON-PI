@@ -17,6 +17,21 @@ function Home() {
         dispatch(getAllPokemons())
     },[dispatch]);
 
+    const [type, setType] = useState();
+   
+    const renderPokemons = () => {
+        return pokemonStore.allPokemons.filter(pokemon => {
+            if(type) return  pokemon.types.includes(type)
+            return true
+        }).map((po) => (
+            <div >
+              <PokeCard key={po.name} props={po} />
+            </div>
+            
+          ))
+        
+    }
+
     
     return (
 
@@ -24,13 +39,8 @@ function Home() {
         <Nav/>
         <div>
         {
-            <div >
-              {pokemonStore ? pokemonStore.allPokemons.map((po) => (
-                <div >
-                  <PokeCard key={po.name} props={po} />
-                </div>
-                
-              ))
+            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)'}} >
+              {pokemonStore ? renderPokemons()
               : <h1>Cargando</h1>
               }
         </div>

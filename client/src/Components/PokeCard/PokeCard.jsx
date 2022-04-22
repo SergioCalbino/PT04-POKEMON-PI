@@ -19,11 +19,12 @@ function PokeCard(props) {
         <h1>{poke.name}</h1>
       </Link>
      
-     <img  src={poke.sprites} alt="" />
+     <img  src={poke.img} alt="" />
       <div>
+      {console.log(poke)}
         <h2>Tipo de pokemon:</h2>
            <div>
-          {poke.Types?.map((t) => {
+          {poke.types?.map((t) => {
             return <p key={t.id}>{(t.name)}</p>;
           })}
       </div>
