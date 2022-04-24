@@ -14,9 +14,13 @@ function Nav() {
     function searchPokemon(e) { // Para realizar la busqueda por nombre
         e.preventDefault()
        // dispatch(getPokemonsByname(search))
+       if( !/[a-zA-Z]/.test(search)) {
+           alert('El caracter ingresado no es valido')
+           setSearch('')
+       } else { 
        dispatch(getPokemonsByname(search))
         setSearch('')
-
+       }
     }
 
       function handleInputChange(e) {

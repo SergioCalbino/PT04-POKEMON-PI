@@ -59,7 +59,7 @@ export  function getPokemonsByname (name) {
     return async function (dispatch) {
         try {
             const poke = await axios(`http://localhost:3001/pokemons/?name=${name}`)
-           // console.log(poke)
+           console.log(poke)
             if(poke){
             return dispatch({
                 type: GET_ALL_POKEMONS,
@@ -98,20 +98,17 @@ export function getTypes() {
 
 //Actions post a pokemons
 
-export function postPokemon() {
-	return async function(dispatch){
+export function postPokemon(inputFormPoke) {
+    return async function(dispatch){
         try {
-            const resp = await axios.post('http://localhost:3001/pokemons')
+           // console.log(inputFormPoke)
+            await axios.post('http://localhost:3001/pokemons',inputFormPoke)
             return dispatch({
-                type: CREATE_POKEMON,
-                payload: resp.data
+                type: CREATE_POKEMON
+                
             })
         } catch (error) {
-            return dispatch({
-                type: CREATE_POKEMON,
-                payload: error
-            })
-            
+            return console.log(error)
         }
 	}
 }

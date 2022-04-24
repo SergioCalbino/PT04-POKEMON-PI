@@ -64,8 +64,8 @@ export default function rootReducer(state = initialState, action) {
         }
         case CREATE_POKEMON: {
             return {
-                ...state,
-                allPokemons: state.allPokemons.concat(action.payload)
+                ...state
+                
             }
         }
         //Aca empiezo con los ordenamientos

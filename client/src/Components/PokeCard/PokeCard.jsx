@@ -16,7 +16,7 @@ function PokeCard(props) {
     <div >
       
       <Link to={`/pokemon/${poke.id}`}>
-        <h1>{poke.name} {poke.id}</h1>
+        <h1>{poke.name}</h1>
       </Link>
      
      <img  src={poke.img} alt="" />
