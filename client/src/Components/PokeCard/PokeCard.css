@@ -1,0 +1,130 @@
+.container{
+    background-color: lightsalmon;
+    margin-bottom: 50px;
+    color: #1a1b1f;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 20px;
+    height: 450px;
+    width: 360px; 
+    font-size: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.674);
+    overflow: hidden;
+    transition: 100ms;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px 0px  #8238382d;  
+}
+/* .Container{
+
+    background-image: url('./imagenes/pokebola2.png');
+    background-size: 100%;
+    background-repeat: no-repeat; 
+  
+} */
+.container:hover{
+    box-shadow: 0px 5px 5px 0px  #b6c5ce;
+}
+
+.name{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    background: linear-gradient(180deg, #e83d1634 0%, #2b262681);
+    align-content: center;
+    justify-content: center;
+    height: 70px;
+    text-align: center;
+}
+
+
+
+.types{
+   padding-bottom: 15px;
+   padding-top: 18px;
+   text-align: center;
+   background-color: #ffffff6e;
+   height: 120px;
+   display: flex;
+   flex-direction: row; 
+   justify-content:  space-between;
+   padding-left: 20px;
+   padding-right: 20px;
+   
+}
+
+
+
+.btn{
+    display:flex;
+    flex-direction: row-reverse;
+    font-size: 45px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: transparent;
+    background-color: transparent; 
+    border: 2px solid rgba(149, 1, 1, 0);
+    border-radius: 800px;
+    overflow: hidden;
+    transition: all 500ms ease;
+    margin-bottom: 40px;
+    z-index: 0;
+     
+}
+.btn{
+    list-style: none;
+    text-align: center;
+  }
+
+   btn::before{
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      margin: auto;
+      transition: all 500ms ease;
+      z-index: -1;
+    } 
+    
+    
+    .btn:hover{
+      background-color:rgb(133, 136, 132); 
+      box-shadow: rgb(132, 134, 132), 0 0 20 rgb(117, 247, 186); 
+    } 
+
+.img{
+    align-items: center;
+    height: 215px;
+    width: 350px;
+}
+
+
+.container .card{
+    border-radius: 20px;
+    box-shadow: 0 2px 2px rgba(201, 43, 43, 0);
+    overflow: hidden;
+    margin: 15px;
+    text-align: center;
+    transition: all 0.25s; 
+}
+
+.container .card:hover{
+   
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+
+}
+.card .img{
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0px;
+    text-align: center;
+    transition: all 0.25s; 
+}
+
+.card .img:hover{
+    transform: translate(-15px);
+    
+}
