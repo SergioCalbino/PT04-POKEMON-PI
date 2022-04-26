@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
 router.get("/types", async (req, res) => {
   try {
     const allTypeDb = await Type.findAll();
-    if (allTypeDb.length > 1) res.json(allTypeDb);
+    if (allTypeDb.length > 1) return res.json(allTypeDb);
     const allpokemons = await axios.get(urlType);
     let typePoke = await allpokemons.data.results.map((ty) => {
       return {
@@ -33,6 +33,7 @@ router.get("/types", async (req, res) => {
         url: ty.url,
       };
     });
+    
     await Type.bulkCreate(typePoke);
     res.json(typePoke);
   } catch (error) {}
