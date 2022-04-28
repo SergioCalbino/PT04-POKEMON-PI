@@ -15,6 +15,7 @@ export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC';
 export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH_DESC';
 export const GET_ALL_POKEMONS_BY_DB = 'GET_ALL_POKEMONS_BY_DB';
 export const GET_ALL_POKEMONS_BY_API = 'GET_ALL_POKEMONS_BY_API'
+export const CLEAR = 'CLEAR'
 
 
 //Action para traernos todos los pokemons
@@ -114,7 +115,13 @@ export function postPokemon(inputFormPoke) {
 }
 
 
-// Funciones de filtrado
+// Funciones de filtrado y borrado para mantener el estado
+
+export function deleteState() {
+    return {
+        type: CLEAR
+    }
+}
 
 export function orderNameAsc() {
     return {

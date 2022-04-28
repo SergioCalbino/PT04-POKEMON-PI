@@ -20,7 +20,8 @@ function Home() {
   let [currentPage, setCurrentPage] = useState(1);
   const indexLastPage = currentPage * postsPerPage;
   const indexFirstPage = indexLastPage - postsPerPage;
-  const currentPokes = pokemonStore.filter ? pokemonStore?.filter.slice(indexFirstPage,indexLastPage) : pokemonStore?.allPokemons.slice(indexFirstPage,indexLastPage); 
+  const currentPokes = pokemonStore.filter ? pokemonStore?.filter.slice(indexFirstPage,indexLastPage) 
+        : pokemonStore?.allPokemons.slice(indexFirstPage,indexLastPage); 
   //Este currentsPokes lo utilizo para veriificar sobre los pokemons de la api y la DB con el paginado. En caso contrario, utilizo para todos juntos.
   //Lugo en currentPokes hago el mapeo, ya sea con ordenamiento de api y db, o de todos
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -42,6 +43,12 @@ function Home() {
           ))
         
     }
+
+    const renderOrder = {
+      allPokemons: !pokemonStore.allPokemons ? <h1>Cargando</h1> : renderPokemons(),
+      filtered: !pokemonStore.filter ? <h1>No se encontraron resultados</h1>: renderPokemons()
+
+    }
     
     return (
 
@@ -50,9 +57,10 @@ function Home() {
         <div>
         {
             <div className='pokemons-view' >
-              {pokemonStore ? renderPokemons()
+              {/* {pokemonStore ? renderPokemons()
               : <h1>Cargando</h1>
-              }
+              } */}
+              {!pokemonStore.filter ? renderOrder.allPokemons : renderOrder.filtered}
         </div>
 
         

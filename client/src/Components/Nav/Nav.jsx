@@ -10,6 +10,7 @@ import {
   ordeByStrengthDesc,
   getPokemonsByDb,
   getPokemonsByApi,
+  deleteState
 } from "../../redux/actions/actions";
 import { getPokemonsByname } from "../../redux/actions/actions.js";
 import "../Nav/Nav.css";
@@ -52,15 +53,15 @@ function Nav() {
   function handlerName(e) {
     // Filtro por orden alfabetico
     if (e.target.value === "asc") {
-      dispatch(orderNameAsc());
+      return dispatch(orderNameAsc());
     }
 
     if (e.target.value === "desc") {
-      dispatch(orderNameDesc());
+     return dispatch(orderNameDesc());
     }
 
     if (e.target.value === "") {
-      dispatch(getAllPokemons());
+      return dispatch(deleteState());
     }
 
     return;
@@ -69,23 +70,24 @@ function Nav() {
   function handlerStrength(e) {
     // Filtro los pokemons por Fuerza
     if (e.target.value === "asc") {
-      dispatch(ordeByStrengthAsc(e.target.value));
+      return dispatch(ordeByStrengthAsc());
     }
     if (e.target.value === "desc") {
-      dispatch(ordeByStrengthDesc(e.target.value));
+      return dispatch(ordeByStrengthDesc());
     }
     if (e.target.value === "") {
-      dispatch(getAllPokemons());
+      return dispatch(deleteState());
     }
+    return
   }
 
   function handlerOriginPokemons(e) {
     // Filtro los pokemons por origen
     if (e.target.value === "Data Base") {
-      dispatch(getPokemonsByDb(e.target.value));
+      dispatch(getPokemonsByDb());
     }
     if (e.target.value === "Api") {
-      dispatch(getPokemonsByApi(e.target.value));
+      dispatch(getPokemonsByApi());
     }
     if (e.target.value === "") {
       delete pokemons.filter;
@@ -136,10 +138,20 @@ function Nav() {
           value={search}
           placeholder="Buscar por nombre"
         />
-        <button className="button" onClick={searchPokemon}>Buscar</button>
+        <button className="button" onClick={searchPokemon}>Search</button>
       </div>
     </div>
   );
 }
 
 export default Nav;
+
+
+{/* <p>Select Temperaments</p>
+                    <select multiple name = 'temperaments' onChange = {handleInputChange}>
+                        {
+                            temperaments.map(t => (
+                                <option key = {t.id} value = {t.id}>{t.temperaments}</option>
+                            ))
+                        }
+                    </select> */}

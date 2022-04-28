@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { options } from '../../../../api/src/routes/index.js';
-import { postPokemon, getTypes } from "../../redux/actions/actions.js";
-import { Link } from "react-router-dom";
+import { postPokemon, getTypes, deleteState, getAllPokemons } from "../../redux/actions/actions.js";
+import { Link, useNavigate } from "react-router-dom";
 
 function CreatePokemon() {
   let newPokemon = {
@@ -21,6 +21,7 @@ function CreatePokemon() {
   const [input, setInput] = useState(newPokemon);
   const [error, setError] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   function validator(input, item) {
       let error = {}
@@ -79,6 +80,9 @@ function CreatePokemon() {
     alert("Create Pokemon Success");
     setInput(newPokemon)
     setError({})
+    navigate('/home')
+    dispatch(deleteState())
+    dispatch(getAllPokemons())
 
   }
 
@@ -105,6 +109,10 @@ function CreatePokemon() {
         [item]: parseInt(e.target.value),
       });
     }
+
+    
+
+    
 
     // setError(
     //   validator({
@@ -205,6 +213,10 @@ function CreatePokemon() {
           ))}
         </select>
         {error.types && <p>{error.types}</p>}
+
+
+        
+
         <button type="submit" disabled={isObjEmpty(error)}>Create Pokemon</button>
 
        
@@ -218,3 +230,4 @@ function CreatePokemon() {
 }
 
 export default CreatePokemon;
+
