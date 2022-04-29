@@ -40,9 +40,9 @@ router.get("/types", async (req, res) => {
 });
 
 router.post("/pokemons", async (req, res) => {
-  let { name, life, strength, defense, speed, height, weight, type, img } =
+  let { name, life, strength, defense, speed, height, weight, types, img } =
     req.body;
-  if (!name) return res.status(404).send("El nombre es requerido");
+  //if (!name) return res.status(404).send("El nombre es requerido");
 
   try {
     const newPokemon = await Pokemon.create({
@@ -60,13 +60,13 @@ router.post("/pokemons", async (req, res) => {
     //     name: type,
     //   },
     // });
-    console.log(type)
+   
     //En este caso el {where id} hace que se busque el type por id
-    await newPokemon.addTypes(type);
+    await newPokemon.addTypes(types);
     return res.status(201).json(newPokemon);
   } catch (error) {
-    console.log(error);
-    res.status(404).send(error);
+   return console.log(error);
+   // res.status(404).send(error);
   }
 });
 

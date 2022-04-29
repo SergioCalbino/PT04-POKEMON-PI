@@ -10,13 +10,14 @@ import {
     FILTER_BY_TYPE,
     GET_ALL_POKEMONS_BY_DB,
     GET_ALL_POKEMONS_BY_API,
-    CLEAR 
+    CLEAR,
+    GET_NAME 
 
     } from "../actions/actions";
 
 const initialState = {
     allPokemons: [],
-    pokemons: {},
+    pokemons: [],
     types: []
 }
  function compare( array, prop ) {
@@ -52,11 +53,19 @@ export default function rootReducer(state = initialState, action) {
             }
         }
         case GET_POKEMON_NAME: {
+            const filtered = action.payload
             return {
                 ...state,
-                pokemons: action.payload
+                filt: filtered
             }
         }
+
+        // case GET_NAME: {
+        //     return {
+        //         ...state,
+        //         pokName: action.payload
+        //     }
+        // }
 
         // case GET_POKEMON_NAME: {
         //     return {
@@ -87,6 +96,7 @@ export default function rootReducer(state = initialState, action) {
                 filter: state.allPokemons
             }
         }
+        
         case FILTER_BY_TYPE: {
             const cloneType =  [...state.allPokemons]
             

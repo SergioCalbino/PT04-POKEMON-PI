@@ -10,9 +10,11 @@ import {
   ordeByStrengthDesc,
   getPokemonsByDb,
   getPokemonsByApi,
-  deleteState
+  deleteState,
+  
+  getPokemonByname
 } from "../../redux/actions/actions";
-import { getPokemonsByname } from "../../redux/actions/actions.js";
+
 import "../Nav/Nav.css";
 
 function Nav() {
@@ -25,18 +27,23 @@ function Nav() {
   function searchPokemon(e) {
     // Para realizar la busqueda por nombre
     e.preventDefault();
+   // console.log(search)
     // dispatch(getPokemonsByname(search))
     if (!/[a-zA-Z]/.test(search)) {
       //Constatamos que lo que se ingrese sea un nombre
       alert("El caracter ingresado no es valido");
       setSearch("");
     } else {
-      dispatch(getPokemonsByname(search));
+      //console.log(search)
+      dispatch(getPokemonByname(search));
       setSearch("");
     }
   }
 
+
+
   function handleInputChange(e) {
+
     setSearch(e.target.value);
   }
 
@@ -132,6 +139,7 @@ function Nav() {
           <option value="Api"> Pokemons from Api</option>
         </select>
       </div>
+     
       <div >
         <input className=""
           onChange={handleInputChange}
@@ -147,11 +155,3 @@ function Nav() {
 export default Nav;
 
 
-{/* <p>Select Temperaments</p>
-                    <select multiple name = 'temperaments' onChange = {handleInputChange}>
-                        {
-                            temperaments.map(t => (
-                                <option key = {t.id} value = {t.id}>{t.temperaments}</option>
-                            ))
-                        }
-                    </select> */}

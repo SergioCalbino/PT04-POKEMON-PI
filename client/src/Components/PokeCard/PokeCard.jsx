@@ -21,9 +21,12 @@ function PokeCard(props) {
         <img className="img" src={poke.img} alt="" />
         }
 
+     
+
         <div  className= "types">
           <p>Types:</p>
-          {poke.types?.map((t) => {
+          {
+            poke.types?.map((t) => {
             return <p key={t.id}>{t.name}</p>;
           })}
         </div>

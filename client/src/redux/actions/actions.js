@@ -14,8 +14,9 @@ export const ORDER_NAME_DESC = 'ORDER_NAME_DESC'; // Ordena por nombre de forma 
 export const ORDER_STRENGTH_ASC = 'ORDER_STRENGTH_ASC';
 export const ORDER_STRENGTH_DESC = 'ORDER_STRENGTH_DESC';
 export const GET_ALL_POKEMONS_BY_DB = 'GET_ALL_POKEMONS_BY_DB';
-export const GET_ALL_POKEMONS_BY_API = 'GET_ALL_POKEMONS_BY_API'
-export const CLEAR = 'CLEAR'
+export const GET_ALL_POKEMONS_BY_API = 'GET_ALL_POKEMONS_BY_API';
+export const CLEAR = 'CLEAR';
+export const GET_NAME = 'GET_NAME';
 
 
 //Action para traernos todos los pokemons
@@ -55,28 +56,41 @@ export const getPokemonsById = (id) => async dispatch => {
 
 //Actions para traer los pokemons por nombre
 
-export  function getPokemonsByname (name) {
-    //console.log(name)
+export  function getPokemonByname (name) {
     return async function (dispatch) {
         try {
-            const poke = await axios(`http://localhost:3001/pokemons/?name=${name}`)
-           console.log(poke)
-            if(poke){
-            return dispatch({
-                type: GET_ALL_POKEMONS,
-                payload: [poke.data] // De esta forma hago un arreglo de toda la data
-            })
-        }
-            
+          const resp = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+          return dispatch({
+            type: GET_ALL_POKEMONS,
+            payload: [resp.data]
+          });
         } catch (error) {
-            return dispatch({
-                type: GET_ALL_POKEMONS,
-                payload: error
-            })
-            
+          return dispatch({
+            type: GET_ALL_POKEMONS,
+            payload: "error"
+          });
         }
-    }
+      }
 };
+
+// export function getName (name) {
+//     return async function(dispatch) {
+//         try {
+//             const poke = await(`http://localhost:3001/pokemons/?name=${name}`)
+//             return dispatch({
+//                 type:  GET_NAME,
+//                 payload: [poke.data]
+//             })
+            
+//         } catch (error) {
+//             return dispatch({
+//                 type: GET_NAME,
+//                 payload: error
+//             })
+            
+//         }
+//     }
+// }
 
 export function getTypes() {
     return async function(dispatch) {
