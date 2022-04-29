@@ -30,62 +30,59 @@ function CreatePokemon() {
 
   function validator(input, item) {
     let error = {};
-    if (item === "name") {
+   
       if (!input.name) error.name = "Name is required";
-      if (!/^[a-zA-Z ]*$/.test(input.name))
-        error.name = "Name is invalid: must be letters only";
-      if (input.name.length > 20 || input.name.length < 3)
-        error.name = "Name must be between 3 and 20 characters";
-    }
+      if (!/^[a-zA-Z ]*$/.test(input.name)) error.name = "Name is invalid: must be letters only";
+      if (input.name.length > 20 || input.name.length < 3) error.name = "Name must be between 3 and 20 characters";
+    
 
-    if (item === "life") {
-      if (input.life <= 0 || input.life >= 200)
-        error.life =
-          "Los valores permitidos deben ser mayores a 0 y menor a 200";
-    }
+    
+      if (input.life <= 0 || input.life >= 200) error.life = "Los valores permitidos deben ser mayores a 0 y menor a 200";
+    
 
-    if (item === "strength") {
-      if (input.strength <= 0 || input.strength >= 150)
-        error.strength =
-          "Los valores permitidos deben ser mayores a 0 y menor a 150";
-    }
+    
+      if (input.strength <= 0 || input.strength >= 150) error.strength = "Los valores permitidos deben ser mayores a 0 y menor a 150";
+    
 
-    if (item === "defense") {
-      if (input.defense <= 0 || input.defense >= 200)
-        error.defense =
-          "Los valores permitidos deben ser mayores a 0 y menor a 200";
-    }
+   
+      if (input.defense <= 0 || input.defense >= 200) error.defense = "Los valores permitidos deben ser mayores a 0 y menor a 200";
+    
 
-    if (item === "speed") {
-      if (input.speed <= 0 || input.speed >= 150)
-        error.speed =
-          "Los valores permitidos deben ser mayores a 0 y menor a 150";
-    }
+    
+      if (input.speed <= 0 || input.speed >= 150) error.speed = "Los valores permitidos deben ser mayores a 0 y menor a 150";
+    
 
-    if (item === "height") {
-      if (input.height <= 0 || input.height >= 150)
-        error.height =
-          "Los valores permitidos deben ser mayores a 0 y menor a 150";
-    }
+    
+      if (input.height <= 0 || input.height >= 150) error.height = "Los valores permitidos deben ser mayores a 0 y menor a 150";
+  
 
-    if (item === "weight") {
-      if (input.weight <= 0 || input.weight >= 300)
-        error.weight =
-          "Los valores permitidos deben ser mayores a 0 y menor a 200";
-    }
-
-    if (item === "types") {
-      if (input.types.length >= 2)
-        error.types = "El pokemon no puede tener mas de dos Types";
-    }
+    
+      if (input.weight <= 0 || input.weight >= 300) error.weight = "Los valores permitidos deben ser mayores a 0 y menor a 200";
+    
+      // if (input.types[2]) error.types = "El pokemon no puede tener mas de dos Types";
+    
     return error;
   }
+
+  const [submit, setSubmit] = useState(false);
+  useEffect(() => {
+      if (
+        input.types.length < 3 &&
+        input.types.length > 0 &&
+        !isNotObjEmpty(error)
+      ) {
+        setSubmit(true);
+      } else {
+        setSubmit(false);
+      }
+    
+    }, [error, input, submit]);
 
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);
 
-  const isObjEmpty = () => {
+  const isNotObjEmpty = () => {
     for (var prop in error) {
       if (error.hasOwnProperty(prop)) return true;
     }
@@ -107,65 +104,65 @@ function CreatePokemon() {
 
   // Estados del input para todos los campos menos el type
   function handleInput(e) {
-    let item = e.target.name;
-    if (item === "name") {
-      setError(validator({ ...input, [item]: e.target.value }, item));
+    
+    if ( e.target.name === "name") {
+      setError(validator({ ...input, [ e.target.name]: e.target.value }));
       setInput({
         ...input,
-        [item]: e.target.value,
+        [ e.target.name]: e.target.value,
       });
     }
 
-    if (item === "life") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
-      setInput({
-        ...input,
-        [e.target.name]: e.target.value,
-      });
-    }
-
-    if (item === "strength") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "life") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       });
     }
 
-    if (item === "defense") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "strength") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       });
     }
 
-    if (item === "speed") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "defense") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       });
     }
 
-    if (item === "height") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "speed") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       });
     }
 
-    if (item === "weight") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "height") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       });
     }
 
-    if (item === "types") {
-      setError(validator({ ...input, [e.target.name]: e.target.value }, item));
+    if ( e.target.name === "weight") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
+    }
+
+    if ( e.target.name === "types") {
+      setError(validator({ ...input, [e.target.name]: e.target.value }));
       setInput({
         ...input,
         [e.target.name]: [...input.types, parseInt(e.target.value)],
@@ -174,7 +171,9 @@ function CreatePokemon() {
   }
 
   const deleteType = (e) => {
-    let ty = input.types.filter((t) => t !== e.target.value);
+    console.log(typeof e.target.value)
+    let ty = input.types.filter((t) => t !== parseInt(e.target.value));
+    console.log(typeof ty[0])
     setInput({
       ...input,
       types: ty,
@@ -257,15 +256,21 @@ function CreatePokemon() {
           required
         />
         {error.weight && <p>{error.weight}</p>}
-
+        
         <select name="types" onChange={handleInput} autoComplete="off" required>
           <option value=""> Elija tipo</option>
           {typeState.types?.map((ty) => (
             <option value={ty.id}>{ty.name}</option>
-          ))}
+          ))} 
         </select>
         {error.types && <p>{error.types}</p>}
 
+
+        <button type="submit" disabled={!submit}>
+          Create Pokemon
+        </button>
+      </form>
+      
         <div>
           <h3>Pokemons to add the Type</h3>
           <table>
@@ -290,11 +295,6 @@ function CreatePokemon() {
             </tbody>
           </table>
         </div>
-
-        <button type="submit" disabled={isObjEmpty(error)}>
-          Create Pokemon
-        </button>
-      </form>
 
       <Link to={"/home"}>
         <button>Back</button>
