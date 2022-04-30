@@ -19,12 +19,14 @@ function CreatePokemon() {
     speed: 0,
     height: 0,
     weight: 0,
+    img: " ",
     types: [],
   };
 
   const typeState = useSelector((state) => state);
   const [input, setInput] = useState(newPokemon);
   const [error, setError] = useState({});
+  const [submit, setSubmit] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,19 +66,13 @@ function CreatePokemon() {
     return error;
   }
 
-  const [submit, setSubmit] = useState(false);
+  
   useEffect(() => {
-      if (
-        input.types.length < 3 &&
-        input.types.length > 0 &&
-        !isNotObjEmpty(error)
-      ) {
+      if (input.types.length < 3 && input.types.length > 0 && !isNotObjEmpty(error)) {
         setSubmit(true);
       } else {
         setSubmit(false);
-      }
-    
-    }, [error, input, submit]);
+      }}, [error, input, submit]);
 
   useEffect(() => {
     dispatch(getTypes());
@@ -256,6 +252,14 @@ function CreatePokemon() {
           required
         />
         {error.weight && <p>{error.weight}</p>}
+        
+        <label>Image</label>
+        <input
+          name="image"
+          type="tex"
+          onChange={handleInput}
+        />
+        
         
         <select name="types" onChange={handleInput} autoComplete="off" required>
           <option value=""> Elija tipo</option>

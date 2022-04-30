@@ -4,7 +4,7 @@ const { Router } = require("express");
 const axios = require("axios");
 //const Pokemon = require('../models/Pokemon');
 const { Pokemon, Type } = require("../db");
-const { reqApi } = require("../ReqApi/ReqApi");
+const { reqApi, reqApi2 } = require("../ReqApi/ReqApi");
 const { Op } = require("sequelize");
 
 const url = "https://pokeapi.co/api/v2/pokemon";
@@ -178,8 +178,13 @@ router.get("/pokemons", async (req, res) => {
         through: { attributes: [] },
       },
     });
-    const pokeDev = await reqApi();
+    const pokeDev = await reqApi(); // Me traigo los primeros poke de la API y hago una promesa de arreglos con ellos
+    const pokeDev2 = await reqApi2() // Con esta request me traigo los segundos 20
+    
     let pokeFinal = await Promise.all(pokeDev);
+    let pokeFinal2 = await Promise.all(pokeDev2)
+    let pokeFusionApi = pokeFinal.concat(pokeFinal2) // Fusiono los request en un
+
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
@@ -207,7 +212,7 @@ router.get("/pokemons", async (req, res) => {
         img: valor
     } */
     console.log(allPokeDb);
-    return res.json(allPokeDb.concat(pokeFinal));
+    return res.json(allPokeDb.concat(pokeFusionApi));
   } catch (error) {
     res.send(error);
   }

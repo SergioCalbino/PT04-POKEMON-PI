@@ -61,12 +61,12 @@ export  function getPokemonByname (name) {
         try {
           const resp = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
           return dispatch({
-            type: GET_ALL_POKEMONS,
+            type: GET_POKEMON_NAME,
             payload: [resp.data]
           });
         } catch (error) {
           return dispatch({
-            type: GET_ALL_POKEMONS,
+            type: GET_POKEMON_NAME,
             payload: "error"
           });
         }

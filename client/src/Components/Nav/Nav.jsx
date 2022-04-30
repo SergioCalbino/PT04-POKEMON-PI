@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   ordeByStrengthAsc,
   getTypes,
@@ -11,7 +12,6 @@ import {
   getPokemonsByDb,
   getPokemonsByApi,
   deleteState,
-  
   getPokemonByname
 } from "../../redux/actions/actions";
 
@@ -31,14 +31,21 @@ function Nav() {
     // dispatch(getPokemonsByname(search))
     if (!/[a-zA-Z]/.test(search)) {
       //Constatamos que lo que se ingrese sea un nombre
-      alert("El caracter ingresado no es valido");
+      alert("El caracter ingresado no es valido o el Pokemon no existe");
       setSearch("");
     } else {
       //console.log(search)
       dispatch(getPokemonByname(search));
       setSearch("");
     }
-  }
+
+  //   if(search.includes(pokemons.filter)) {
+  //      dispatch(getPokemonByname(search))
+  //   } else {
+  //     alert('El nombre del pokemon ingresado no existe')
+  //   }
+   
+   }
 
 
 
@@ -102,6 +109,10 @@ function Nav() {
     }
   }
 
+  function clear() {
+    return dispatch(deleteState())
+  }
+
   return (
     <div className="button-nav">
       <div className="select">
@@ -148,6 +159,9 @@ function Nav() {
         />
         <button className="button" onClick={searchPokemon}>Search</button>
       </div>
+
+          <button onClick={clear}>Clear </button>
+      
     </div>
   );
 }

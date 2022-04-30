@@ -56,7 +56,7 @@ export default function rootReducer(state = initialState, action) {
             const filtered = action.payload
             return {
                 ...state,
-                filt: filtered
+                filter: filtered
             }
         }
 
