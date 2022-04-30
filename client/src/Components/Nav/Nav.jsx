@@ -15,7 +15,7 @@ import {
   getPokemonByname
 } from "../../redux/actions/actions";
 
-import "../Nav/Nav.css";
+import Styles from "../Nav/Nav.module.css";
 
 function Nav() {
   const [search, setSearch] = useState("");
@@ -27,25 +27,23 @@ function Nav() {
   function searchPokemon(e) {
     // Para realizar la busqueda por nombre
     e.preventDefault();
-   // console.log(search)
+    console.log(search)
     // dispatch(getPokemonsByname(search))
     if (!/[a-zA-Z]/.test(search)) {
       //Constatamos que lo que se ingrese sea un nombre
+      alert("El caracter ingresado no es valido");
+      setSearch("");
+    } else if (pokemons.filter?.length === 1 && typeof pokemons.filter === 'string') {
       alert("El caracter ingresado no es valido o el Pokemon no existe");
       setSearch("");
     } else {
-      //console.log(search)
+
+    
       dispatch(getPokemonByname(search));
       setSearch("");
     }
 
-  //   if(search.includes(pokemons.filter)) {
-  //      dispatch(getPokemonByname(search))
-  //   } else {
-  //     alert('El nombre del pokemon ingresado no existe')
-  //   }
-   
-   }
+  }
 
 
 
@@ -114,8 +112,9 @@ function Nav() {
   }
 
   return (
-    <div className="button-nav">
-      <div className="select">
+    <div className={Styles.buttonNav}>
+    <div >
+      <div className={Styles.select} >
         <select onChange={hanlderFilterByType}>
           {types.map((ty, i) => (
             <option key={i} name={ty.name}>
@@ -127,7 +126,7 @@ function Nav() {
       </div>
 
      
-      <div className="select">
+      <div className={Styles.select}>
         <select onChange={handlerName}>
           <option value="">Ordena por Nombre</option>
           <option value="asc">Ascendente</option>
@@ -135,7 +134,7 @@ function Nav() {
         </select>
       </div>
 
-      <div className="select">
+      <div className={Styles.select} >
         <select onChange={handlerStrength}>
           <option value="">Ordena por Fuerza</option>
           <option value="asc">More strength</option>
@@ -143,7 +142,7 @@ function Nav() {
         </select>
       </div>
 
-      <div className="select">
+      <div className={Styles.select}>
         <select onChange={handlerOriginPokemons}>
           <option value=""> Select origin from Pokemons</option>
           <option value="Data Base"> Pokemons from Data Base</option>
@@ -151,17 +150,22 @@ function Nav() {
         </select>
       </div>
      
-      <div >
+      <div className={Styles.select} >
         <input className=""
           onChange={handleInputChange}
           value={search}
           placeholder="Buscar por nombre"
         />
-        <button className="button" onClick={searchPokemon}>Search</button>
-      </div>
-
-          <button onClick={clear}>Clear </button>
+        <button className={Styles.button} onClick={searchPokemon}>Search</button>
+        </div>
+          <button className={Styles.button2} onClick={clear}>Clear </button>
+        
       
+
+            
+          
+      
+    </div>
     </div>
   );
 }

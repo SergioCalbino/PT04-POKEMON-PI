@@ -9,6 +9,7 @@ import {
   getAllPokemons,
 } from "../../redux/actions/actions.js";
 import { Link, useNavigate } from "react-router-dom";
+import Styles from '../CreatePokemon/CreatePokemon.module.css'
 
 function CreatePokemon() {
   let newPokemon = {
@@ -177,12 +178,14 @@ function CreatePokemon() {
   };
 
   return (
-    <div>
+    <div  className={Styles.create}>
       <h1>Create your Pokemon</h1>
       <form onSubmit={handleSubmit}>
-        <label>Name</label>
+       
+     
+        <label className={Styles.select}  >Name</label>
 
-        <input
+        <input 
           name="name"
           type="text"
           onChange={handleInput}
@@ -190,8 +193,8 @@ function CreatePokemon() {
           required
         />
         {error.name && <p>{error.name}</p>}
-
-        <label>Life</label>
+       
+        <label className={Styles.select} >Life</label>
 
         <input
           name="life"
@@ -256,8 +259,9 @@ function CreatePokemon() {
         <label>Image</label>
         <input
           name="image"
-          type="tex"
+          type="text"
           onChange={handleInput}
+          placeholder='Insert URL'
         />
         
         

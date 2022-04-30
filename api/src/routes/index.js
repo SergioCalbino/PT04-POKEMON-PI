@@ -164,7 +164,7 @@ router.get("/pokemons", async (req, res) => {
         if (onlyPoke) return res.json(onlyPoke);
     }
     } catch (error) {
-      return res.json("Nombre no encontrado");
+      return res.send("Nombre no encontrado");
       //No utilizo un send.error porque corta el flujo de la aplicaciónn
     }
   }
