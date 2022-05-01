@@ -43,8 +43,8 @@
    padding-bottom: 15px;
    padding-top: 18px;
    text-align: center;
-   background-color: #ffffff6e;
-   height: 120px;
+   background-color: goldenrod;
+      height: 120px;
    display: flex;
    flex-direction: row; 
    justify-content:  space-between;

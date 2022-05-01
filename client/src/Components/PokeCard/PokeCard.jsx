@@ -15,6 +15,8 @@ function PokeCard(props) {
         <h1 className={Styles.name}>{poke.name}</h1>
       </Link>
 
+    
+
       <div className={Styles.card}>
       {
         poke.img === '' ? <img src= 'https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80--sticker-vinyl-car-decals.jpg' alt="Not found"/> : 

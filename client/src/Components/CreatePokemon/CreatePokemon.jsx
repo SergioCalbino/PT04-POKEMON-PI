@@ -92,7 +92,7 @@ function CreatePokemon() {
     console.log(input);
     dispatch(postPokemon(input));
 
-    alert("Create Pokemon Success");
+   // alert("Create Pokemon Success");
     setInput(newPokemon);
     setError({});
     navigate("/home");
@@ -274,7 +274,7 @@ function CreatePokemon() {
         {error.types && <p>{error.types}</p>}
 
 
-        <button type="submit" disabled={!submit}>
+        <button className={Styles.createPoke} type="submit" disabled={!submit}>
           Create Pokemon
         </button>
       </form>
@@ -294,7 +294,7 @@ function CreatePokemon() {
                   <tr key={t}>
                     <td>{t}</td>
                     <td>
-                      <button onClick={deleteType} value={t}>
+                      <button  onClick={deleteType} value={t}>
                         Remove
                       </button>
                     </td>
@@ -305,7 +305,7 @@ function CreatePokemon() {
         </div>
 
       <Link to={"/home"}>
-        <button>Back</button>
+        <button className={Styles.back}>Back</button>
       </Link>
     </div>
   );

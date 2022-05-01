@@ -39,13 +39,15 @@ router.get("/types", async (req, res) => {
   } catch (error) {}
 });
 
-router.post("/pokemons", async (req, res) => {
+router.post("/pokemons",  (req, res) => {
   let { name, life, strength, defense, speed, height, weight, types, img } =
     req.body;
-  //if (!name) return res.status(404).send("El nombre es requerido");
-
-  try {
-    const newPokemon = await Pokemon.create({
+    
+    
+    //Verifico si el nombre del pokemon ya existe en la base de datos
+    let urlApi = urlName + name.toLowerCase().trim();
+   // console.log(urlApi)
+    let atributesPokemon = {
       name,
       life,
       strength,
@@ -54,20 +56,20 @@ router.post("/pokemons", async (req, res) => {
       height,
       weight,
       img,
-    });
-    // const allTypeDb = await Type.findAll({
-    //   where: {
-    //     name: type,
-    //   },
-    // });
-   
-    //En este caso el {where id} hace que se busque el type por id
-    await newPokemon.addTypes(types);
-    return res.status(201).json(newPokemon);
-  } catch (error) {
-   return console.log(error);
-   // res.status(404).send(error);
-  }
+    }
+    
+    let status;
+    let message;
+    axios(urlApi) //Creo el pokemon con la respuesta del catch porque de esta forma se que no existe
+    .then((r) => {status = 400, message = "El nombre del Pokemon ya existe en la API"})
+    .catch((c) => Pokemon.create(atributesPokemon)) // Ver en el modelo 
+    .then((newPokemon) => newPokemon.addTypes(types))
+    .then((c) =>  {status = 201, message = atributesPokemon})
+    .catch((c) => {status = 400, message = "El nombre del Pokemon ya fue creado"}) // Este catch es por si ya lo tengo creado en la base de datos
+    .finally(function() {
+    res.status(status).send(message)
+    }) 
+ 
 });
 
 //Traemos por params con ID el pokemon
@@ -141,7 +143,7 @@ router.get("/pokemons", async (req, res) => {
       if (allpokemons) {
         return res.json(allpokemons);
       } else {
-        urlApi = urlName + name.toLocaleLowerCase().trim();
+        urlApi = urlName + name.toLowerCase().trim();
         const poke = await axios(urlApi);
 
         let onlyPoke = {

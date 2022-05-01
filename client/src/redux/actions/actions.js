@@ -116,10 +116,13 @@ export function getTypes() {
 export function postPokemon(inputFormPoke) {
     return async function(dispatch){
         try {
+            let resp;
            // console.log(inputFormPoke)
             await axios.post('http://localhost:3001/pokemons',inputFormPoke)
+            //.then((r) => resp = r.data)
             return dispatch({
-                type: CREATE_POKEMON
+                type: CREATE_POKEMON,
+               // payload : resp
                 
             })
         } catch (error) {

@@ -19,7 +19,12 @@ function DetailPokemon() {
 
   return (
     <div className={Styles.container}>
+    <div>
+                <label> Id: </label>
+                {detail.pokemons.id}
+              </div>
       {detail.pokemons ? (
+        
         <div className={Styles.det}>
           <div>
             <div className={Styles.name}>
@@ -37,10 +42,7 @@ function DetailPokemon() {
 
           <div className={Styles.infoPokemon}>
             <div>
-              <div>
-                <label> Id: </label>
-                {detail.pokemons.id}
-              </div>
+              
 
               <div>
                 <label> Life: </label>
