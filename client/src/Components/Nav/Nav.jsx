@@ -33,16 +33,12 @@ function Nav() {
       //Constatamos que lo que se ingrese sea un nombre
       alert("El caracter ingresado no es valido");
       setSearch("");
-    } else if (pokemons.filter?.length === 1 && typeof pokemons.filter === 'string') {
-      alert("El caracter ingresado no es valido o el Pokemon no existe");
-      setSearch("");
-    } else {
-
-    
+    } else { 
       dispatch(getPokemonByname(search));
       setSearch("");
-    }
 
+
+    }
   }
 
 
@@ -115,6 +111,7 @@ function Nav() {
     <div className={Styles.buttonNav}>
     <div >
       <div className={Styles.select} >
+        <span>Select type of Pokemon</span>
         <select onChange={hanlderFilterByType}>
           {types.map((ty, i) => (
             <option key={i} name={ty.name}>

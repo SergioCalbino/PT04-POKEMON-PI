@@ -67,30 +67,13 @@ export  function getPokemonByname (name) {
         } catch (error) {
           return dispatch({
             type: GET_POKEMON_NAME,
-            payload: "error"
+            payload: {error: "error"}
           });
         }
       }
 };
 
-// export function getName (name) {
-//     return async function(dispatch) {
-//         try {
-//             const poke = await(`http://localhost:3001/pokemons/?name=${name}`)
-//             return dispatch({
-//                 type:  GET_NAME,
-//                 payload: [poke.data]
-//             })
-            
-//         } catch (error) {
-//             return dispatch({
-//                 type: GET_NAME,
-//                 payload: error
-//             })
-            
-//         }
-//     }
-// }
+
 
 export function getTypes() {
     return async function(dispatch) {
@@ -119,10 +102,10 @@ export function postPokemon(inputFormPoke) {
             let resp;
            // console.log(inputFormPoke)
             await axios.post('http://localhost:3001/pokemons',inputFormPoke)
-            //.then((r) => resp = r.data)
+            .then((r) => resp = r.data)
             return dispatch({
                 type: CREATE_POKEMON,
-               // payload : resp
+                payload : resp
                 
             })
         } catch (error) {

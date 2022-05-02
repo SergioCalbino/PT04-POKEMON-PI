@@ -18,7 +18,9 @@ import {
 const initialState = {
     allPokemons: [],
     pokemons: [],
-    types: []
+    types: [],
+    message: null
+    
 }
  function compare( array, prop ) {
      let order = array.sort(function(a,b) { 
@@ -60,20 +62,7 @@ export default function rootReducer(state = initialState, action) {
             }
         }
 
-        // case GET_NAME: {
-        //     return {
-        //         ...state,
-        //         pokName: action.payload
-        //     }
-        // }
-
-        // case GET_POKEMON_NAME: {
-        //     return {
-        //         ...state,
-        //         pokemons: action.payload
-        //     }
-        // }
-
+        
         case GET_TYPES: {
             return {
                 ...state,
@@ -82,8 +71,8 @@ export default function rootReducer(state = initialState, action) {
         }
         case CREATE_POKEMON: {
             return {
-                ...state
-                //create: action.payload
+                ...state,
+                message: action.payload
                 
             }
         }
@@ -94,7 +83,8 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 types: state.types,
-                filter: state.allPokemons
+                filter: state.allPokemons,
+                message: null
             }
         }
         
@@ -102,10 +92,10 @@ export default function rootReducer(state = initialState, action) {
             const cloneType =  [...state.allPokemons]
             
             const filtered = cloneType.filter(poke => poke.types?.filter(type => {
-                console.log(type.name, action.payload)
+              //  console.log(type.name, action.payload)
                 return type.name === action.payload}).length > 0)
-            console.log('aca comienza')
-            console.log(filtered)
+            // console.log('aca comienza')
+            // console.log(filtered)
             return {
                 ...state,
                 filter: filtered

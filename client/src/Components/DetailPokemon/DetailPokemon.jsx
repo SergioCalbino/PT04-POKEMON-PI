@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import sombra from "../img/all.jpg";
 import Styles from "../DetailPokemon/DetailPokemon.module.css";
+import {deleteState} from "../../redux/actions/actions";
 
 function DetailPokemon() {
   const detail = useSelector((state) => state);
@@ -14,6 +15,10 @@ function DetailPokemon() {
   console.log(detail.pokemons);
 
   useEffect(() => dispatch(getPokemonsById(id)), [dispatch]);
+
+  function back() {
+    dispatch(deleteState())
+  }
 
   //let pokeFilt = detail.filter((poke) => poke.id === pokeId)
 
@@ -81,7 +86,7 @@ function DetailPokemon() {
       )}
 
       <Link to={"/home"}>
-        <button className={Styles.home}>Back to home</button>
+        <button className={Styles.home} onClick={back} >  Back to home</button>
       </Link>
     </div>
   );

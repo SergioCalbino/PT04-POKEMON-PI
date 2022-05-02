@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllPokemons,
+  deleteState,
   getTypes,
   filterByType,
   handlerStrength,
@@ -16,22 +17,22 @@ import Styles from "../Home/Home.module.css";
 function Home() {
   const dispatch = useDispatch();
   const pokemonStore = useSelector((initialState) => initialState);
-
-  const [postsPerPage] = useState(12);
+  const filter = useSelector((initialState) => initialState.filter)
+  const pokePerPage = 12;
 
   let [currentPage, setCurrentPage] = useState(1);
-  const indexLastPage = currentPage * postsPerPage;
-  const indexFirstPage = indexLastPage - postsPerPage;
+  const indexLastPage = currentPage * pokePerPage;
+  const indexFirstPage = indexLastPage - pokePerPage;
   const currentPokes = pokemonStore.filter
     ? pokemonStore?.filter.slice(indexFirstPage, indexLastPage)
     : pokemonStore?.allPokemons.slice(indexFirstPage, indexLastPage);
   //Este currentsPokes lo utilizo para veriificar sobre los pokemons de la api y la DB con el paginado. En caso contrario, utilizo para todos juntos.
   //Lugo en currentPokes hago el mapeo, ya sea con ordenamiento de api y db, o de todos
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber); //Indica en que pagina me encuentro
 
   useEffect(() => {
     dispatch(getAllPokemons());
-  }, [dispatch]);
+  }, [dispatch, filter]);
   console.log(pokemonStore.allPokemons);
 
   const renderPokemons = () => {
@@ -55,6 +56,13 @@ function Home() {
     ),
   };
 
+  const buttonBack = () => {
+    dispatch(deleteState())
+    dispatch(getAllPokemons())
+    dispatch(getTypes())
+
+  }
+
   return (
     <>
       <Nav />
@@ -62,9 +70,8 @@ function Home() {
         <Link to={"/pokemons"}>
           <button className={Styles.button}>Create Pokemon</button>
         </Link>
-        <Link to={"/"}>
-          <button className={Styles.buttonBack}>Back</button>
-        </Link>
+       
+          <button onClick={buttonBack} className={Styles.buttonBack}>Back</button>
         {
           <div className={Styles.pokemons}>
             {/* {pokemonStore ? renderPokemons()
@@ -77,7 +84,7 @@ function Home() {
         }
         <div >
         <Pagination className={Styles.pagination}
-          postsPerPage={postsPerPage}
+          pokePerPage={pokePerPage}
           totalPokemons={pokemonStore.allPokemons.length}
           paginate={paginate}
         />

@@ -39,7 +39,7 @@ router.get("/types", async (req, res) => {
   } catch (error) {}
 });
 
-router.post("/pokemons",  (req, res) => {
+router.post("/pokemons", async  (req, res) => {
   let { name, life, strength, defense, speed, height, weight, types, img } =
     req.body;
     
@@ -58,17 +58,40 @@ router.post("/pokemons",  (req, res) => {
       img,
     }
     
-    let status;
-    let message;
-    axios(urlApi) //Creo el pokemon con la respuesta del catch porque de esta forma se que no existe
-    .then((r) => {status = 400, message = "El nombre del Pokemon ya existe en la API"})
-    .catch((c) => Pokemon.create(atributesPokemon)) // Ver en el modelo 
-    .then((newPokemon) => newPokemon.addTypes(types))
-    .then((c) =>  {status = 201, message = atributesPokemon})
-    .catch((c) => {status = 400, message = "El nombre del Pokemon ya fue creado"}) // Este catch es por si ya lo tengo creado en la base de datos
-    .finally(function() {
-    res.status(status).send(message)
-    }) 
+
+    try {
+      await axios(urlApi)
+      res.status(404).send("El pokemon ya existe")
+      
+    } catch (error) {
+     
+      try {
+        let newPoke = await Pokemon.create(atributesPokemon)
+       await newPoke.addTypes(types)
+        res.status(200).send(`El pokemon ${newPoke} se ha creado de manera exitosa`)
+        
+      } catch (error) {
+        res.status(404).send("El pokemon ya existe")
+
+        
+      }
+      
+    }
+
+
+
+
+    // let status;
+    // let message;
+    // axios(urlApi) //Creo el pokemon con la respuesta del catch porque de esta forma se que no existe
+    // .then((r) => {status = 400, message = "El nombre del Pokemon ya existe en la API"})
+    // .catch((c) => Pokemon.create(atributesPokemon)) // Ver en el modelo 
+    // .then((newPokemon) => newPokemon.addTypes(types))
+    // .then((c) =>  {status = 201, message = atributesPokemon})
+    // .catch((c) => {status = 400, message = "El nombre del Pokemon ya fue creado"}) // Este catch es por si ya lo tengo creado en la base de datos
+    // .finally(function() {
+    // res.status(status).send(message)
+    // }) 
  
 });
 
