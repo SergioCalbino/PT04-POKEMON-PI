@@ -70,9 +70,9 @@ function CreatePokemon() {
     return error;
   }
   //probando la creacion
-  // useEffect(() => {
-  //   if(message !== null) alert(message)
-  // },[message])
+  useEffect(() => {
+    if(message !== null) alert(message)
+  },[message])
 
   useEffect(() => {
     if (
@@ -105,12 +105,22 @@ function CreatePokemon() {
     console.log(input);
     dispatch(postPokemon(input));
 
-   // alert(message);
+   alert(message);
     setInput(newPokemon);
     setError({});
-    //navigate("/home");
     //dispatch(deleteState())
-   dispatch(getAllPokemons());
+    dispatch(getAllPokemons());
+  //   setInput({ name: "",
+  //   life: '',
+  //   strength: '',
+  //   defense: '',
+  //   speed: '',
+  //   height: '',
+  //   weight: '',
+  //   img: "",
+  //   types: [],
+  // })
+  navigate("/home");
   }
 
   // Estados del input para todos los campos menos el type

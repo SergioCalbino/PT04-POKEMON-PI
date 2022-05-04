@@ -1,6 +1,20 @@
+/* .img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../img/pokemon.png');
+  background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+} */
 
 
 .pokemons {
+  background-color: yellow;
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 grid-template-rows: repeat(3, 1fr);
@@ -10,7 +24,7 @@ grid-row-gap: 7px;
 
 
     .button {
-        background-color: skyblue; /* Green */
+        background-color: skyblue; 
         border: none;
         border-radius: 5px;
         color: white;
@@ -45,56 +59,4 @@ grid-row-gap: 7px;
             margin: 4px 2px;
       }
 
-      .pagination {
-        display: inline-block;
-        background-color:orange ;
-        color: #f4511e;
-        
-        
-      }
-      
-      .pagination a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-      }
-      
-      .pagination a.active {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-      }
-      
-      .pagination a:hover:not(.active) {
-        background-color: #ddd;
-        border-radius: 5px;
-      }
      
-          
-          .buttonBack back {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-          }
-          
-          .buttonBack:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            left: -20px;
-            transition: 0.5s;
-          }
-          
-          .buttonBack:hover  {
-            padding-left: 25px;
-          }
-          
-          .buttonBack:hover :after {
-            opacity: 1;
-            left: 4;
-          }
-      
-      

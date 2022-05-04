@@ -12,7 +12,7 @@ import {
   getPokemonsByDb,
   getPokemonsByApi,
   deleteState,
-  getPokemonByname
+  getPokemonByname,
 } from "../../redux/actions/actions";
 
 import Styles from "../Nav/Nav.module.css";
@@ -27,24 +27,19 @@ function Nav() {
   function searchPokemon(e) {
     // Para realizar la busqueda por nombre
     e.preventDefault();
-    console.log(search)
+    console.log(search);
     // dispatch(getPokemonsByname(search))
     if (!/[a-zA-Z]/.test(search)) {
       //Constatamos que lo que se ingrese sea un nombre
-      alert("El caracter ingresado no es valido");
+      alert("Invalid Character");
       setSearch("");
-    } else { 
+    } else {
       dispatch(getPokemonByname(search));
       setSearch("");
-
-
     }
   }
 
-
-
   function handleInputChange(e) {
-
     setSearch(e.target.value);
   }
 
@@ -65,7 +60,7 @@ function Nav() {
     }
 
     if (e.target.value === "desc") {
-     return dispatch(orderNameDesc());
+      return dispatch(orderNameDesc());
     }
 
     if (e.target.value === "") {
@@ -86,7 +81,7 @@ function Nav() {
     if (e.target.value === "") {
       return dispatch(deleteState());
     }
-    return
+    return;
   }
 
   function handlerOriginPokemons(e) {
@@ -104,69 +99,72 @@ function Nav() {
   }
 
   function clear() {
-    return dispatch(deleteState())
+    return dispatch(deleteState());
   }
 
   return (
-    <div className={Styles.buttonNav}>
-    <div >
-      <div className={Styles.select} >
-        <span>Select type of Pokemon</span>
-        <select onChange={hanlderFilterByType}>
-          {types.map((ty, i) => (
-            <option key={i} name={ty.name}>
-              {" "}
-              {ty.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
+    <>
+    <div className={Styles.img}>
+  
+    </div>
+    <div className={Styles.container}>
      
-      <div className={Styles.select}>
-        <select onChange={handlerName}>
-          <option value="">Ordena por Nombre</option>
-          <option value="asc">Ascendente</option>
-          <option value="desc">Descendente</option>
-        </select>
-      </div>
-
-      <div className={Styles.select} >
-        <select onChange={handlerStrength}>
-          <option value="">Ordena por Fuerza</option>
-          <option value="asc">More strength</option>
-          <option value="desc">Less strength</option>
-        </select>
-      </div>
-
-      <div className={Styles.select}>
-        <select onChange={handlerOriginPokemons}>
-          <option value=""> Select origin from Pokemons</option>
-          <option value="Data Base"> Pokemons from Data Base</option>
-          <option value="Api"> Pokemons from Api</option>
-        </select>
-      </div>
-     
-      <div className={Styles.select} >
-        <input className=""
-          onChange={handleInputChange}
-          value={search}
-          placeholder="Buscar por nombre"
-        />
-        <button className={Styles.button} onClick={searchPokemon}>Search</button>
-        </div>
-          <button className={Styles.button2} onClick={clear}>Clear </button>
+      
         
-      
-
+          <div>
+          <div className={Styles.title}>
+            <span>Select type of Pokemon</span>
+            <select onChange={hanlderFilterByType}>
+              {types.map((ty, i) => (
+                <option key={i} name={ty.name}>
+                  {" "}
+                  {ty.name}
+                </option>
+              ))}
+            </select>
+            </div>
             
+            <select onChange={handlerName}>
+              <option value="">Ordena por Nombre</option>
+              <option value="asc">Ascendente</option>
+              <option value="desc">Descendente</option>
+            </select>
+         
+            <select onChange={handlerStrength}>
+              <option value="">Ordena por Fuerza</option>
+              <option value="asc">More strength</option>
+              <option value="desc">Less strength</option>
+            </select>
+         
+            <select onChange={handlerOriginPokemons}>
+              <option value=""> Select origin from Pokemons</option>
+              <option value="Data Base"> Pokemons from Data Base</option>
+              <option value="Api"> Pokemons from Api</option>
+            </select>
+          </div>
+
+          <div >
+            <input
+              className=""
+              onChange={handleInputChange}
+              value={search}
+              placeholder="Buscar por nombre"
+            />
+            <button className={Styles.button} onClick={searchPokemon}>
+              Search
+            </button>
+          </div>
           
+          <div>
+          <button className={Styles.button} onClick={clear}>
+            Clear{" "}
+          </button>
+          </div>
+      
       
     </div>
-    </div>
+    </>
   );
 }
 
 export default Nav;
-
-

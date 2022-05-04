@@ -7,11 +7,11 @@ import Styles from '../LandingPage/LandingPage.module.css'
 function LandingPage() {
   return (
     <div className={Styles.img}>
-    <div className={Styles.landing}>
+    <button className={Styles.btn}>
         <Link to='/home'>Home</Link>
-        </div>
-    <h1>Gotta catch 'em all!</h1>
-    <img className={Styles.img} src={image} alt=''/>
+        </button>
+    <h1 className={Styles.title}>Gotta catch 'em all!</h1>
+   
         
     </div>
   )

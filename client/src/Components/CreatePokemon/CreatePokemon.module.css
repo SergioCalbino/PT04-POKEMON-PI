@@ -1,4 +1,4 @@
-
+/* 
 .create {
     display: inline-block;
     width: 500px;
@@ -75,7 +75,7 @@ input[type=text], select {
 
   .createPoke {
      
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
     border: none;
     color: white;
     padding: 20px;
@@ -88,10 +88,5 @@ input[type=text], select {
     border-radius: 50%;
     }
     
-    .createPoke:hover {background-color: #3e8e41}
+    .createPoke:hover {background-color: #3e8e41} */
     
-    /* .createPoke:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-  } */

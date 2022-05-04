@@ -8,7 +8,7 @@ import DetailPokemon from './Components/DetailPokemon/DetailPokemon'
 
 function App() {
   return (
-    <div className="App"> 
+    <div className="app"> 
     
     
     <Routes>

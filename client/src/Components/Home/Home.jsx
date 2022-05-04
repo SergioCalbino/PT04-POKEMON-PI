@@ -4,15 +4,14 @@ import {
   getAllPokemons,
   deleteState,
   getTypes,
-  filterByType,
-  handlerStrength,
+  
 } from "../../redux/actions/actions";
 import Nav from "../Nav/Nav";
 import PokeCard from "../PokeCard/PokeCard";
 import Pagination from "../Pagination/Pagination";
-import CretePokemon from "../CreatePokemon/CreatePokemon";
 import { Link } from "react-router-dom";
 import Styles from "../Home/Home.module.css";
+import img from '../img/cover-pokemon-preview.png'
 
 function Home() {
   const dispatch = useDispatch();
@@ -66,14 +65,16 @@ function Home() {
   return (
     <>
       <Nav />
-      <div>
-        <Link to={"/pokemons"}>
-          <button className={Styles.button}>Create Pokemon</button>
-        </Link>
+      <>
+        
+          <button className={Styles.button}> <Link to={"/pokemons"}>Create Pokemon</Link> </button>
        
           <button onClick={buttonBack} className={Styles.buttonBack}>Back</button>
+       
         {
+          
           <div className={Styles.pokemons}>
+       
             {/* {pokemonStore ? renderPokemons()
               : <h1>Cargando</h1>
               } */}
@@ -81,15 +82,16 @@ function Home() {
               ? renderOrder.allPokemons
               : renderOrder.filtered}
           </div>
+          
         }
-        <div >
-        <Pagination className={Styles.pagination}
+        < >
+        <Pagination
           pokePerPage={pokePerPage}
           totalPokemons={pokemonStore.allPokemons.length}
           paginate={paginate}
         />
-        </div>
-      </div>
+        </>
+      </>
     </>
   );
 }

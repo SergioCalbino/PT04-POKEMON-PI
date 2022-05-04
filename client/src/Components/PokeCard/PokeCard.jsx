@@ -17,7 +17,7 @@ function PokeCard(props) {
     <h1>No existe el pokemon</h1> <img src={imagen}/>  
     </>
     : <>
-      <Link className={Styles.name} to={`/pokemon/${poke.id}`}>
+      <Link  to={`/pokemon/${poke.id}`}>
         <h1 className={Styles.name}>{poke.name}</h1>
       </Link>
 
