@@ -61,14 +61,14 @@ router.post("/pokemons", async  (req, res) => {
 
     try {
       await axios(urlApi)
-      res.status(404).send("El pokemon ya existe")
+     return res.status(404).send("El pokemon ya existe")
       
     } catch (error) {
      
       try {
         let newPoke = await Pokemon.create(atributesPokemon)
        await newPoke.addTypes(types)
-        res.status(200).send(`El pokemon ${newPoke} se ha creado de manera exitosa`)
+        return res.status(200).send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`)
         
       } catch (error) {
         res.status(404).send("El pokemon ya existe")

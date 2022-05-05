@@ -25,8 +25,6 @@ function DetailPokemon() {
   return (
     <div className={Styles.container}>
     <div>
-                <label> Id: </label>
-                {detail.pokemons.id}
               </div>
       {detail.pokemons ? (
         
@@ -47,6 +45,8 @@ function DetailPokemon() {
 
           <div className={Styles.infoPokemon}>
             <div>
+                <label> Id: </label>
+                {detail.pokemons.id}
               
 
               <div>
@@ -86,7 +86,7 @@ function DetailPokemon() {
       )}
 
       <Link to={"/home"}>
-        <button className={Styles.home} onClick={back} >  Back to home</button>
+        <button className={Styles.back} onClick={back} >  Back to home</button>
       </Link>
     </div>
   );

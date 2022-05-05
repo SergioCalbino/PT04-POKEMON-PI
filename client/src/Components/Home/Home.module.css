@@ -1,16 +1,8 @@
-/* .img {
+.buttonContainer{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-image: url('../img/pokemon.png');
-  background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-} */
+  justify-content: space-around;
+}
 
 
 .pokemons {
@@ -57,6 +49,11 @@ grid-row-gap: 7px;
             transition-duration: 0.4s;
             cursor: pointer;
             margin: 4px 2px;
+      }
+
+      .pagination {
+        display: flex;
+  flex-direction: column;
       }
 
      

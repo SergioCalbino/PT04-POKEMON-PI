@@ -1,6 +1,133 @@
-/* 
-.create {
-    display: inline-block;
+input[type=text], select {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+ 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=number] {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color:pink;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.border {
+  display: flex;
+  
+  justify-content: center;
+ align-items: center;
+  border-radius: 15px;
+  background-color:dimgrey;
+  padding: 20px;
+  
+}
+
+.general {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  border: 1px solid #000000;
+}
+.table td, .table th {
+}
+.table thead {
+  background: #DDDDDD;
+  border-bottom: 2px solid #444444;
+}
+.table thead th {
+  font-weight: normal;
+}
+
+.button {
+  display: inline-block;
+            border-radius: 5px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 16px;
+            padding: 16px 32px;
+            width: 200px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin: 4px 2px;
+}
+
+.button:hover {
+  background-color: #008CBA;
+  color: white;
+}
+.button2 {
+  display: inline-block;
+            border-radius: 5px;
+            background-color: yellowgreen;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 16px;
+            padding: 16px 32px;
+            width: 200px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin: 4px 2px;
+}
+
+.button2:hover {
+  background-color: red;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+/* .create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 500px;
     padding: 12px 20px;
     margin: 8px ;
@@ -10,9 +137,9 @@
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: medium;
     font-weight: 100;
-}
+} */
 
-
+/* 
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -88,5 +215,5 @@ input[type=text], select {
     border-radius: 50%;
     }
     
-    .createPoke:hover {background-color: #3e8e41} */
-    
+    .createPoke:hover {background-color: #3e8e41} 
+     */

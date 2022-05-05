@@ -11,7 +11,8 @@ function PokeCard(props) {
   const dispatch = useDispatch();
 
   return (
-    <div className={Styles.container}>
+   <>
+   <div className={Styles.container}>
     {poke.id == undefined ? <>
 
     <h1>No existe el pokemon</h1> <img src={imagen}/>  
@@ -41,6 +42,7 @@ function PokeCard(props) {
       </div>
     </>}
     </div>
+    </>
   );
 }
 

@@ -23,6 +23,7 @@ const reqApi = async () => {
                 }})
 
             });
+           
             
             return pokeDev;
             

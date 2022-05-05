@@ -66,11 +66,11 @@ function Home() {
     <>
       <Nav />
       <>
-        
+        <div className={Styles.buttonContainer}>
           <button className={Styles.button}> <Link to={"/pokemons"}>Create Pokemon</Link> </button>
        
           <button onClick={buttonBack} className={Styles.buttonBack}>Back</button>
-       
+          </div>
         {
           
           <div className={Styles.pokemons}>
@@ -85,11 +85,13 @@ function Home() {
           
         }
         < >
+        
         <Pagination
           pokePerPage={pokePerPage}
           totalPokemons={pokemonStore.allPokemons.length}
           paginate={paginate}
         />
+         
         </>
       </>
     </>

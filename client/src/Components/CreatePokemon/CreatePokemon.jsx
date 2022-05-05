@@ -71,6 +71,9 @@ function CreatePokemon() {
   }
   //probando la creacion
   useEffect(() => {
+    console.log('sajdhsahdhasjdhjkashdkjhasjdhjashdjka')
+    console.log(message)
+
     if(message !== null) alert(message)
   },[message])
 
@@ -108,7 +111,7 @@ function CreatePokemon() {
    alert(message);
     setInput(newPokemon);
     setError({});
-    //dispatch(deleteState())
+    dispatch(deleteState())
     dispatch(getAllPokemons());
   //   setInput({ name: "",
   //   life: '',
@@ -201,12 +204,21 @@ function CreatePokemon() {
   };
 
   return (
-    <div className={Styles.create}>
+    <>
+    <div className={Styles.header}>
       <h1>Create your Pokemon</h1>
-      <form onSubmit={handleSubmit}>
-        <label className={Styles.select}>Name</label>
+      <Link to={"/home"}>
+        <button className={Styles.button}>Back</button>
+      </Link>
+    </div>
+    <div className={Styles.general}>
+    {/* <div > */}
+     
+     <div className={Styles.border}>
+      <form  onSubmit={handleSubmit}>
+        <label >Name</label>
 
-        <input
+        <input className={Styles.input}
           name="name"
           type="text"
           onChange={handleInput}
@@ -215,9 +227,9 @@ function CreatePokemon() {
         />
         {error.name && <p>{error.name}</p>}
 
-        <label className={Styles.select}>Life</label>
+        <label >Life</label>
 
-        <input
+        <input className={Styles.input}
           name="life"
           type="number"
           onChange={handleInput}
@@ -293,14 +305,19 @@ function CreatePokemon() {
         </select>
         {error.types && <p>{error.types}</p>}
 
-        <button className={Styles.createPoke} type="submit" disabled={!submit}>
+        <button className={Styles.button2} type="submit" disabled={!submit}>
           Create Pokemon
         </button>
       </form>
 
-      <div>
+      </div>
+
+
+    {/* </div> */}
+
+      <div >
         <h3>Pokemons to add the Type</h3>
-        <table>
+        <table className={Styles.table}>
           <thead>
             <tr>
               <th>Type id</th>
@@ -322,12 +339,10 @@ function CreatePokemon() {
           </tbody>
         </table>
       </div>
-
-      <Link to={"/home"}>
-        <button className={Styles.back}>Back</button>
-      </Link>
-    </div>
+      </div>
+      </>
   );
+
 }
 
 export default CreatePokemon;

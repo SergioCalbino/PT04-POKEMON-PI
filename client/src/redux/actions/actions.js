@@ -103,6 +103,7 @@ export function postPokemon(inputFormPoke) {
            // console.log(inputFormPoke)
             await axios.post('http://localhost:3001/pokemons',inputFormPoke)
             .then((r) => resp = r.data)
+           
             return dispatch({
                 type: CREATE_POKEMON,
                 payload : resp
