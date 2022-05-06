@@ -28,11 +28,13 @@ grid-row-gap: 7px;
         margin: 4px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
+        
       }
 
       .button:hover {
         background-color: #008CBA;
         color: white;
+        text-emphasis: none;
       }
 
       .buttonBack {

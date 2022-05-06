@@ -125,13 +125,13 @@ function Nav() {
             </div>
             
             <select onChange={handlerName}>
-              <option value="">Ordena por Nombre</option>
+              <option value="">Order By Name</option>
               <option value="asc">Ascendente</option>
               <option value="desc">Descendente</option>
             </select>
          
             <select onChange={handlerStrength}>
-              <option value="">Ordena por Fuerza</option>
+              <option value="">order By Strength</option>
               <option value="asc">More strength</option>
               <option value="desc">Less strength</option>
             </select>
@@ -148,7 +148,7 @@ function Nav() {
               className=""
               onChange={handleInputChange}
               value={search}
-              placeholder="Buscar por nombre"
+              placeholder="Search Name"
             />
             <button className={Styles.button} onClick={searchPokemon}>
               Search

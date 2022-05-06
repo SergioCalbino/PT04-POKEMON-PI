@@ -33,66 +33,44 @@ router.get("/types", async (req, res) => {
         url: ty.url,
       };
     });
-    
+
     await Type.bulkCreate(typePoke);
     res.json(typePoke);
   } catch (error) {}
 });
 
-router.post("/pokemons", async  (req, res) => {
+router.post("/pokemons", async (req, res) => {
   let { name, life, strength, defense, speed, height, weight, types, img } =
     req.body;
-    
-    
-    //Verifico si el nombre del pokemon ya existe en la base de datos
-    let urlApi = urlName + name.toLowerCase().trim();
-   // console.log(urlApi)
-    let atributesPokemon = {
-      name,
-      life,
-      strength,
-      defense,
-      speed,
-      height,
-      weight,
-      img,
-    }
-    
 
+  //Verifico si el nombre del pokemon ya existe en la base de datos
+  let urlApi = urlName + name.toLowerCase().trim();
+  // console.log(urlApi)
+  let atributesPokemon = {
+    name,
+    life,
+    strength,
+    defense,
+    speed,
+    height,
+    weight,
+    img,
+  };
+
+  try {
+    await axios(urlApi);
+    return res.status(404).send("El pokemon ya existe");
+  } catch (error) {
     try {
-      await axios(urlApi)
-     return res.status(404).send("El pokemon ya existe")
-      
+      let newPoke = await Pokemon.create(atributesPokemon);
+      await newPoke.addTypes(types);
+      return res
+        .status(200)
+        .send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`);
     } catch (error) {
-     
-      try {
-        let newPoke = await Pokemon.create(atributesPokemon)
-       await newPoke.addTypes(types)
-        return res.status(200).send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`)
-        
-      } catch (error) {
-        res.status(404).send("El pokemon ya existe")
-
-        
-      }
-      
+      res.status(404).send("El pokemon ya existe");
     }
-
-
-
-
-    // let status;
-    // let message;
-    // axios(urlApi) //Creo el pokemon con la respuesta del catch porque de esta forma se que no existe
-    // .then((r) => {status = 400, message = "El nombre del Pokemon ya existe en la API"})
-    // .catch((c) => Pokemon.create(atributesPokemon)) // Ver en el modelo 
-    // .then((newPokemon) => newPokemon.addTypes(types))
-    // .then((c) =>  {status = 201, message = atributesPokemon})
-    // .catch((c) => {status = 400, message = "El nombre del Pokemon ya fue creado"}) // Este catch es por si ya lo tengo creado en la base de datos
-    // .finally(function() {
-    // res.status(status).send(message)
-    // }) 
- 
+  }
 });
 
 //Traemos por params con ID el pokemon
@@ -127,7 +105,6 @@ router.get("/pokemons/:id", async (req, res) => {
       id: pokeApi.id,
       img: pokeApi.sprites.other.dream_world.front_default,
       name: pokeApi.name,
-      //types: poke.data.types.map(type=> type.type.name),
       types: pokeApi.types.map((type) => ({
         name: type.type.name,
         url: type.type.url,
@@ -179,15 +156,14 @@ router.get("/pokemons", async (req, res) => {
           height: poke.data.height,
           weight: poke.data.weight,
           img: poke.data.sprites.other.dream_world.front_default,
-          //types: poke.data.types.map(type=> type.type.name)
           types: poke.data.types.map((type) => ({
             name: type.type.name,
             url: type.type.url,
           })),
         };
-       // const joined = [allpokemons,onlyPoke]  
+        // const joined = [allpokemons,onlyPoke]
         if (onlyPoke) return res.json(onlyPoke);
-    }
+      }
     } catch (error) {
       return res.send("Nombre no encontrado");
       //No utilizo un send.error porque corta el flujo de la aplicaciónn
@@ -204,16 +180,16 @@ router.get("/pokemons", async (req, res) => {
       },
     });
     const pokeDev = await reqApi(); // Me traigo los primeros poke de la API y hago una promesa de arreglos con ellos
-    const pokeDev2 = await reqApi2() // Con esta request me traigo los segundos 20
-    
+    const pokeDev2 = await reqApi2(); // Con esta request me traigo los segundos 20
+
     let pokeFinal = await Promise.all(pokeDev);
-    let pokeFinal2 = await Promise.all(pokeDev2)
-    let pokeFusionApi = pokeFinal.concat(pokeFinal2) // Fusiono los request en un
+    let pokeFinal2 = await Promise.all(pokeDev2);
+    let pokeFusionApi = pokeFinal.concat(pokeFinal2); // Fusiono los request en un
 
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
-      types: pokemon.types.map((type) => ({ name: type.name })), 
+      types: pokemon.types.map((type) => ({ name: type.name })),
     }));
     /* Asi viene de la base de datos
     {

@@ -94,6 +94,3 @@ function DetailPokemon() {
 
 export default DetailPokemon;
 
-{
-  /* <h3>Types: {detail.pokemons.types}</h3> */
-}

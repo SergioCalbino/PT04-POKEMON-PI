@@ -67,7 +67,7 @@ function Home() {
       <Nav />
       <>
         <div className={Styles.buttonContainer}>
-          <button className={Styles.button}> <Link to={"/pokemons"}>Create Pokemon</Link> </button>
+          <button className={Styles.button}> <Link to={"/pokemons"}>Go To Create Pokemon</Link> </button>
        
           <button onClick={buttonBack} className={Styles.buttonBack}>Back</button>
           </div>
@@ -75,9 +75,7 @@ function Home() {
           
           <div className={Styles.pokemons}>
        
-            {/* {pokemonStore ? renderPokemons()
-              : <h1>Cargando</h1>
-              } */}
+          
             {!pokemonStore.filter
               ? renderOrder.allPokemons
               : renderOrder.filtered}

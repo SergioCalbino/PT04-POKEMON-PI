@@ -7,7 +7,6 @@ export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const CREATE_POKEMON = 'CREATE_POKEMON';
-//export const ORDER_STRENGTH = 'ORDER_STRENGTH'; //ordena por fuerza de forma ascendente
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE'; // Ordena por tipo
 export const ORDER_NAME_ASC = 'ORDER_NAME_ASC'; // Ordena por nombre de forma Ascendente 
 export const ORDER_NAME_DESC = 'ORDER_NAME_DESC'; // Ordena por nombre de forma Descendente
