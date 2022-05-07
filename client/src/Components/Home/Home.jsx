@@ -32,12 +32,16 @@ function Home() {
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch, filter]);
-  console.log(pokemonStore.allPokemons);
+ // console.log(pokemonStore.allPokemons);
 
   const renderPokemons = () => {
     return currentPokes.map((po) => (
       <div>
-        <PokeCard key={po.name} props={po} />
+        <PokeCard key={po.name} 
+                  id={po.id} 
+                  name={po.name} 
+                  img={po.img} 
+                  types={po.types}  />
       </div>
     ));
   };
@@ -98,4 +102,3 @@ function Home() {
 
 export default Home;
 
-//style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)'}}

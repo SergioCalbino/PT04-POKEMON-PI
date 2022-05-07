@@ -6,63 +6,39 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import sombra from "../img/all.jpg";
 import Styles from "../DetailPokemon/DetailPokemon.module.css";
-import {deleteState} from "../../redux/actions/actions";
+import { deleteState } from "../../redux/actions/actions";
 
 function DetailPokemon() {
   const detail = useSelector((state) => state);
   const { id } = useParams();
   const dispatch = useDispatch();
-  console.log(detail.pokemons);
+  console.log(detail.pokemons.types);
 
   useEffect(() => dispatch(getPokemonsById(id)), [dispatch]);
 
   function back() {
-    dispatch(deleteState())
+    dispatch(deleteState());
   }
 
   //let pokeFilt = detail.filter((poke) => poke.id === pokeId)
 
   return (
-    <div className={Styles.container}>
-    <div>
-              </div>
+    <div >
+      
+      
       {detail.pokemons ? (
-        
-        <div className={Styles.det}>
-          <div>
-            <div className={Styles.name}>
-            {detail.pokemons.name}
-            </div>
-          </div>
+        <div >
+          
+        <div className={Styles.card}>{detail.pokemons.name}</div>
+          
+          
 
-          <div>
-            <img
-              className={Styles.img}
-              src={detail.pokemons.img}
-              alt={sombra}
-            ></img>
-          </div>
 
-          <div className={Styles.infoPokemon}>
-            <div>
-                <label> Id: </label>
-                {detail.pokemons.id}
-              
-
-              <div>
-                <label> Life: </label>
-                {detail.pokemons.life}
-              </div>
-
-              <div>
-                <label>strength:</label>
-                {detail.pokemons.strength}
-              </div>
-
-              <div>
-                <label>Defense:</label>
-                {detail.pokemons.defense}
-              </div>
+          <div className={Styles.card}>
+            <h2> Id: <b>{detail.pokemons.id} </b> </h2> 
+            <h4> Life:<b> {detail.pokemons.life}</b> </h4>
+            <h4> strength:<b>{detail.pokemons.strength}</b></h4>
+            <h4>Defense:<b>{detail.pokemons.defense} </b></h4>
 
               <div>
                 <label>Speed:</label>
@@ -78,7 +54,23 @@ function DetailPokemon() {
                 <label>Weight:</label>
                 {detail.pokemons.weight}
               </div>
-            </div>
+              
+              <div>
+                <label>types:</label>
+                {detail.pokemons.types?.map((ty) => {
+                  return ( <p>{ty.name}</p>
+                  )
+                })}
+              </div>
+          <div>
+            <img
+              className={Styles.img}
+              src={detail.pokemons.img}
+              alt={sombra}
+            ></img>
+          </div>
+              
+            
           </div>
         </div>
       ) : (
@@ -86,11 +78,13 @@ function DetailPokemon() {
       )}
 
       <Link to={"/home"}>
-        <button className={Styles.back} onClick={back} >  Back to home</button>
+        <button className={Styles.back} onClick={back}>
+          {" "}
+          Back to home
+        </button>
       </Link>
     </div>
   );
 }
 
 export default DetailPokemon;
-

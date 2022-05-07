@@ -85,7 +85,7 @@ function CreatePokemon() {
     navigate("/home");
   }
 
-  // Estados del input para todos los campos menos el type
+  // Estados del input y el Types
   function handleInput(e) {
     if (e.target.name === "name") {
       setError(validator({ ...input, [e.target.name]: e.target.value }));
