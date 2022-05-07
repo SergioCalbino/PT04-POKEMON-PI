@@ -23,54 +23,39 @@ function DetailPokemon() {
   //let pokeFilt = detail.filter((poke) => poke.id === pokeId)
 
   return (
-    <div >
-      
-      
+    <div>
       {detail.pokemons ? (
         <div >
-          
-        <div className={Styles.card}>{detail.pokemons.name}</div>
-          
-          
-
-
-          <div className={Styles.card}>
-            <h2> Id: <b>{detail.pokemons.id} </b> </h2> 
-            <h4> Life:<b> {detail.pokemons.life}</b> </h4>
-            <h4> strength:<b>{detail.pokemons.strength}</b></h4>
-            <h4>Defense:<b>{detail.pokemons.defense} </b></h4>
-
-              <div>
-                <label>Speed:</label>
-                {detail.pokemons.speed}
-              </div>
-
-              <div>
-                <label>Height:</label>
-                {detail.pokemons.height}
-              </div>
-
-              <div>
-                <label>Weight:</label>
-                {detail.pokemons.weight}
-              </div>
+          <div className={Styles.infoPokemon}>
+          <label> Id: <b>{detail.pokemons.id} </b> </label>
+            <label>
+              {" "}
+              Life:<b> {detail.pokemons.life}</b>{" "}
+            </label>
+            <label>
+              {" "}
+              strength:<b>{detail.pokemons.strength}</b>
+            </label>
+            <label>
+              Defense:<b>{detail.pokemons.defense} </b>
+            </label>
+            <label>Speed: {detail.pokemons.speed} </label>
+            <label>Height: {detail.pokemons.height}</label>
+            <div>Weight: {detail.pokemons.weight}</div>
+            <div>
+              <label>types:</label>
+              {detail.pokemons.types?.map((ty) => {
+                return <p>{ty.name}</p>;
+              })}
+            </div>
               
               <div>
-                <label>types:</label>
-                {detail.pokemons.types?.map((ty) => {
-                  return ( <p>{ty.name}</p>
-                  )
-                })}
-              </div>
-          <div>
-            <img
-              className={Styles.img}
-              src={detail.pokemons.img}
-              alt={sombra}
-            ></img>
-          </div>
+            <div className={Styles.name} >
+              <h4>{detail.pokemons.name}</h4>
               
-            
+              <img src={detail.pokemons.img} alt={sombra}></img>
+              </div>
+            </div>
           </div>
         </div>
       ) : (
