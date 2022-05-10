@@ -57,6 +57,7 @@ router.post("/pokemons", async (req, res) => {
     img,
   };
 
+  console.log(atributesPokemon)
   try {
     await axios(urlApi);
     return res.status(404).send("El pokemon ya existe");
@@ -189,6 +190,7 @@ router.get("/pokemons", async (req, res) => {
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
+      img: pokemon.img,
       types: pokemon.types.map((type) => ({ name: type.name })),
     }));
     /* Asi viene de la base de datos

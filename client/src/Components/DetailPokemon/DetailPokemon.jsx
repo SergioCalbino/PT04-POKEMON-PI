@@ -53,7 +53,7 @@ function DetailPokemon() {
             <div className={Styles.name} >
               <h4>{detail.pokemons.name}</h4>
               
-              <img src={detail.pokemons.img} alt={sombra}></img>
+              <img className={Styles.img} src={detail.pokemons.img}></img>
               </div>
             </div>
           </div>

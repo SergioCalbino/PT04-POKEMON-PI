@@ -15,7 +15,7 @@ function PokeCard({id, name, img, types}) {
    <div className={Styles.container}>
     {id == undefined ? <>
 
-    <h1>No existe el pokemon</h1> <img src={imagen}/>  
+    <h1> there is no pokemon</h1> <img src={imagen}/>  
     </>
     : <>
       <Link  to={`/pokemon/${id}`}>
@@ -26,7 +26,7 @@ function PokeCard({id, name, img, types}) {
 
       <div className={Styles.card}>
       {
-      //  img === '' ? <img src= 'https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80--sticker-vinyl-car-decals.jpg' alt="Not found"/> : 
+     // img === '' ? <img src= {'https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80--sticker-vinyl-car-decals.jpg'} alt={"Not found"}/> : 
         <img className={Styles.img} src={img} alt="" />
         }
 

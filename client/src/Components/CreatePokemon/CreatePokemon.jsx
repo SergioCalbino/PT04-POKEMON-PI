@@ -7,6 +7,7 @@ import {
   postPokemon,
   getTypes,
   getAllPokemons,
+  deleteState
 } from "../../redux/actions/actions.js";
 import { Link, useNavigate } from "react-router-dom";
 import Styles from "../CreatePokemon/CreatePokemon.module.css";
@@ -35,10 +36,10 @@ function CreatePokemon() {
  
   //probando la creacion
   useEffect(() => {
-    console.log("sajdhsahdhasjdhjkashdkjhasjdhjashdjka");
-    console.log(message);
-
-    if (message !== null) alert(message);
+    if (message?.length > 1) { 
+      alert(message)
+    dispatch(deleteState())}
+    return ()=> {setInput(newPokemon)}
   }, [message]);
 
   useEffect(() => {
@@ -63,26 +64,26 @@ function CreatePokemon() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(input);
+   
     dispatch(postPokemon(input));
+    // setInput({
+    //   name: "",
+    //   life: 0,
+    //   strength: 0,
+    //   defense: 0,
+    //   speed: 0,
+    //   height: 0,
+    //   weight: 0,
+    //   img: "",
+    //   types: [],
+    // });
+    //dispatch(getAllPokemons());
 
-    alert(message);
-    setInput(newPokemon);
+    
+    
     setError({});
     // dispatch(deleteState())
-    dispatch(getAllPokemons());
-    setInput({
-      name: "",
-      life: "",
-      strength: "",
-      defense: "",
-      speed: "",
-      height: "",
-      weight: "",
-      img: "",
-      types: [],
-    });
-    navigate("/home");
+   // navigate("/home");
   }
 
   // Estados del input y el Types
@@ -151,10 +152,10 @@ function CreatePokemon() {
       });
     }
 
-    if(e.target.name === "image") {
+    if(e.target.name === "img") {
        
       setInput({
-        ...input, [e.target.name]: [e.target.value]
+        ...input, [e.target.name]: e.target.value
       })
     }
   }
@@ -188,6 +189,7 @@ function CreatePokemon() {
               type="text"
               onChange={handleInput}
               autoComplete="off"
+              value={input.name}
               required
             />
             {error.name && <p>{error.name}</p>}
@@ -200,6 +202,7 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.life}
               required
             />
             {error.life && <p>{error.life}</p>}
@@ -211,6 +214,7 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.strength}
               required
             />
             {error.strength && <p>{error.strength}</p>}
@@ -221,6 +225,7 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.defense}
               required
             />
             {error.defense && <p>{error.defense}</p>}
@@ -231,6 +236,7 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.speed}
               required
             />
             {error.speed && <p>{error.speed}</p>}
@@ -241,6 +247,7 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.height}
               required
             />
             {error.height && <p>{error.height}</p>}
@@ -251,22 +258,25 @@ function CreatePokemon() {
               type="number"
               onChange={handleInput}
               autoComplete="off"
+              value={input.weight}
               required
             />
             {error.weight && <p>{error.weight}</p>}
 
             <label>Image</label>
             <input
-              name="image"
+              name="img"
               type="text"
               onChange={handleInput}
               placeholder="Insert URL"
+              value={input.img}
             />
 
             <select
               name="types"
               onChange={handleInput}
               autoComplete="off"
+              
               required
             >
               <option value=""> Choose Type</option>
@@ -276,7 +286,7 @@ function CreatePokemon() {
             </select>
             {error.types && <p>{error.types}</p>}
 
-            <button className={Styles.button2} type="submit" disabled={!submit}>
+            <button className={Styles.button2} type="submit" enable={submit}>
               Create Pokemon
             </button>
           </form>

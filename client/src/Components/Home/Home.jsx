@@ -11,7 +11,7 @@ import PokeCard from "../PokeCard/PokeCard";
 import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
 import Styles from "../Home/Home.module.css";
-import img from '../img/cover-pokemon-preview.png'
+import rando from '../img/random.gif'
 
 function Home() {
   const dispatch = useDispatch();
