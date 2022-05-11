@@ -36,11 +36,14 @@ function CreatePokemon() {
  
   //probando la creacion
   useEffect(() => {
-    if (message?.length > 1) { 
-      alert(message)
-    dispatch(deleteState())}
+    // if (message?.length > 1) { 
+    //   alert(message)
+    dispatch(getAllPokemons())
     return ()=> {setInput(newPokemon)}
-  }, [message]);
+  }, []);
+
+  
+  
 
   useEffect(() => {
     if (
@@ -276,7 +279,6 @@ function CreatePokemon() {
               name="types"
               onChange={handleInput}
               autoComplete="off"
-              
               required
             >
               <option value=""> Choose Type</option>
@@ -286,7 +288,7 @@ function CreatePokemon() {
             </select>
             {error.types && <p>{error.types}</p>}
 
-            <button className={Styles.button2} type="submit" enable={submit}>
+            <button className={Styles.button2} type="submit" disabled={!submit}>
               Create Pokemon
             </button>
           </form>

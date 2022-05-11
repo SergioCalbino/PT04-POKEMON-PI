@@ -104,14 +104,9 @@ function Nav() {
 
   return (
     <>
-    <div className={Styles.img}>
-  
-    </div>
-    <div className={Styles.container}>
-     
-      
-        
-          <div>
+      <div className={Styles.img}></div>
+      <div className={Styles.container}>
+        <div>
           <div className={Styles.title}>
             <span>Select type of Pokemon</span>
             <select onChange={hanlderFilterByType}>
@@ -122,47 +117,45 @@ function Nav() {
                 </option>
               ))}
             </select>
-            </div>
-            
-            <select onChange={handlerName}>
-              <option value="">Order By Name</option>
-              <option value="asc">Ascendente</option>
-              <option value="desc">Descendente</option>
-            </select>
-         
-            <select onChange={handlerStrength}>
-              <option value="">order By Strength</option>
-              <option value="asc">More strength</option>
-              <option value="desc">Less strength</option>
-            </select>
-         
-            <select onChange={handlerOriginPokemons}>
-              <option value=""> Select origin from Pokemons</option>
-              <option value="Data Base"> Pokemons from Data Base</option>
-              <option value="Api"> Pokemons from Api</option>
-            </select>
           </div>
 
-          <div >
-            <input
-              className=""
-              onChange={handleInputChange}
-              value={search}
-              placeholder="Search Name"
-            />
-            <button className={Styles.button} onClick={searchPokemon}>
-              Search
-            </button>
-          </div>
-          
-          <div>
+          <select onChange={handlerName}>
+            <option value="">Order By Name</option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+
+          <select onChange={handlerStrength}>
+            <option value="">order By Strength</option>
+            <option value="asc">More strength</option>
+            <option value="desc">Less strength</option>
+          </select>
+
+          <select onChange={handlerOriginPokemons}>
+            <option value=""> Select origin from Pokemons</option>
+            <option value="Data Base"> Pokemons from Data Base</option>
+            <option value="Api"> Pokemons from Api</option>
+          </select>
+        </div>
+
+        <form onSubmit={searchPokemon}>
+          <input
+            className=""
+            onChange={handleInputChange}
+            value={search}
+            placeholder="Search Name"
+          />
+          <button className={Styles.button}>
+            Search
+          </button>
+        </form>
+
+        <div>
           <button className={Styles.button} onClick={clear}>
             Clear{" "}
           </button>
-          </div>
-      
-      
-    </div>
+        </div>
+      </div>
     </>
   );
 }

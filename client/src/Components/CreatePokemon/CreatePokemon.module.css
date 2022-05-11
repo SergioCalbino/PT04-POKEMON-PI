@@ -95,7 +95,7 @@ input[type=submit]:hover {
   background-color: #008CBA;
   color: white;
 }
-.button2 {
+/* .button2 {
   display: inline-block;
             border-radius: 5px;
             background-color: yellowgreen;
@@ -109,12 +109,12 @@ input[type=submit]:hover {
             cursor: pointer;
             margin: 4px 2px;
             text-decoration: none;
-}
+} */
 
-.button2:hover {
+/* .button2:hover {
   background-color: red;
   color: white;
-}
+} */
 
 
 /* .img {

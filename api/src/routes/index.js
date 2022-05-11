@@ -60,16 +60,15 @@ router.post("/pokemons", async (req, res) => {
   console.log(atributesPokemon)
   try {
     await axios(urlApi);
-    return res.status(404).send("El pokemon ya existe");
+    return res.send("El pokemon ya existe");
   } catch (error) {
     try {
       let newPoke = await Pokemon.create(atributesPokemon);
       await newPoke.addTypes(types);
       return res
-        .status(200)
-        .send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`);
+      .send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`);
     } catch (error) {
-      res.status(404).send("El pokemon ya existe");
+      return res.send(`El pokemon ya existe en la base de datos`);
     }
   }
 });
@@ -190,7 +189,7 @@ router.get("/pokemons", async (req, res) => {
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
-      img: pokemon.img,
+      img: pokemon.img, //agregue esto recien
       types: pokemon.types.map((type) => ({ name: type.name })),
     }));
     /* Asi viene de la base de datos
