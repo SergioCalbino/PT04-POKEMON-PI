@@ -31,8 +31,8 @@ function Home() {
 
   useEffect(() => {
     dispatch(getAllPokemons());
-  }, [dispatch, filter]);
- // console.log(pokemonStore.allPokemons);
+  }, [dispatch]);
+
 
   const renderPokemons = () => {
     return currentPokes.map((po) => (

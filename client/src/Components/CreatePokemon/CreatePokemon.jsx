@@ -69,17 +69,17 @@ function CreatePokemon() {
 
    
     dispatch(postPokemon(input));
-    // setInput({
-    //   name: "",
-    //   life: 0,
-    //   strength: 0,
-    //   defense: 0,
-    //   speed: 0,
-    //   height: 0,
-    //   weight: 0,
-    //   img: "",
-    //   types: [],
-    // });
+    setInput({
+      name: "",
+      life: 0,
+      strength: 0,
+      defense: 0,
+      speed: 0,
+      height: 0,
+      weight: 0,
+      img: "",
+      types: [],
+    });
     //dispatch(getAllPokemons());
 
     

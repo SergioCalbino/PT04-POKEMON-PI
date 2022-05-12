@@ -62,7 +62,9 @@ router.post("/pokemons", async (req, res) => {
     await axios(urlApi);
     return res.send("El pokemon ya existe");
   } catch (error) {
+    console.log(error)
     try {
+      
       let newPoke = await Pokemon.create(atributesPokemon);
       await newPoke.addTypes(types);
       return res
