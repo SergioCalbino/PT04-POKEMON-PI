@@ -7,9 +7,8 @@ const { Pokemon, Type } = require("../db");
 const { reqApi, reqApi2 } = require("../ReqApi/ReqApi");
 const { Op } = require("sequelize");
 
-const url = "https://pokeapi.co/api/v2/pokemon";
-const urlId = `https://pokeapi.co/api/v2/pokemon/`;
-const urlName = `https://pokeapi.co/api/v2/pokemon/`;
+
+const url = `https://pokeapi.co/api/v2/pokemon/`;
 const urlType = `https://pokeapi.co/api/v2/type`;
 
 const router = Router();
@@ -26,8 +25,8 @@ router.get("/types", async (req, res) => {
   try {
     const allTypeDb = await Type.findAll();
     if (allTypeDb.length > 1) return res.json(allTypeDb);
-    const allpokemons = await axios.get(urlType);
-    let typePoke = await allpokemons.data.results.map((ty) => {
+    const allTypes = await axios.get(urlType);
+    let typePoke = await allTypes.data.results.map((ty) => {
       return {
         name: ty.name,
         url: ty.url,
@@ -43,9 +42,8 @@ router.post("/pokemons", async (req, res) => {
   let { name, life, strength, defense, speed, height, weight, types, img } =
     req.body;
 
-  //Verifico si el nombre del pokemon ya existe en la base de datos
-  let urlApi = urlName + name.toLowerCase().trim();
-  // console.log(urlApi)
+  //Verifico si el nombre del pokemon ya existe en la base de datos y en la Api
+  let urlApi = url + name.toLowerCase().trim();
   let atributesPokemon = {
     name,
     life,
@@ -57,18 +55,16 @@ router.post("/pokemons", async (req, res) => {
     img,
   };
 
-  console.log(atributesPokemon)
   try {
     await axios(urlApi);
     return res.send("El pokemon ya existe");
   } catch (error) {
-    console.log(error)
     try {
-      
       let newPoke = await Pokemon.create(atributesPokemon);
       await newPoke.addTypes(types);
-      return res
-      .send(`El pokemon ${newPoke.name} se ha creado de manera exitosa`);
+      return res.send(
+        `El pokemon ${newPoke.name} se ha creado de manera exitosa`
+      );
     } catch (error) {
       return res.send(`El pokemon ya existe en la base de datos`);
     }
@@ -78,7 +74,7 @@ router.post("/pokemons", async (req, res) => {
 //Traemos por params con ID el pokemon
 router.get("/pokemons/:id", async (req, res) => {
   let { id } = req.params;
-  let urlApi = urlId + id;
+  let urlApi = url + id;
 
   ///^[0-9]+$/.test(id)
 
@@ -128,13 +124,12 @@ router.get("/pokemons/:id", async (req, res) => {
 //Hacemos el request de Name y todo los Pokemons
 router.get("/pokemons", async (req, res) => {
   let { name } = req.query;
-  let urlApi = urlName;
-  let allpokemons = [];
+  let urlApi;
+  let pok = [];
 
   if (name) {
     try {
-      //Si existe name, primero verifico si existe en la base de datos
-      allpokemons = await Pokemon.findOne({
+		pok = await Pokemon.findOne({
         where: { name: { [Op.iLike]: name } },
         include: {
           model: Type,
@@ -142,10 +137,10 @@ router.get("/pokemons", async (req, res) => {
           through: { attributes: [] },
         },
       });
-      if (allpokemons) {
-        return res.json(allpokemons);
+      if (pok) {
+        return res.json(pok);
       } else {
-        urlApi = urlName + name.toLowerCase().trim();
+        urlApi = url + name.toLowerCase().trim();
         const poke = await axios(urlApi);
 
         let onlyPoke = {
@@ -163,12 +158,11 @@ router.get("/pokemons", async (req, res) => {
             url: type.type.url,
           })),
         };
-        // const joined = [allpokemons,onlyPoke]
+
         if (onlyPoke) return res.json(onlyPoke);
       }
     } catch (error) {
       return res.send("Nombre no encontrado");
-      //No utilizo un send.error porque corta el flujo de la aplicaciónn
     }
   }
 
@@ -181,17 +175,17 @@ router.get("/pokemons", async (req, res) => {
         through: { attributes: [] },
       },
     });
-    const pokeDev = await reqApi(); // Me traigo los primeros poke de la API y hago una promesa de arreglos con ellos
-    const pokeDev2 = await reqApi2(); // Con esta request me traigo los segundos 20
+    const pokeDev = await reqApi();
+    const pokeDev2 = await reqApi2();
 
     let pokeFinal = await Promise.all(pokeDev);
     let pokeFinal2 = await Promise.all(pokeDev2);
-    let pokeFusionApi = pokeFinal.concat(pokeFinal2); // Fusiono los request en un
+    let pokeFusionApi = pokeFinal.concat(pokeFinal2); // Fusiono los request en uno
 
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
-      img: pokemon.img, //agregue esto recien
+      img: pokemon.img,
       types: pokemon.types.map((type) => ({ name: type.name })),
     }));
     /* Asi viene de la base de datos

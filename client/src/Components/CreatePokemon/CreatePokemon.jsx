@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
- import {validator} from '../../Utils/validatorFunction.js'
- import {isNotEmpty} from "../../Utils/objectError.js"
+import { validator } from "../../Utils/validatorFunction.js";
+import { isObjEmpty } from "../../Utils/objectError.js";
 import {
   postPokemon,
   getTypes,
   getAllPokemons,
-  deleteState
 } from "../../redux/actions/actions.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Styles from "../CreatePokemon/CreatePokemon.module.css";
 
 function CreatePokemon() {
@@ -26,30 +25,25 @@ function CreatePokemon() {
   };
 
   const typeState = useSelector((state) => state);
-  const message = useSelector((state) => state.message);
+
   const [input, setInput] = useState(newPokemon);
   const [error, setError] = useState({});
   const [submit, setSubmit] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
- 
   //probando la creacion
   useEffect(() => {
-    // if (message?.length > 1) { 
-    //   alert(message)
-    dispatch(getAllPokemons())
-    return ()=> {setInput(newPokemon)}
+    dispatch(getAllPokemons());
+    // return () => {
+    //   setInput(newPokemon);
+    // };
   }, []);
-
-  
-  
 
   useEffect(() => {
     if (
       input.types.length < 3 &&
       input.types.length > 0 &&
-      !isNotEmpty(error)
+      isObjEmpty(error)
     ) {
       setSubmit(true);
     } else {
@@ -62,12 +56,8 @@ function CreatePokemon() {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-
-
   function handleSubmit(e) {
     e.preventDefault();
-
-   
     dispatch(postPokemon(input));
     setInput({
       name: "",
@@ -80,13 +70,7 @@ function CreatePokemon() {
       img: "",
       types: [],
     });
-    //dispatch(getAllPokemons());
-
-    
-    
     setError({});
-    // dispatch(deleteState())
-   // navigate("/home");
   }
 
   // Estados del input y el Types
@@ -155,11 +139,11 @@ function CreatePokemon() {
       });
     }
 
-    if(e.target.name === "img") {
-       
+    if (e.target.name === "img") {
       setInput({
-        ...input, [e.target.name]: e.target.value
-      })
+        ...input,
+        [e.target.name]: e.target.value,
+      });
     }
   }
 
@@ -320,7 +304,7 @@ function CreatePokemon() {
             </tbody>
           </table>
         </div>
-        {/* <div className={Styles.img}></div> */}
+     
       </div>
     </>
   );

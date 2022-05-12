@@ -12,7 +12,6 @@ import {
   GET_ALL_POKEMONS_BY_DB,
   GET_ALL_POKEMONS_BY_API,
   CLEAR,
-  GET_NAME,
 } from "../actions/actions";
 
 const initialState = {
@@ -73,25 +72,18 @@ export default function rootReducer(state = initialState, action) {
     //Aca empiezo con los ordenamientos
 
     case CLEAR: {
-     // delete state.filter;
+      // delete state.filter;
       return {
         ...state,
         types: state.types,
-        filter: state.allPokemons
+        filter: state.allPokemons,
       };
     }
 
     case FILTER_BY_TYPE: {
       const cloneType = [...state.allPokemons];
-
-      const filtered = cloneType.filter(
-        (poke) =>
-          poke.types?.filter((type) => {
-            return type.name === action.payload;
-          }).length > 0
-      );
-
-      return {
+      const filtered = cloneType.filter((poke) => poke.types?.filter((type) => {return type.name === action.payload}).length > 0);
+          return {
         ...state,
         filter: filtered,
       };
@@ -159,4 +151,3 @@ export default function rootReducer(state = initialState, action) {
   }
 }
 
-//allType.filter(el => (el.types[1]) ? el.types[1].name  === action.payload : el.types[0].name === action.payload)

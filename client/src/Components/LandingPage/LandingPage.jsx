@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import image from '../img/all.jpg'
 import Styles from '../LandingPage/LandingPage.module.css'
 
 

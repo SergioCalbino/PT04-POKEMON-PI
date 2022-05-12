@@ -1,7 +1,6 @@
 const axios = require("axios");
 
 const reqApi = async () => {
-  const url = "?offset=0&limit={limit}";
   const allpokemons = await axios("https://pokeapi.co/api/v2/pokemon");
   let pokeDev = await allpokemons.data.results.map((poke) => {
     return axios(poke.url).then((poke) => {

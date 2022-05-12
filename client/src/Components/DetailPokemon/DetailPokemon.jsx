@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonsById } from "../../redux/actions/actions.js";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import sombra from "../img/all.jpg";
 import Styles from "../DetailPokemon/DetailPokemon.module.css";
 import { deleteState } from "../../redux/actions/actions";
 
@@ -12,7 +10,7 @@ function DetailPokemon() {
   const detail = useSelector((state) => state);
   const { id } = useParams();
   const dispatch = useDispatch();
-  console.log(detail.pokemons.types);
+  
 
   useEffect(() => dispatch(getPokemonsById(id)), [dispatch]);
 
@@ -20,7 +18,7 @@ function DetailPokemon() {
     dispatch(deleteState());
   }
 
-  //let pokeFilt = detail.filter((poke) => poke.id === pokeId)
+
 
   return (
     <div>

@@ -27,8 +27,7 @@ function Nav() {
   function searchPokemon(e) {
     // Para realizar la busqueda por nombre
     e.preventDefault();
-    console.log(search);
-    // dispatch(getPokemonsByname(search))
+   
     if (!/[a-zA-Z]/.test(search)) {
       //Constatamos que lo que se ingrese sea un nombre
       alert("Invalid Character");

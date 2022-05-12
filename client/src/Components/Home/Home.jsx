@@ -4,19 +4,16 @@ import {
   getAllPokemons,
   deleteState,
   getTypes,
-  
 } from "../../redux/actions/actions";
 import Nav from "../Nav/Nav";
 import PokeCard from "../PokeCard/PokeCard";
 import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
 import Styles from "../Home/Home.module.css";
-import rando from '../img/random.gif'
 
 function Home() {
   const dispatch = useDispatch();
-  const pokemonStore = useSelector((initialState) => initialState);
-  const filter = useSelector((initialState) => initialState.filter)
+  const pokemonStore = useSelector((state) => state);
   const pokePerPage = 12;
 
   let [currentPage, setCurrentPage] = useState(1);
@@ -25,23 +22,22 @@ function Home() {
   const currentPokes = pokemonStore.filter
     ? pokemonStore?.filter.slice(indexFirstPage, indexLastPage)
     : pokemonStore?.allPokemons.slice(indexFirstPage, indexLastPage);
-  //Este currentsPokes lo utilizo para veriificar sobre los pokemons de la api y la DB con el paginado. En caso contrario, utilizo para todos juntos.
-  //Lugo en currentPokes hago el mapeo, ya sea con ordenamiento de api y db, o de todos
-  const paginate = (pageNumber) => setCurrentPage(pageNumber); //Indica en que pagina me encuentro
+    const paginate = (pageNumber) => setCurrentPage(pageNumber); //Indica en que pagina me encuentro
 
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-
   const renderPokemons = () => {
     return currentPokes.map((po) => (
       <div>
-        <PokeCard key={po.name} 
-                  id={po.id} 
-                  name={po.name} 
-                  img={po.img} 
-                  types={po.types}  />
+        <PokeCard
+          key={po.name}
+          id={po.id}
+          name={po.name}
+          img={po.img}
+          types={po.types}
+        />
       </div>
     ));
   };
@@ -60,40 +56,38 @@ function Home() {
   };
 
   const buttonBack = () => {
-    dispatch(deleteState())
-    dispatch(getAllPokemons())
-    dispatch(getTypes())
-
-  }
+    dispatch(deleteState());
+    dispatch(getAllPokemons());
+    dispatch(getTypes());
+  };
 
   return (
     <>
       <Nav />
       <>
         <div className={Styles.buttonContainer}>
-          <button className={Styles.button}> <Link to={"/pokemons"}>Go To Create Pokemon</Link> </button>
-       
-          <button onClick={buttonBack} className={Styles.buttonBack}>Back</button>
-          </div>
+          <button className={Styles.button}>
+            {" "}
+            <Link to={"/pokemons"}>Go To Create Pokemon</Link>{" "}
+          </button>
+
+          <button onClick={buttonBack} className={Styles.buttonBack}>
+            Back
+          </button>
+        </div>
         {
-          
           <div className={Styles.pokemons}>
-       
-          
             {!pokemonStore.filter
               ? renderOrder.allPokemons
               : renderOrder.filtered}
           </div>
-          
         }
-        < >
-        
-        <Pagination
-          pokePerPage={pokePerPage}
-          totalPokemons={pokemonStore.allPokemons.length}
-          paginate={paginate}
-        />
-         
+        <>
+          <Pagination
+            pokePerPage={pokePerPage}
+            totalPokemons={pokemonStore.allPokemons.length}
+            paginate={paginate}
+          />
         </>
       </>
     </>
@@ -101,4 +95,3 @@ function Home() {
 }
 
 export default Home;
-

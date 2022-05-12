@@ -1,9 +1,9 @@
 
 
-export const isNotEmpty = (error) => {
+export const isObjEmpty = (error) => {
     for (var prop in error) {
-      if (error.hasOwnProperty(prop)) return true;
+      if (error.hasOwnProperty(prop)) return false;
     }
-    return false;
+    return true;
   };
 
