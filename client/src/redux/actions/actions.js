@@ -18,13 +18,15 @@ export const CLEAR = "CLEAR";
 export const GET_NAME = "GET_NAME";
 export const GET = 'GET'
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+
 //Action para traernos todos los pokemons
 
 
 export function getAllPokemons() {
   return async (dispatch) => {
     try {
-      const response = await axios("http://localhost:3001/pokemons");
+      const response = await axios(`${API_URL}/pokemons`);
       return dispatch({
         type: GET_ALL_POKEMONS,
         payload: response.data,
@@ -46,7 +48,7 @@ export function allPokemonsByDb() {
 export function getPokemonsById(id) {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/pokemons/${id}`);
+      const response = await axios(`${API_URL}/pokemons/${id}`);
       return dispatch(
           { type: GET_POKEMON_ID, 
             payload: response.data });
@@ -61,7 +63,7 @@ export function getPokemonsById(id) {
 export function getPokemonByname(name) {
   return async function (dispatch) {
     try {
-      const resp = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+      const resp = await axios.get(`${API_URL}/pokemons?name=${name}`);
       return dispatch({
         type: GET_POKEMON_NAME,
         payload: [resp.data],
@@ -78,7 +80,7 @@ export function getPokemonByname(name) {
 export function getTypes() {
   return async function (dispatch) {
     try {
-      const resp = await axios("http://localhost:3001/types");
+      const resp = await axios(`${API_URL}/types`);
       return dispatch({
         type: GET_TYPES,
         payload: resp.data,
@@ -98,7 +100,7 @@ export function postPokemon(inputFormPoke) {
   return async function (dispatch) {
     try {
       let resp;
-      await axios.post("http://localhost:3001/pokemons", inputFormPoke)
+      await axios.post(`${API_URL}/pokemons`, inputFormPoke)
       .then((r) => (resp = r.data));
       alert(resp);
       return dispatch({

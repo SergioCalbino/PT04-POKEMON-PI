@@ -37,7 +37,7 @@ function Home() {
           name={po.name}
           img={po.img}
           types={po.types}
-          strength={po.strength}
+      
         />
       </div>
     ));
