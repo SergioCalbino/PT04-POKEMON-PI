@@ -22,7 +22,7 @@ function Nav() {
   const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state);
   const dispatch = useDispatch();
-  //const [currentPage, setCurrentPage] = useState(1)
+
 
   function searchPokemon(e) {
     // Para realizar la busqueda por nombre

@@ -16,8 +16,11 @@ export const GET_ALL_POKEMONS_BY_DB = "GET_ALL_POKEMONS_BY_DB";
 export const GET_ALL_POKEMONS_BY_API = "GET_ALL_POKEMONS_BY_API";
 export const CLEAR = "CLEAR";
 export const GET_NAME = "GET_NAME";
+export const GET = 'GET'
 
 //Action para traernos todos los pokemons
+
+
 export function getAllPokemons() {
   return async (dispatch) => {
     try {
@@ -141,7 +144,6 @@ export function ordeByStrengthDesc() {
 }
 
 export function filterByType(type) {
-  // console.log(type)
   return {
     type: FILTER_BY_TYPE,
     payload: type,

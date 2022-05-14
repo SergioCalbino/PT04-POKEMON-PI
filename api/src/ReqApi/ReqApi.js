@@ -52,6 +52,8 @@ const reqApi2 = async () => {
   return pokeDev2;
 };
 
+
+
 module.exports = {
   reqApi,
   reqApi2,

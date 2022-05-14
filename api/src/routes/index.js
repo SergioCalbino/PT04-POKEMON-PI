@@ -16,9 +16,11 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get("/", (req, res) => {
-  res.send("<h1>Bienvenidos</h1>");
+router.get("/get", (req, res) => {
+  res.json("<h1>Bienvenidos</h1>");
 });
+
+
 
 // Hacemos el request a types y luego lo utilizo para la creación del pokemon en el post
 router.get("/types", async (req, res) => {
@@ -37,6 +39,8 @@ router.get("/types", async (req, res) => {
     res.json(typePoke);
   } catch (error) {}
 });
+
+
 
 router.post("/pokemons", async (req, res) => {
   let { name, life, strength, defense, speed, height, weight, types, img } =
@@ -121,6 +125,8 @@ router.get("/pokemons/:id", async (req, res) => {
   }
 });
 
+
+
 //Hacemos el request de Name y todo los Pokemons
 router.get("/pokemons", async (req, res) => {
   let { name } = req.query;
@@ -182,10 +188,12 @@ router.get("/pokemons", async (req, res) => {
     let pokeFinal2 = await Promise.all(pokeDev2);
     let pokeFusionApi = pokeFinal.concat(pokeFinal2); // Fusiono los request en uno
 
+    console.log(allPokeDb)
     allPokeDb = allPokeDb.map((pokemon) => ({
       id: pokemon.id,
       name: pokemon.name,
       img: pokemon.img,
+      
       types: pokemon.types.map((type) => ({ name: type.name })),
     }));
     /* Asi viene de la base de datos

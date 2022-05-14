@@ -12,6 +12,7 @@ import {
   GET_ALL_POKEMONS_BY_DB,
   GET_ALL_POKEMONS_BY_API,
   CLEAR,
+  
 } from "../actions/actions";
 
 const initialState = {
@@ -69,6 +70,8 @@ export default function rootReducer(state = initialState, action) {
         message: action.payload,
       };
     }
+
+  
     //Aca empiezo con los ordenamientos
 
     case CLEAR: {

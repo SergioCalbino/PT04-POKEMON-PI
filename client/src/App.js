@@ -16,6 +16,7 @@ function App() {
     <Route path ='/home' element={<Home/>}/>
     <Route exact path = '/pokemons' element={<CreatePokemon/>}/>
     <Route exact path = '/pokemon/:id' element={<DetailPokemon/>}/>
+   
     
     </Routes>
     </div>
