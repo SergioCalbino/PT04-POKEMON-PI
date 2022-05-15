@@ -21,4 +21,4 @@ jobs:
         heroku_email: ${{secrets.HEROKU_API_KEY }}
       env:
         HD_APP_BASE: "client"
-        HD_REACT_APP_API_URL: "https://api-calbinopokemon.herokuapp.com/"
+        HD_REACT_APP_API_URL: "https://api-calbinopokemon.herokuapp.com"
