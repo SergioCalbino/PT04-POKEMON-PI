@@ -10,7 +10,7 @@ function PokeCard({ id, name, img, types }) {
       <div className={Styles.container}>
         {id === undefined ? (
           <>
-            <h1> there is no pokemon</h1> <img src={noPoke} />
+            <h1> there is no pokemons</h1> <img src={noPoke} />
           </>
         ) : (
           <>
