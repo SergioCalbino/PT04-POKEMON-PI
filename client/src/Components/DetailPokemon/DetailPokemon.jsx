@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Styles from "../DetailPokemon/DetailPokemon.module.css";
 import { deleteState } from "../../redux/actions/actions";
-import imagen from '../img/sombra.jpg'
+import imagen from '../img/bb65acb8eced7c4a1fbce90916211e80--sticker-vinyl-car-decals.jpg'
 
 function DetailPokemon() {
   const detail = useSelector((state) => state);
@@ -71,7 +71,7 @@ function DetailPokemon() {
     <>  
     <div className={Styles.all}>
     <div className="col-md-4">
-      <img src={detail.pokemons.img} className="img-fluid rounded-start" alt="..."/>
+      <img src={detail.pokemons.img ? detail.pokemons.img : imagen} className="img-fluid rounded-start" alt="..."/>
    
     </div>
         <div className={Styles.cont}>

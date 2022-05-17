@@ -111,7 +111,7 @@ function Nav() {
       <div className={Styles.container}>
         
           <div className={Styles.title}>
-            <p>Select type </p>
+           
             <select  onChange={hanlderFilterByType}>
               {types.map((ty, i) => (
                 <option key={i} name={ty.name}>
