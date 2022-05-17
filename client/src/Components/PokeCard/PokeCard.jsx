@@ -15,6 +15,7 @@ function PokeCard({ id, name, img, types }) {
         ) : (
           <>
              
+             
             <Link to={`/pokemon/${id}`}>
               <h1 key={id} className={Styles.name}>
                 {" "}

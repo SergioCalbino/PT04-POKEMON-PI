@@ -1,18 +1,67 @@
-container{
-    
+.cont{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
     align-items:center;
-    background-color: aqua;  
-    background-size: 80%;
-    background-position:center ;
-    overflow: hidden;
-    height: 100vh; 
     
-    border: 8px solid black
-    
-   } 
-    
+  }
 
-.details{  
+
+    
+.detail{
+  display: flex;
+  justify-content: center;
+  flex-direction:column;
+  margin-top: 10px;
+  width: 300px;
+  height: 500px;
+ 
+
+    
+}
+
+.all {
+  
+    display: flex;
+    background-color:darksalmon;
+    border: 5px solid black;
+    
+    align-items: center;
+    justify-content: center;
+    
+    background-size: cover;
+      width: 100vw;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+  }
+
+
+  .back{
+  position: fixed;
+  left: 30px;
+  right: 50px;
+  bottom: 50px;
+  height: 77px;
+  width: 200px;
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  font-size: 28px;
+  font-family: 'Architects Daughter', cursive;
+  transition: all 500ms ease;
+  border: 4px solid rgb(149, 1, 1);
+  margin-bottom: 40px;
+  cursor: pointer;
+  
+  
+}
+.back:hover{
+  background-color:rgb(149, 1, 1); 
+  box-shadow: rgb(149, 1, 1), 0 0 20 rgb(149, 1, 1); 
+  color: white;
+}
+/* .details{  
     background-size: 100%;
     background-position:center ;
     overflow: hidden;
@@ -26,10 +75,6 @@ container{
        bottom: 25%;
    }
    
-   .img{
-     width: 100%;
-       
-   }
    .name{
        position: fixed; 
        left:50%;
@@ -52,29 +97,7 @@ container{
        color: rgb(58, 52, 81);
    }
   
-   .back{
-   position: fixed;
-   left: 30px;
-   right: 50px;
-   bottom: 50px;
-   height: 77px;
-   width: 200px;
-   border-radius: 12px;
-   color: rgb(0, 0, 0);
-   font-size: 28px;
-   font-family: 'Architects Daughter', cursive;
-   transition: all 500ms ease;
-   border: 4px solid rgb(149, 1, 1);
-   margin-bottom: 40px;
-    cursor: pointer;
-   
-   
-   }
    
    
      
-     .back:hover{
-       background-color:rgb(149, 1, 1); 
-       box-shadow: rgb(149, 1, 1), 0 0 20 rgb(149, 1, 1); 
-       color: white;
-     }
+      */

@@ -157,6 +157,7 @@ function CreatePokemon() {
 
   return (
     <>
+     <div className={Styles.img}></div>
       <div className={Styles.header}>
         {/* <h1>Create your Pokemon</h1> */}
         <Link to={"/home"}>
@@ -280,6 +281,12 @@ function CreatePokemon() {
 
         {/* </div> */}
 
+        <div className={Styles.lab}>
+            Welcome to the Pokemon's Laboratory
+        <img className={Styles.img2} />
+        
+      </div>
+
         <div>
           <h3>Pokemons to add the Type</h3>
           <table className={Styles.table}>
@@ -298,6 +305,7 @@ function CreatePokemon() {
                       <button onClick={deleteType} value={t}>
                         Remove
                       </button>
+                  
                     </td>
                   </tr>
                 ))}
@@ -306,7 +314,8 @@ function CreatePokemon() {
         </div>
      
       </div>
-    </>
+              
+    </> 
   );
 }
 

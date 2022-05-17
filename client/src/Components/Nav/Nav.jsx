@@ -103,18 +103,23 @@ function Nav() {
 
   return (
     <>
-      <div className={Styles.img}></div>
+      <div className={Styles.img}>
+      <button className={Styles.button2} onClick={clear}>
+            Clear{" "}
+          </button>
+      </div>
       <div className={Styles.container}>
-        <div>
+        
           <div className={Styles.title}>
-            <span>Select type of Pokemon</span>
-            <select onChange={hanlderFilterByType}>
+            <p>Select type </p>
+            <select  onChange={hanlderFilterByType}>
               {types.map((ty, i) => (
                 <option key={i} name={ty.name}>
                   {" "}
                   {ty.name}
                 </option>
               ))}
+            
             </select>
           </div>
 
@@ -137,24 +142,24 @@ function Nav() {
           </select>
         </div>
 
+                <div className={Styles.search}>
         <form onSubmit={searchPokemon}>
           <input
-            className=""
+            
             onChange={handleInputChange}
             value={search}
             placeholder="Search Name"
           />
-          <button className={Styles.button}>
+          <button>
             Search
           </button>
         </form>
 
-        <div>
-          <button className={Styles.button} onClick={clear}>
-            Clear{" "}
-          </button>
         </div>
-      </div>
+        
+          
+      
+    
     </>
   );
 }
