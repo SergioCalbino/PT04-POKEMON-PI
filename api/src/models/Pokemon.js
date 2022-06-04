@@ -54,3 +54,5 @@ module.exports = (sequelize) => {
 
   });
 };
+
+//Quiero subir esto ultimo a heroku
