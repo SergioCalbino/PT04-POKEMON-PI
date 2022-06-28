@@ -16,6 +16,9 @@
     "redux-thunk": "^2.4.1",
     "web-vitals": "^0.2.4"
   },
+  "engines": {
+		"node": "16.x"
+	},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
