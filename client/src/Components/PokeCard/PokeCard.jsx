@@ -7,7 +7,8 @@ import noPoke from '../img/descarga.jpg'
 function PokeCard({ id, name, img, types }) {
   return (
     <>
-      <div className={Styles.container}>
+     
+      {/* <div className={Styles.container}>
         {id === undefined ? (
           <>
             <h1> there is no pokemons</h1> <img src={noPoke} />
@@ -36,7 +37,26 @@ function PokeCard({ id, name, img, types }) {
             </div>
           </>
         )}
+      </div> */}
+
+     
+      <div className={Styles.card}>
+      
+      <div className={Styles.cardheader}>{name}</div>
+      <div className={Styles.cardcontent}>
+        <div className={Styles.cardimage}>
+        <img src={img} />
       </div>
+        <div className={Styles.cardtext}>
+        <p>{}</p>
+        <p>Types:</p>
+                {types?.map((t) => {
+                  return <p key={t.id}>{t.name}</p>;
+                })}
+      </div>
+    </div>
+  </div>
+  
     </>
   );
 }

@@ -103,16 +103,51 @@ function Nav() {
 
   return (
     <>
-      <div className={Styles.img}>
+      {/* <div className={Styles.img}>
       <button className={Styles.button2} onClick={clear}>
             Clear{" "}
           </button>
       </div>
       <div className={Styles.container}>
         
-          <div className={Styles.title}>
-           
-            <select  onChange={hanlderFilterByType}>
+          <div className={Styles.title}> */}
+           {/* <div  > */}
+          
+
+          
+            <nav className={Styles.navbar}>
+            <select className={Styles.navbar__select} onChange={hanlderFilterByType}>
+            {types.map((ty, i) => (
+                <option key={i} name={ty.name}>
+                  {" "}
+                  {ty.name}
+                </option>
+              ))}
+            </select>
+            <select className={Styles.navbar__select} onChange={handlerName}>
+            <option value="">Order By Name</option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+
+          <select className={Styles.navbar__select} onChange={handlerStrength}>
+            <option value="">order By Strength</option>
+            <option value="asc">More strength</option>
+            <option value="desc">Less strength</option>
+          </select>
+
+          <select className={Styles.navbar__select} onChange={handlerOriginPokemons}>
+            <option value=""> Select origin from Pokemons</option>
+            <option value="Data Base"> Pokemons from Data Base</option>
+            <option value="Api"> Pokemons from Api</option>
+          </select>
+
+         
+          </nav>
+          
+          {/* </div> */}
+
+            {/* <select  onChange={hanlderFilterByType}>
               {types.map((ty, i) => (
                 <option key={i} name={ty.name}>
                   {" "}
@@ -120,26 +155,10 @@ function Nav() {
                 </option>
               ))}
             
-            </select>
-          </div>
+            </select> */}
+          {/* </div> */}
 
-          <select onChange={handlerName}>
-            <option value="">Order By Name</option>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
-          </select>
-
-          <select onChange={handlerStrength}>
-            <option value="">order By Strength</option>
-            <option value="asc">More strength</option>
-            <option value="desc">Less strength</option>
-          </select>
-
-          <select onChange={handlerOriginPokemons}>
-            <option value=""> Select origin from Pokemons</option>
-            <option value="Data Base"> Pokemons from Data Base</option>
-            <option value="Api"> Pokemons from Api</option>
-          </select>
+          {/* 
         </div>
 
                 <div className={Styles.search}>
@@ -155,7 +174,7 @@ function Nav() {
           </button>
         </form>
 
-        </div>
+        </div> */}
         
           
       

@@ -1,24 +1,24 @@
-name: Push stack to heroku
+# name: Push stack to heroku
 
-on: [push]
+# on: [push]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2    
-    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY }}
-        heroku_app_name: "api-calbinopokemon"
-        heroku_email: ${{secrets.HEROKU_API_KEY }}
-      env:
-        HD_APP_BASE: "api"    
-    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY }}
-        heroku_app_name: "web-client-calbinopokemon"
-        heroku_email: ${{secrets.HEROKU_API_KEY }}
-      env:
-        HD_APP_BASE: "client"
-        HD_REACT_APP_API_URL: "https://api-calbinopokemon.herokuapp.com"
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2    
+#     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+#       with:
+#         heroku_api_key: ${{secrets.HEROKU_API_KEY }}
+#         heroku_app_name: "pokeclient"
+#         heroku_email: ${{secrets.HEROKU_API_KEY }}
+#       env:
+#         HD_APP_BASE: "api"    
+#     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+#       with:
+#         heroku_api_key: ${{secrets.HEROKU_API_KEY }}
+#         heroku_app_name: "pokeclient"
+#         heroku_email: ${{secrets.HEROKU_API_KEY }}
+#       env:
+#         HD_APP_BASE: "client"
+#         HD_REACT_APP_API_URL: "https://pokeclient.herokuapp.com"

@@ -30,7 +30,7 @@ function Home() {
 
   const renderPokemons = () => {
     return currentPokes.map((po) => (
-      <div>
+      
         <PokeCard
           key={po.name}
           id={po.id}
@@ -39,7 +39,7 @@ function Home() {
           types={po.types}
       
         />
-      </div>
+      
     ));
   };
 
@@ -64,25 +64,22 @@ function Home() {
 
   return (
     <>
+    
       <Nav />
-      <>
-        <div className={Styles.buttonContainer}>
-          <button className={Styles.button}>
-            {" "}
+      <button className={Styles.btn}>
             <Link to={"/pokemons"}>Go To Create Pokemon</Link>{" "}
           </button>
-
-          <button onClick={buttonBack} className={Styles.buttonBack}>
-            Back
-          </button>
-        </div>
-        {
-          <div className={Styles.pokemons}>
+      <>
+       
+         
+          
+          <div  >
             {!pokemonStore.filter
               ? renderOrder.allPokemons
               : renderOrder.filtered}
           </div>
-        }
+          
+        
         <>
           <Pagination
             pokePerPage={pokePerPage}
@@ -91,6 +88,7 @@ function Home() {
           />
         </>
       </>
+  
     </>
   );
 }
