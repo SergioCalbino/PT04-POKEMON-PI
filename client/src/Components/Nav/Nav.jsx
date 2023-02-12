@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Banner from 'react-js-banner';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import {
   ordeByStrengthAsc,
   getTypes,
@@ -17,7 +25,7 @@ import {
 
 import Styles from "../Nav/Nav.module.css";
 
-function Nav() {
+function NavBar() {
   const [search, setSearch] = useState("");
   const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state);
@@ -103,79 +111,83 @@ function Nav() {
 
   return (
     <>
-      {/* <div className={Styles.img}>
-      <button className={Styles.button2} onClick={clear}>
-            Clear{" "}
-          </button>
-      </div>
-      <div className={Styles.container}>
-        
-          <div className={Styles.title}> */}
-           {/* <div  > */}
-          
-
-          
-            <nav className={Styles.navbar}>
-            <select className={Styles.navbar__select} onChange={hanlderFilterByType}>
+     <Navbar bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Brand href="#">Poke Api</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            {/* <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link href="#action2">Link</Nav.Link> */}
+            <Form.Select aria-label="Default select example" onChange={hanlderFilterByType} >
             {types.map((ty, i) => (
                 <option key={i} name={ty.name}>
                   {" "}
                   {ty.name}
                 </option>
               ))}
-            </select>
-            <select className={Styles.navbar__select} onChange={handlerName}>
+            </Form.Select>
+            
+            <Form.Select aria-label="Default select example" onChange={handlerName}>
             <option value="">Order By Name</option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
-          </select>
-
-          <select className={Styles.navbar__select} onChange={handlerStrength}>
+            </Form.Select>
+            
+            <Form.Select aria-label="Default select example" onChange={handlerStrength}>
             <option value="">order By Strength</option>
             <option value="asc">More strength</option>
             <option value="desc">Less strength</option>
-          </select>
-
-          <select className={Styles.navbar__select} onChange={handlerOriginPokemons}>
+            </Form.Select>
+            
+            <Form.Select aria-label="Default select example" onChange={handlerOriginPokemons}>
             <option value=""> Select origin from Pokemons</option>
             <option value="Data Base"> Pokemons from Data Base</option>
             <option value="Api"> Pokemons from Api</option>
-          </select>
-
-         
-          </nav>
+            </Form.Select>
           
-          {/* </div> */}
-
-            {/* <select  onChange={hanlderFilterByType}>
-              {types.map((ty, i) => (
-                <option key={i} name={ty.name}>
-                  {" "}
-                  {ty.name}
-                </option>
-              ))}
+             <a href="/pokemons" className={Styles.btn} >Create Pokemon</a>
             
-            </select> */}
-          {/* </div> */}
-
-          {/* 
-        </div>
-
-                <div className={Styles.search}>
-        <form onSubmit={searchPokemon}>
+         
+            
+          </Nav>
+          <form className="d-flex" onSubmit={searchPokemon}>
           <input
-            
+             className="me-2"
+              aria-label="Search"
             onChange={handleInputChange}
             value={search}
             placeholder="Search Name"
           />
-          <button>
+          <button variant="outline-success" >
             Search
           </button>
         </form>
+          
+          {/* <Form className="d-flex">
+            <Form.Control 
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              onChange={handleInputChange}
+            value={search}
+           
+            />
+            
+          </Form> */}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+          
 
-        </div> */}
-        
+          
+          
+  
           
       
     
@@ -183,4 +195,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default NavBar;

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-js-banner": "^0.6.0-beta3",
     "redux-devtools-extension": "^2.13.9"
   }
 }

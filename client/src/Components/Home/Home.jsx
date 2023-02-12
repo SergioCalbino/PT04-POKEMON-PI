@@ -5,11 +5,11 @@ import {
   deleteState,
   getTypes,
 } from "../../redux/actions/actions";
-import Nav from "../Nav/Nav";
 import PokeCard from "../PokeCard/PokeCard";
 import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
 import Styles from "../Home/Home.module.css";
+import NavBar from "../Nav/Nav";
 
 function Home() {
   const dispatch = useDispatch();
@@ -65,10 +65,8 @@ function Home() {
   return (
     <>
     
-      <Nav />
-      <button className={Styles.btn}>
-            <Link to={"/pokemons"}>Go To Create Pokemon</Link>{" "}
-          </button>
+      <NavBar />
+     
       <>
        
          

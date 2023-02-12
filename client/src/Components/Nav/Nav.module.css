@@ -5,7 +5,7 @@
   justify-content: space-around;
   align-items: center;
   height: 80px;
-  background-color: #333;
+  background-color: #FF5858;
   margin: auto;
   padding: 25px;
 }
@@ -28,27 +28,45 @@
   border-radius: 5px;
   background-color: green;
   color: #fff;
-  width: 15px;
+  width: 50%;
+  height: 50%;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
 
  
 }
 
+.img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../img/HD-wallpaper-pikachu-detective-pikachu-hiw-to-train-your-dragon-just-keep-pokemon-toothless.jpg');
+  background-size: contain;
+  width: 100vw;
+  height: 10vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
 
-@media screen and (max-width: 768px) {
-  .navbar {
+
+@media (max-width: 800px) {
+   
+  .navbar{
+      flex-direction: row;
+      width: 500px;
+      height: 250px;
+  }
+  .navbar__select{
     flex-direction: column;
+      width: 50%;
+      height: 100%;
   }
-
-  .navbar__select {
-    width: 100%;
-  }
-
-  .btn {
-    @media (max-width: 767px) {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
+  
+  .products__list-item__content{
+      width: 50%;
+      height: 100%;
   }
 }
