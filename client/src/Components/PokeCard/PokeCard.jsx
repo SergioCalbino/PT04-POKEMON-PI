@@ -1,4 +1,6 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import Styles from "../PokeCard/PokeCard.module.css";
 import imagen from "../img/random.gif";
@@ -8,55 +10,27 @@ function PokeCard({ id, name, img, types }) {
   return (
     <>
      
-      {/* <div className={Styles.container}>
-        {id === undefined ? (
-          <>
-            <h1> there is no pokemons</h1> <img src={noPoke} />
-          </>
-        ) : (
-          <>
-             
-             
-            <Link to={`/pokemon/${id}`}>
-              <h1 key={id} className={Styles.name}>
-                {" "}
-                {name}
-              </h1>
-            </Link>
-
-            <div className={Styles.card}>
-              {<img className={Styles.img} src={img ? img : imagen} alt="" />}
-
-
-              <div className={Styles.types}>
-                <p>Types:</p>
-                {types?.map((t) => {
-                  return <p key={t.id}>{t.name}</p>;
+     {/* <Card style={{ width: '400px', height: '400px', display: 'inline-block', flexDirection: 'column', justifyContent: 'space-arround', marginTop: '25px', marginLeft: '120px', alignItems: 'center' }}>
+          <Card.Title>{name}</Card.Title>
+        <Card.Img variant="top"  style={{ width: '300px', height: '400px'}} src={img} />
+        <Card.Body  >
+          <span> Type:</span>{types?.map((t) => {
+                  return   <span  key={t.id}>  {t.name} - </span>;
                 })}
-              </div>
-            </div>
-          </>
-        )}
-      </div> */}
-
+          <Card.Text>
+          </Card.Text>
+          <Button variant="primary"> <Link to={`/pokemon/${id}`} ></Link> </Button>
+        </Card.Body>
+      </Card> */}
      
-      <div className={Styles.card}>
-      
-      <div className={Styles.cardheader}>{name}</div>
-      <div className={Styles.cardcontent}>
-        <div className={Styles.cardimage}>
-        <img src={img} />
-      </div>
-        <div className={Styles.cardtext}>
-        <p>{}</p>
-        <p>Types:</p>
-                {types?.map((t) => {
-                  return <p key={t.id}>{t.name}</p>;
-                })}
-      </div>
+      <div className={Styles.pokemon_card}>
+      <img src={img} alt={name} />
+      <h2>{name}</h2>
+      <p>{types?.map((t) => {
+                  return   <span  key={t.id}>  {t.name} - </span>;
+                })}</p>
     </div>
-  </div>
-  
+    
     </>
   );
 }

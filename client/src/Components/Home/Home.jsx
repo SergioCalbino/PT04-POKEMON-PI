@@ -29,19 +29,20 @@ function Home() {
   }, [dispatch]);
 
   const renderPokemons = () => {
-    return currentPokes.map((po) => (
-      
-        <PokeCard
-          key={po.name}
-          id={po.id}
-          name={po.name}
-          img={po.img}
-          types={po.types}
-      
-        />
-      
-    ));
-  };
+    return (
+      <div className={Styles.pokemon_card_container}>
+        {currentPokes.map((po) => (
+          <PokeCard
+            key={po.name}
+            id={po.id}
+            name={po.name}
+            img={po.img}
+            types={po.types}
+          />
+        ))}
+      </div>
+    );
+  }
 
   const renderOrder = {
     allPokemons: !pokemonStore.allPokemons ? (
@@ -71,11 +72,11 @@ function Home() {
        
          
           
-          <div  >
+          
             {!pokemonStore.filter
               ? renderOrder.allPokemons
               : renderOrder.filtered}
-          </div>
+         
           
         
         <>

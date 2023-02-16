@@ -111,9 +111,9 @@ function NavBar() {
 
   return (
     <>
-     <Navbar bg="light" expand="lg">
+     <Navbar bg="success" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">Poke Api</Navbar.Brand>
+        <Navbar.Brand href="/home">Poke Api</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -123,7 +123,7 @@ function NavBar() {
           >
             {/* <Nav.Link href="#action1">Home</Nav.Link>
             <Nav.Link href="#action2">Link</Nav.Link> */}
-            <Form.Select aria-label="Default select example" onChange={hanlderFilterByType} >
+            <Form.Select  className="mx-2" aria-label="Default select example" onChange={hanlderFilterByType} >
             {types.map((ty, i) => (
                 <option key={i} name={ty.name}>
                   {" "}
@@ -132,19 +132,19 @@ function NavBar() {
               ))}
             </Form.Select>
             
-            <Form.Select aria-label="Default select example" onChange={handlerName}>
+            <Form.Select className="mx-2" aria-label="Default select example" onChange={handlerName}>
             <option value="">Order By Name</option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
             </Form.Select>
             
-            <Form.Select aria-label="Default select example" onChange={handlerStrength}>
+            <Form.Select  className="mx-2" aria-label="Default select example" onChange={handlerStrength}>
             <option value="">order By Strength</option>
             <option value="asc">More strength</option>
             <option value="desc">Less strength</option>
             </Form.Select>
             
-            <Form.Select aria-label="Default select example" onChange={handlerOriginPokemons}>
+            <Form.Select className="mx-2" aria-label="Default select example" onChange={handlerOriginPokemons}>
             <option value=""> Select origin from Pokemons</option>
             <option value="Data Base"> Pokemons from Data Base</option>
             <option value="Api"> Pokemons from Api</option>
@@ -158,12 +158,12 @@ function NavBar() {
           <form className="d-flex" onSubmit={searchPokemon}>
           <input
              className="me-2"
-              aria-label="Search"
+             aria-label="Default select example"
             onChange={handleInputChange}
             value={search}
             placeholder="Search Name"
           />
-          <button variant="outline-success" >
+          <button className={Styles.btn} >
             Search
           </button>
         </form>
