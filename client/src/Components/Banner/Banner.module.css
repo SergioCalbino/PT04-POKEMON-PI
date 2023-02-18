@@ -1,0 +1,10 @@
+.coverimg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    width: 100%;
+    height: auto;
+    background-color: blueviolet;
+     background-image: url('../img/BANNER-26-POKEMON-1920X700-1170x427.jpg'); 
+    background-size: cover;
+  }

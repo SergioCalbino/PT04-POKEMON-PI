@@ -2,6 +2,11 @@
 import React from 'react';
 import Styles from '../Pagination/Pagination.module.css'
 
+
+
+
+
+
 const Pagination = ({ pokePerPage, totalPokemons, paginate }) => {
   const pageNumbers = [];
 

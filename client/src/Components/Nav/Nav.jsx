@@ -155,18 +155,22 @@ function NavBar() {
          
             
           </Nav>
-          <form className="d-flex" onSubmit={searchPokemon}>
-          <input
+          <Form className="d-flex" onSubmit={searchPokemon}>
+          <Form.Control
+          
              className="me-2"
-             aria-label="Default select example"
+            aria-label="Default select example"
             onChange={handleInputChange}
             value={search}
             placeholder="Search Name"
+          
+
           />
           <button className={Styles.btn} >
             Search
           </button>
-        </form>
+
+        </Form>
           
           {/* <Form className="d-flex">
             <Form.Control 

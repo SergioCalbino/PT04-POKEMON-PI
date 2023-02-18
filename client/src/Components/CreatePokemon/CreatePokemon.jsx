@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +10,8 @@ import {
 } from "../../redux/actions/actions.js";
 import { Link } from "react-router-dom";
 import Styles from "../CreatePokemon/CreatePokemon.module.css";
+import NavBar from "../Nav/Nav.jsx";
+import Banner from "../Banner/Banner.jsx";
 
 function CreatePokemon() {
   let newPokemon = {
@@ -41,11 +42,7 @@ function CreatePokemon() {
   }, []);
 
   useEffect(() => {
-    if (
-      input.types.length < 3 &&
-      input.types.length > 0 &&
-      isObjEmpty(error)
-    ) {
+    if (input.types.length < 3 && input.types.length > 0 && isObjEmpty(error)) {
       setSubmit(true);
     } else {
       setSubmit(false);
@@ -157,166 +154,158 @@ function CreatePokemon() {
   };
 
   return (
+    
     <>
-     <div className={Styles.img}></div>
-      <div className={Styles.header}>
-        {/* <h1>Create your Pokemon</h1> */}
-        <Link to={"/home"}>
-          <button className={Styles.button}>Back</button>
-        </Link>
-      </div>
-      <div className={Styles.general}>
-        {/* <div > */}
-
-        <div className={Styles.border}>
-          <form onSubmit={handleSubmit}>
-            <label>Name</label>
-
+      {/* <div className={Styles.form_container}> */}
+      <Banner/>
+      <Link className={Styles.btn}  to={'/home'} > Back</Link>
+        <form onSubmit={handleSubmit} className={Styles.pokemon_form}>
+          <div className={Styles.form_group}>
+            <label htmlFor="name">Name:</label>
             <input
-              className={Styles.input}
-              name="name"
               type="text"
-              onChange={handleInput}
-              autoComplete="off"
+              id="name"
+              name="name"
               value={input.name}
+              onChange={handleInput}
               required
             />
             {error.name && <p>{error.name}</p>}
+          </div>
 
-            <label>Life</label>
-
+          <div className={Styles.form_group}>
+            <label htmlFor="life">Life:</label>
             <input
-              className={Styles.input}
-              name="life"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="life"
+              name="life"
               value={input.life}
+              onChange={handleInput}
               required
             />
             {error.life && <p>{error.life}</p>}
+          </div>
 
-            <label>Strength</label>
-
+          <div className={Styles.form_group}>
+            <label htmlFor="strength">Strength:</label>
             <input
-              name="strength"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="strength"
+              name="strength"
               value={input.strength}
+              onChange={handleInput}
               required
             />
             {error.strength && <p>{error.strength}</p>}
+          </div>
 
-            <label>Defense</label>
+          <div className={Styles.form_group}>
+            <label htmlFor="defense">Defense:</label>
             <input
-              name="defense"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="defense"
+              name="defense"
               value={input.defense}
+              onChange={handleInput}
               required
             />
             {error.defense && <p>{error.defense}</p>}
+          </div>
 
-            <label>Speed</label>
+          <div className={Styles.form_group}>
+            <label htmlFor="speed">Speed:</label>
             <input
-              name="speed"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="speed"
+              name="speed"
               value={input.speed}
+              onChange={handleInput}
               required
             />
             {error.speed && <p>{error.speed}</p>}
+          </div>
 
-            <label>Height</label>
+          <div className={Styles.form_group}>
+            <label htmlFor="height">Height:</label>
             <input
-              name="height"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="height"
+              name="height"
               value={input.height}
+              onChange={handleInput}
               required
             />
             {error.height && <p>{error.height}</p>}
+          </div>
 
-            <label>Weight</label>
+          <div className={Styles.form_group}>
+            <label htmlFor="weight">Weight:</label>
             <input
-              name="weight"
               type="number"
-              onChange={handleInput}
-              autoComplete="off"
+              id="weight"
+              name="weight"
               value={input.weight}
+              onChange={handleInput}
               required
             />
             {error.weight && <p>{error.weight}</p>}
+          </div>
 
-            <label>Image</label>
+          <div className={Styles.form_group}>
+            <label htmlFor="img">Image:</label>
             <input
+              type="url"
+              id="img"
               name="img"
-              type="text"
-              onChange={handleInput}
-              placeholder="Insert URL"
               value={input.img}
-            />
-
-            <select
-              name="types"
               onChange={handleInput}
-              autoComplete="off"
               required
+            />
+            {error.img && <p>{error.img}</p>}
+          </div>
+
+          <div className={Styles.form_group}>
+            <label htmlFor="types">Type:</label>
+            <select
+              id="types"
+              name="types"
+              value={input.types}
+              onChange={handleInput}
             >
-              <option value=""> Choose Type</option>
+              <option value=""> Choose Type </option>
               {typeState.types?.map((ty) => (
                 <option value={ty.id}>{ty.name}</option>
               ))}
+              {error.types && <p>{error.types}</p>}
             </select>
-            {error.types && <p>{error.types}</p>}
-
-            <button className={Styles.button2} type="submit" disabled={!submit}>
+          </div>
+          <div className={Styles.form_group}>
+            <button type="submit" disabled={!submit}>
               Create Pokemon
             </button>
-          </form>
-        </div>
-
-        {/* </div> */}
-
-        <div className={Styles.lab}>
-            Welcome to the Pokemon's Laboratory
-        <img className={Styles.img2} />
-        
-      </div>
-
-        <div>
-          <h3>Pokemons to add the Type</h3>
-          <table className={Styles.table}>
+          </div>
+          <table className={Styles.pokemon_table}>
             <thead>
               <tr>
-                <th>Type id</th>
-                <th>To Add</th>
+                <th>Selected Types</th>
               </tr>
             </thead>
             <tbody>
-              {input.types &&
-                input.types.map((t) => (
-                  <tr key={t}>
-                    <td>{t}</td>
-                    <td>
-                      <button onClick={deleteType} value={t}>
-                        Remove
-                      </button>
-                  
-                    </td>
-                  </tr>
-                ))}
+              {input.types?.map((type, index) => (
+                <tr key={index}>
+                  <td>{type}</td>
+                  <td>
+                    <button onClick={deleteType} value={type}>
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </div>
-     
-      </div>
-              
-    </> 
+        </form>
+      {/* </div> */}
+    </>
   );
 }
 

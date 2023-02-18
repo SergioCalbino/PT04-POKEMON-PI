@@ -10,22 +10,11 @@ function PokeCard({ id, name, img, types }) {
   return (
     <>
      
-     {/* <Card style={{ width: '400px', height: '400px', display: 'inline-block', flexDirection: 'column', justifyContent: 'space-arround', marginTop: '25px', marginLeft: '120px', alignItems: 'center' }}>
-          <Card.Title>{name}</Card.Title>
-        <Card.Img variant="top"  style={{ width: '300px', height: '400px'}} src={img} />
-        <Card.Body  >
-          <span> Type:</span>{types?.map((t) => {
-                  return   <span  key={t.id}>  {t.name} - </span>;
-                })}
-          <Card.Text>
-          </Card.Text>
-          <Button variant="primary"> <Link to={`/pokemon/${id}`} ></Link> </Button>
-        </Card.Body>
-      </Card> */}
+     
      
       <div className={Styles.pokemon_card}>
       <img src={img} alt={name} />
-      <h2>{name}</h2>
+     <Link to={`/pokemon/${id}`} >  <h2>{name}</h2> </Link>
       <p>{types?.map((t) => {
                   return   <span  key={t.id}>  {t.name} - </span>;
                 })}</p>
